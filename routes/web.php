@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\MytaskController;
 
 
 /*
@@ -30,8 +31,10 @@ Route::post('/login',[AdminController::class,'AuthLogin'])->name('login');
 
 Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'index'])->name('master-dashboard');
-    Route::resource('/task',BrandController::class);
     Route::resource('/company',CompanyController::class);
+    Route::resource('/brands',BrandController::class);
+    Route::resource('/tasks',MytaskController::class);
+    Route::post('/statusUpdate/{id}','MytaskController@statusUpdate')->name('statusUpdate');
     
     // Route::get('/career','EnquiryController@career')->name('career');
     // Route::get('/subscribers','EnquiryController@subscriber')->name('subscribers');

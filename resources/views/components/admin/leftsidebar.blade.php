@@ -25,8 +25,8 @@
                         <li>
                             <a href="javascript: void(0);" class="has-arrow" key="t-vertical">My Task</a>
                             <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="#" key="t-light-sidebar">My Assign Task</a></li>
-                                <li><a href="#" key="t-compact-sidebar">Update Assign Task</a></li>
+                                <li><a href="{{route('tasks.index')}}" key="t-light-sidebar">My Assign Task</a></li>
+                                <li><a href="{{route('tasks.create')}}" key="t-compact-sidebar">Assign Task</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -39,10 +39,10 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="#}" key="t-light-sidebar">All Brand </a></li>
-                            <li><a href="#}" key="t-light-sidebar">Add & Update Brand </a></li>
+                            <li><a href="{{route('brands.index')}}" key="t-light-sidebar">All Brand </a></li>
+                            <li><a href="{{route('brands.create')}}" key="t-light-sidebar">Add Brand </a></li>
                             <li><a href="{{route('company.index')}}" key="t-compact-sidebar">All Company</a></li>
-                            <li><a href="{{route('company.create')}}" key="t-compact-sidebar">Add & Update Company</a></li>
+                            <li><a href="{{route('company.create')}}" key="t-compact-sidebar">Add Company</a></li>
                         </li>
                     </ul>
                 </li>

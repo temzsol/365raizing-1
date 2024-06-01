@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('head_office_address')->nullable();
             $table->string('web_link')->nullable();
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('is_deleted')->default(1);
             $table->timestamps();
         });
     }

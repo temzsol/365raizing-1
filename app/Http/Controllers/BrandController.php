@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -14,7 +15,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $data = Brand::where('is_deleted',0)->orderBy('id', 'DESC')->paginate(20);
+        return view('admin.brands.index', compact('data'));
     }
 
     /**
@@ -24,7 +26,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        $company=Company::where('status',1)->where('is_deleted',0)->get();
+        return view('admin.brands.create',compact('company'));
     }
 
     /**
@@ -33,9 +36,16 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Brand $brand)
     {
-        //
+        $data=$request->all();
+        $data['bdivision'] = implode(",", $request->bdivision);
+        $data['div_mail'] = implode(",",$request->div_mail);
+        $data['div_mob'] = implode(",",$request->div_mob);
+	    $data['bemail'] = implode(",",$request->bemail);
+        $data['bmob']= implode(",",$request->bmob);
+        $brand->create($data);
+        return redirect(route('brands.index'))->with('message','Brand Created Successfully');
     }
 
     /**
@@ -57,7 +67,8 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        $company=Company::where('status',1)->where('is_deleted',0)->get();
+        return view('admin.brands.create',compact('brand','company'));
     }
 
     /**
@@ -69,7 +80,14 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $data=$request->all();
+        $data['bdivision'] = implode(",", $request->bdivision);
+        $data['div_mail'] = implode(",",$request->div_mail);
+        $data['div_mob'] = implode(",",$request->div_mob);
+	    $data['bemail'] = implode(",",$request->bemail);
+        $data['bmob']= implode(",",$request->bmob);
+        $brand->update($data);
+        return redirect(route('brands.index'))->with('message','Brand updated Successfully');
     }
 
     /**
@@ -80,6 +98,13 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        if($brand->update(['is_deleted'=>1]))
+        {
+            $response = array('success' => true, 'error' => false, 'message' => 'Data Delete successfully..');
+        }
+    else{
+        $response = array('success' => false, 'error' => true, 'message' => 'Something Went Wrong !');
+         }
+    return $response;
     }
 }

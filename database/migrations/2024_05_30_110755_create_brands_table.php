@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('bcountry')->nullable();
             $table->string('bdetailstatus')->nullable();
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('is_deleted')->default(1);
             $table->timestamps();
         });
     }

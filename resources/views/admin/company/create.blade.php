@@ -71,7 +71,8 @@
                         <div class="card-header"><strong>Company</strong><small> Form</small></div>
                         @if(isset($company))
                         <form action="{{route('company.update',$company->id)}}" method="post" enctype="multipart/form-data">
-                        @else
+                        @method('PUT')
+                            @else
                     <form action="{{route('company.store')}}" method="post" enctype="multipart/form-data">
                         @endif
                         @csrf
@@ -94,7 +95,7 @@
                                     <label for="gst_location" class =" form-control-label">Tax Location<span class="text-danger">*</span></label>
                                     <select name="gst_location" class="form-control" required>
                                         @foreach($gst_locations as $value => $text)
-                                            <option value="{{ $value }}" {{$value==$company->gst_location?'selected':''}}>{{ $text }}</option>
+                                            <option value="{{ $value }}" @if(isset($company)){{$value==$company->gst_location?'selected':''}}@endif>{{ $text }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -186,7 +187,7 @@
                         </div>
                     </div>
 
-                    <input type="submit" name="cok" value="submit" class="form-control btn btn-primary" id="Add_comp_submit" Name="Submit" style="margin-top: 15px; border-radius: 6px; width: 130px;"   />
+                    <input type="submit" name="cok" value="{{isset($company)?'Update':'Submit'}}" class="form-control btn btn-primary" id="Add_comp_submit" Name="Submit" style="margin-top: 15px; border-radius: 6px; width: 130px;"   />
                         </div>
                     </form>
                     
@@ -204,99 +205,6 @@
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<script>
-    $('#summernote').summernote({
-      placeholder: 'Hello stand alone ui',
-      tabsize: 2,
-      height: 120,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ]
-    });
-  </script>
-  
-<script>
-    var id = $('#gid').val();
-    if(id!='' && id!= null)
-    {
-        $('#image_upload').hide();
-    }
-    else{
-
-        $('#image_upload').show();
-    }
-
-function hideimage(){
-    $('#image_upload').show();
-    $('#image_hide').hide();
-}
-    </script>
-
-
-
-
-<script>
-    $("#form-validation").validate({
-            rules:{
-                title:{
-                    required: true,
-                    maxlength: 255
-                },
-                written_by:{
-                    required: true,
-                    maxlength: 255
-                },
-                
-                description:{
-                    required:true,
-                    minlength:255
-                }
-
-            },
-            message:{
-                title:{
-                    required:"Please Enter title Name",
-                    maxlength:"Text not morethen 50"
-                },
-                written_by:{
-                    required:" Please Enter Writter Name",
-                    maxlength:"Text not morethen 20"
-                },
-               
-                description:{
-                    required:"Please Add Description",
-                    maxlength:"Text Minimum 255"
-                }
-            }   
-        });
-
-
-
-    function addtags(){
-        var index_value=$('#tags-0').attr('findindex');
-        index_value=parseInt(index_value)+1;
-
-        var append_section ='<div class="mb-3 row repet_section_row">';
-                       append_section +='<label for="example-search-input" class="col-md-2 col-form-label"></label>';
-                        append_section +='<div class="col-md-5" >';
-                            append_section +='<input class="form-control" type="text" findindex="'+index_value+'" id="tags-'+index_value+'" name="tags[]"><br>';
-                        append_section +='</div>';
-                        append_section +='<div class="col-md-5" >';
-                            append_section +='<button class="btn btn-text-danger remove" type="button">Remove</button>';
-                        append_section +='</div>';
-                        append_section +='</div>';
-                         $('.repet_section').append(append_section);
-                     }
-        $(document).on('click','.remove', function(){
-        $(this).parents('.repet_section_row').remove();
-        });
-    </script>
 
 @endpush
 

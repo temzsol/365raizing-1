@@ -4,14 +4,16 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-               <div class="table-responsive" style="margin-top:80px;">
+                <div class="table-responsive" style="margin-top:80px;">
                    All Company
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
                     <table class="table mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Brand Name</th>
                                 <th>Company Name</th>
+                                <th>Division</th>
                                 <th>Email</th>
                                 <th>Contact</th>
                                 <th>Action</th>
@@ -21,12 +23,14 @@
                             @foreach($data as $value)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$value->compname}}</td>
-                                <td>{{$value->compemail}}</td>
-                                <td>{{$value->compmob}}</td>
+                                <td>{{$value->bname}}</td>
+                                <td>{{$value->bcomp}}</td>
+                                <td>{{$value->bdivision}}</td>
+                                <td>{{$value->div_mail}}</td>
+                                <td>{{$value->div_mob}}</td>
                                 
                                 <td>
-                                    <a href="{{route('company.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                    <a href="{{route('brands.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
                                 </td>
                             </tr>
                             
@@ -50,7 +54,7 @@
         {
         $.ajax({
             method:'DELETE',
-            url: '{{ url('master-admin/company') }}/'+tid,
+            url: '{{ url('master-admin/brands') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'
@@ -76,8 +80,6 @@
         });
     }
 }
-
-
     </script>
 
 

@@ -14,7 +14,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $data = Company::orderBy('id', 'DESC')->paginate(10);
+        $data = Company::where('is_deleted',0)->orderBy('id', 'DESC')->paginate(10);
         return view('admin.company.index', compact('data'));
         
     }
@@ -54,7 +54,7 @@ class CompanyController extends Controller
             $data['mca'] = $folder."/".$mca;
         }
         $company->create($data);
-        return redirect(route('company.index'))->with('msg','Company Created Successfully');
+        return redirect(route('company.index'))->with('message','Company Created Successfully');
     }
 
     /**
@@ -88,7 +88,24 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $data=$request->all();
+        if ($request->hasFile('gst_file')) {
+            $file = $request->file('gst_file');
+            $gst_file = $this->upload_single_image($file, $folder = 'gst_file');
+            $data['gst_file'] = $folder."/".$gst_file;
+        }
+        if ($request->hasFile('cpan')) {
+            $file = $request->file('cpan');
+            $cpan = $this->upload_single_image($file, $folder = 'cpan');
+            $data['cpan'] = $folder."/".$cpan;
+        }
+        if ($request->hasFile('mca')) {
+            $file = $request->file('mca');
+            $mca = $this->upload_single_image($file, $folder = 'mca');
+            $data['mca'] = $folder."/".$mca;
+        }
+        $company->update($data);
+        return redirect(route('company.index'))->with('message','Company updated Successfully');
     }
 
     /**
@@ -99,6 +116,13 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        if($company->update(['is_deleted'=>1]))
+        {
+            $response = array('success' => true, 'error' => false, 'message' => 'Data Delete successfully..');
+        }
+    else{
+        $response = array('success' => false, 'error' => true, 'message' => 'Something Went Wrong !');
+         }
+    return $response;
     }
 }

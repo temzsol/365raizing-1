@@ -11,36 +11,39 @@
                 </p>
 
                 <div class="table-responsive">
-                    {{$page_title}}
+                   My All Task
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
                     <table class="table mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Blog Title</th>
-                                <th>Slug</th>
-                                <th>Image</th>
-                                <th>Comments</th>
+                                <th>Brand Name</th>
+                                <th>Task Title</th>
+                                <th>Assign Date</th>
+                                <th>File</th>
+                                <th>Task Details</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($datas as $value)
+                            @foreach($data as $value)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$value->title}}</td>
-                                <td>{{$value['slug']}}</td>
-                                <td><a href="{{url('/images/blogs/'.$value['image'])}}" target="_blank">View Image</a></td>
-                                <td><a href="{{url('/admin/blogs-comments?blog_id='.$value->id)}}">view Comments</a></td>
+                                <td>{{$value->brand}}</td>
+                                <td>{{$value->t_title}}</td>
+                                <td>{{$value->assign_date}}</td>
+                                <td><a href="{{url('/images/'.$value->t_file)}}" target="_blank">{{$value->t_file}}</a></td>
+                                <td>{{$value->t_detail}}</td>
+                                
                                 <td><div class="form-check form-switch form-switch-md mb-3" dir="ltr">
                                     {{-- <input class="form-check-input" type="checkbox" id="SwitchCheckSizemd{{$value->id}}" @if($value->status==1){{'checked'}} @endif> --}}
                                     
-                                    <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1){{'Active'}}@else {{'Inactive'}} @endif</label>
+                                    <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1)<button class="btn btn-success">Completed</button>@else <button class="btn btn-warning" onClick="update_status('{{$value->id}}')">Incomplete</button> @endif</label>
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="{{route('blogs.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                    <a href="{{route('tasks.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
                                 </td>
                             </tr>
                             
@@ -48,7 +51,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{$datas->links('vendor.pagination.simple-bootstrap-4')}}
+                {{$data->links('vendor.pagination.simple-bootstrap-4')}}
                 
             </div>
         </div>
@@ -59,12 +62,43 @@
 @push('footer-section-code')
 
 <script>
-    function deleteblogs(tid){
+    function deletetasks(tid){
         if(confirm('Are You sure'))
         {
         $.ajax({
             method:'DELETE',
-            url: '{{ url('admin/blogs/') }}/'+tid,
+            url: '{{ url('master-admin/tasks') }}/'+tid,
+            data:{
+                id: tid,
+                _token: '{{ csrf_token() }}'
+            },
+            success:function(response){
+                
+                if(response.success==true)
+                {
+                    location.reload();
+                    swal("Deleted!", response.message, "error");
+                    
+
+                }
+                if(response.success==false)
+                {
+                    location.reload();
+                    swal("Deleted!", response.message, "error");
+                    
+
+                }
+                
+            }
+        });
+    }
+}
+    function update_status(tid){
+        if(confirm('Do you want to change status'))
+        {
+        $.ajax({
+            method:'POST',
+            url: '{{ url('master-admin/statusUpdate/') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'
@@ -74,9 +108,7 @@
                 if(response.success)
                 {
                     location.reload();
-                    swal("Deleted!", "Data Deleted Successfully!", "error");
-                    //"{{ url('') }}/admin/blogs/"
-                    //$('#success').html(response['message']);
+                    swal("Deleted!", "Data Deleted Successfully!", "success");
 
                 }
                 
