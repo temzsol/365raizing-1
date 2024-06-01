@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Mytask;
 use App\Models\Brand;
 use Illuminate\Http\Request;
-
+use App\Mail\MailMytask;
+use Auth;
+use Mail;
+use Session;
+use Validator;
 class MytaskController extends Controller
 {
     /**
@@ -45,7 +49,9 @@ class MytaskController extends Controller
             $data['t_file'] = $folder."/".$t_file;
         }
         $data['assign_date']=date('Y-m-d');
-        $mytask->create($data);
+        $result=$mytask->create($data);
+        $email= Auth::user()->email;
+        Mail::to($email)->send(new MailMytask($result));
         return redirect(route('tasks.index'))->with('message','Task Created Successfully');
     }
 
@@ -90,6 +96,9 @@ class MytaskController extends Controller
             $data['gst_file'] = $folder."/".$gst_file;
         }
         $mytask->update($data);
+        $result = $mytask->fresh();
+        $email= Auth::user()->email;
+        Mail::to($email)->send(new MailMytask($result));
         return redirect(route('tasks.index'))->with('message','Task updated Successfully');
     }
 

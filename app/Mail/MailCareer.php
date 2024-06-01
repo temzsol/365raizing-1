@@ -29,6 +29,6 @@ class MailCareer extends Mailable
     public function build()
     {
         //dd($this->data);
-        return $this->view('mail.career')->subject('Career Form')->to('deepak.prasad@wemonde.com')->cc('hr@wemonde.com');
+        return $this->view('mail.mytask')->subject('Career Form')->to('deepak.prasad@wemonde.com')->cc('hr@wemonde.com');
     }
 }

@@ -9,18 +9,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CornMail extends Mailable
+class MailMytask extends Mailable
 {
     use Queueable, SerializesModels;
-    public $subscriber;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($subscriber)
+    public $result;
+    public function __construct($result)
     {
-        $this->subscriber=$subscriber;
+        $this->result=$result;
     }
 
     /**
@@ -30,12 +31,9 @@ class CornMail extends Mailable
      */
     public function envelope()
     {
-        $subject = isset($this->subscriber->name) ? $this->subscriber->name : 'Sir/Madam';
-        $subject .= ", Don't Miss Out on Your Special Discount!";
-    
-    return new Envelope(
-        subject: $subject
-    );
+        return new Envelope(
+            subject: 'My Task',
+        );
     }
 
     /**
@@ -46,7 +44,7 @@ class CornMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.cronMail',
+            view: 'mail.mytask',
         );
     }
 

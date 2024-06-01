@@ -19,7 +19,7 @@ class LoginMiddleware
 
         if(empty(Session::get('type')))
         {
-            return redirect('/login');
+            return redirect('/');
         }
         return $next($request);
     }
