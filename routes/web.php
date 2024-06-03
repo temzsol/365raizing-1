@@ -34,7 +34,13 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::resource('/company',CompanyController::class);
     Route::resource('/brands',BrandController::class);
     Route::resource('/tasks',MytaskController::class);
+    Route::resource('/admin',MytaskController::class);
     Route::post('/statusUpdate/{id}','MytaskController@statusUpdate')->name('statusUpdate');
+    Route::get('/admins','AdminController@index')->name('adminlist');
+    Route::get('/admins/{id}','AdminController@edit')->name('admins_edit');
+    Route::post('/admin/create','AdminController@store')->name('admins_create');
+    Route::post('/admin/update/{id}','AdminController@update')->name('admins_update');
+    Route::post('/admins/{id}','AdminController@destroy')->name('admins_delete');
     
     // Route::get('/career','EnquiryController@career')->name('career');
     // Route::get('/subscribers','EnquiryController@subscriber')->name('subscribers');

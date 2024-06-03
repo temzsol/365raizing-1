@@ -6,8 +6,8 @@ use App\Models\Mytask;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Mail\MailMytask;
-use Auth;
 use Mail;
+use Auth;
 use Session;
 use Validator;
 class MytaskController extends Controller

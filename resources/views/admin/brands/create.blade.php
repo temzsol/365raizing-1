@@ -201,7 +201,7 @@
                             </div>
 
                             <div class="form-group mb-4">
-                                <input type="submit" name="brandok" value="{{isset($brand)?'Update':'Submit'}}" class="form-control btn btn-primary" id="Add_brand_submit" value="Submit" style="margin-top: 15px; border-radius: 6px; width: 130px;" />
+                                <input type="submit" name="brandok" value="{{isset($brand)?'Update':'Submit'}}" class="form-control btn btn-primary" id="Add_brand_submit"style="margin-top: 15px; border-radius: 6px; width: 130px;" />
                             </div>
                           </div>
                       </form>
