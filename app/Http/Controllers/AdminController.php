@@ -112,6 +112,7 @@ class AdminController extends Controller
             'email' => $request->empmail,
             'status' => 1,
             'password' => Hash::make($request->empmob),
+            'type' => 'admin',
         ]);
 
         Mail::to($request->empmail)->send(new AdminMail($data));

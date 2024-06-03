@@ -4,7 +4,7 @@
 <head>
         
         <meta charset="utf-8" />
-        <title>Dashboard | RR Web Development</title>
+        <title>Dashboard | 365 Raizing Group</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Raizing Group" name="description" />
         <meta content="Raizing Group" name="Deepak" />

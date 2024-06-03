@@ -10,11 +10,11 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <script>document.write(new Date().getFullYear())</script> © RR Web Development.
+                        <script>document.write(new Date().getFullYear())</script> © Raizing Group.
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">
-                           RR Web Development
+                          Temzsol Pvt. Ltd.
                         </div>
                     </div>
                 </div>

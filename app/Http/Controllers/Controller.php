@@ -23,9 +23,9 @@ class Controller extends BaseController
     {
 	    $data = array();
         foreach($files as $file){
-	        $imageName = $file->getClientOriginalExtension();
+	        $imageName = $file->getClientOriginalName();
 	        $file->move(public_path('images/'.$folder."/"), $imageName);
-	        $data[] = $imageName;
+	        $data[] = $folder."/".$imageName;
 		}
 	    return $data;
 	}

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MytaskController;
+use App\Http\Controllers\EmployeeController;
 
 
 /*
@@ -41,6 +42,7 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::post('/admin/create','AdminController@store')->name('admins_create');
     Route::post('/admin/update/{id}','AdminController@update')->name('admins_update');
     Route::post('/admins/{id}','AdminController@destroy')->name('admins_delete');
+    Route::resource('/employee',EmployeeController::class);
     
     // Route::get('/career','EnquiryController@career')->name('career');
     // Route::get('/subscribers','EnquiryController@subscriber')->name('subscribers');
