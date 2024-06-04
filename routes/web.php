@@ -8,6 +8,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MytaskController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerQueryController;
+use App\Http\Controllers\HolidayController;
 
 
 /*
@@ -45,6 +46,9 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::post('/admins/{id}','AdminController@destroy')->name('admins_delete');
     Route::resource('/employee',EmployeeController::class);
     Route::resource('/customer-query',CustomerQueryController::class);
+    Route::resource('/holiday',HolidayController::class);
+    Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
+
     
     // Route::get('/career','EnquiryController@career')->name('career');
     // Route::get('/subscribers','EnquiryController@subscriber')->name('subscribers');

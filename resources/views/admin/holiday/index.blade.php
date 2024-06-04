@@ -5,34 +5,23 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive" style="margin-top:80px;">
-                   All Employee
+                    Employee's Holidays List Company Wise
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
                     <table class="table mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Employee Name</th>
-                                <th>Brand Name</th>
-                                <th>Designation</th>
-                                <th>Location</th>
-                                <th>Contact</th>
-                                <th>Action</th>
+                                <th>Company Name</th>
+                                <th>View</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($data as $value)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$value->fname . $value->mname.$value->lname }}</td>
-                                <td>{{$value->bname}}</td>
-                                <td>{{$value->designation}}</td>
-                                <td>{{$value->eloc}}</td>
-                                <td>{{$value->empmob}}</td>
-                                <td>{{$value->div_mob}}</td>
-                                
-                                <td>
-                                    <a href="{{route('employee.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
-                                </td>
+                                <td>{{$value->company_name}}</td>
+                                <td><a href="{{url('/master-admin/viewholidays/'.$value->id)}}"class="btn btn-primary">View Holidays</a></td>
+                           
                             </tr>
                             
                             @endforeach
@@ -55,7 +44,7 @@
         {
         $.ajax({
             method:'DELETE',
-            url: '{{ url('master-admin/employee') }}/'+tid,
+            url: '{{ url('master-admin/brands') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'
@@ -66,6 +55,8 @@
                 {
                     location.reload();
                     swal("Deleted!", response.message, "error");
+                    
+
                 }
                 if(response.success==false)
                 {

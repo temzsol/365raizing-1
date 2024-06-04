@@ -23,8 +23,15 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $data = Employee::where('is_deleted',0)->orderBy('id', 'DESC')->paginate(20);
+            $data = Employee::where('employees.is_deleted', 0)
+                ->join('brands', 'employees.empbrand', '=', 'brands.id')
+                ->select('employees.*', 'brands.bname')
+                ->orderBy('employees.id', 'DESC')
+                ->paginate(20);
+        
+        
         return view('admin.employee.index', compact('data'));
+        
     }
 
     /**
@@ -83,6 +90,15 @@ class EmployeeController extends Controller
             
         }
 
+        $data['doj']=$request->doj;
+        $current_month= date("m");
+        if($current_month==1){
+           $data['total_leave']=27;
+        }
+        else{
+ 
+                $data['total_leave']=(int)(12-$current_month)*2.25;
+        }
         $employee->create($data);
         $user = User::create([
             'name' => $request->fname,
@@ -164,6 +180,15 @@ class EmployeeController extends Controller
             $empphoto = $this->upload_single_image($file, $folder = 'empphoto');
             $data['empphoto'] = $folder."/".$empphoto;
             
+        }
+        $data['doj']=$request->doj;
+        $current_month= date("m");
+        if($current_month==1){
+           $data['total_leave']=27;
+        }
+        else{
+ 
+                $data['total_leave']=(int)(12-$current_month)*2.25;
         }
         $employee->update($data);
         return redirect(route('employee.index'))->with('message','employee updated Successfully');

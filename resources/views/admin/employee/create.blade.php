@@ -327,12 +327,14 @@
                                         
                                         
                                         <div id="emp_pan_div">
+                                            <div class="row">
                                                 <div class="col-lg-8">
                                                     <input type="file" id="pancard"  class="form-control" name="pancard[]">
                                                 </div>
                                                 <div class="col-lg-2">
                                                     <button type="button" class="btn btn-success" id="emp_pan">+Add</button>
                                                 </div>
+                                            </div>
                                         </div>
                                         @endif
                                     </div>
