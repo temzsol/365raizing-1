@@ -4,7 +4,7 @@
     <div class="container-fluid">
 
         <!-- start page title -->
-       <h2>Dashboard</h2>
+       <h2>Employee Dashboard</h2>
         <!-- end page title -->
 
         <div class="row">

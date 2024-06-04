@@ -45,16 +45,16 @@ class AdminController extends Controller
             }
             if(Auth::user()->type=='admin')
             {
-                return redirect(route('admin_dashboard'));
+                return redirect(route('admin-dashboard'));
             }
            
             if(Auth::user()->type=='hr')
             {
-                return redirect(route('hr_dashboard'));
+                return redirect(route('hr-dashboard'));
             }
             if(Auth::user()->type=='emp')
             {
-                return redirect(route('mentor_dashboard'));
+                return redirect(route('employee-dashboard'));
             }
             
         }

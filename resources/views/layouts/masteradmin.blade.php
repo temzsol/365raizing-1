@@ -30,7 +30,20 @@
         <!-- END layout-wrapper -->
 
         {{-- left side bar --}}
+        @if( Auth::user()->type =='master_admin')
         <x-admin.leftsidebar/>
+        @endif
+        @if( Auth::user()->type =='hr')
+        <x-admin.hr_sidebar/>
+        @endif
+
+        @if( Auth::user()->type =='admin')
+        <x-admin.admin_sidebar/>
+        @endif
+
+        @if( Auth::user()->type =='emp')
+        <x-admin.employee_sidebar/>
+        @endif
 
         <!-- Right Sidebar -->
         <x-admin.rightsidebar/>

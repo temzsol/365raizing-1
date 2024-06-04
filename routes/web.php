@@ -48,16 +48,21 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::resource('/customer-query',CustomerQueryController::class);
     Route::resource('/holiday',HolidayController::class);
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
+});
 
-    
-    // Route::get('/career','EnquiryController@career')->name('career');
-    // Route::get('/subscribers','EnquiryController@subscriber')->name('subscribers');
-    // Route::get('/subscribers/{id}','EnquiryController@subscriber_delete')->name('subscriber_delete');
-    // Route::get('/career/{id}','EnquiryController@career_delete')->name('career_delete');
-    // Route::post('/newsletters-send','NewsletterController@sendmail')->name('newsletters-send');
-    // Route::resource('/testimonials',TestimonialController::class);
-    // Route::resource('/jobs',JobController::class);
+//  Admin Route
+Route::prefix('admin')->middleware('login')->group(function () {
+    Route::get('/dashboard', [DashboardController::class,'Adminindex'])->name('admin-dashboard');
+});
 
+//  HR Route
+Route::prefix('hr')->middleware('login')->group(function () {
+    Route::get('/dashboard', [DashboardController::class,'HRindex'])->name('hr-dashboard');
+});
+
+//  Employee Route
+Route::prefix('Employee')->middleware('login')->group(function () {
+    Route::get('/dashboard', [DashboardController::class,'Employeeindex'])->name('employee-dashboard');
 });
 
 Route::get('/clear-cache', function() {
@@ -69,7 +74,6 @@ Route::get('/clear-cache', function() {
 });
 
 Route::get('/command', function() {
-
     Artisan::call('make:model Language -mcr');
     Artisan::call('db:seed');
     Artisan::call('db:seed');
