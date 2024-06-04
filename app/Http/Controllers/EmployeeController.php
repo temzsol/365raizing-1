@@ -82,6 +82,7 @@ class EmployeeController extends Controller
             $data['empphoto'] = $folder."/".$empphoto;
             
         }
+
         $employee->create($data);
         $user = User::create([
             'name' => $request->fname,
@@ -91,7 +92,10 @@ class EmployeeController extends Controller
             'type' => 'emp',
         ]);
         $mailresult=['email'=>$request->empmail,'password'=>$request->empmob[0]];
-        Mail::to($request->empmail,$request->personal_id)->send(new EmployeeMail($mailresult));
+        
+        Mail::to($request->empmail)
+        ->cc($request->personal_id) // Use cc or bcc if there are multiple recipients
+        ->send(new EmployeeMail($mailresult));
         return redirect(route('employee.index'))->with('message','employee Created Successfully');
     }
 
@@ -180,5 +184,6 @@ class EmployeeController extends Controller
         }
         return response()->json($response);
     }
+
     
 }
