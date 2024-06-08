@@ -110,6 +110,20 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-layout"></i>
+                        <span key="t-layouts">Vendor Management</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        <li>
+                            <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">All Vendor</a></li>
+                            <li><a href="{{route('vendor.create')}}" key="t-compact-sidebar">Add Vendor</a></li>
+                            <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">Vendor Task</a></li>
+                            <li><a href="{{route('vendor.create')}}" key="t-compact-sidebar">Assign Task</a></li>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-layout"></i>
                         <span key="t-layouts">Web Setting</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
