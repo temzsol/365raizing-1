@@ -22,7 +22,6 @@ class VendorController extends Controller
         ->orderBy('vendors.id', 'DESC')
         ->paginate(20);
 
-
         return view('admin.vendors.index', compact('data'));
     }
 
@@ -43,9 +42,14 @@ class VendorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,vendor $vendor)
     {
-        //
+        $data=$request->all();
+        $data['vcont'] = implode(",", $request->vcont);
+        $data['vemail'] = implode(",", $request->vemail);
+        $data['vservice'] = implode(",", $request->vservice);
+        $vendor->create($data);
+        return redirect(route('vendor.index'))->with('message','Vendor Created Successfully');
     }
 
     /**
@@ -67,7 +71,8 @@ class VendorController extends Controller
      */
     public function edit(vendor $vendor)
     {
-        //
+        $brand=Brand::where('status',1)->where('is_deleted',0)->get();
+        return view('admin.vendors.create',compact('brand','vendor'));
     }
 
     /**
@@ -79,7 +84,12 @@ class VendorController extends Controller
      */
     public function update(Request $request, vendor $vendor)
     {
-        //
+        $data=$request->all();
+        $data['vcont'] = implode(",", $request->vcont);
+        $data['vemail'] = implode(",", $request->vemail);
+        $data['vservice'] = implode(",", $request->vservice);
+        $vendor->update($data);
+        return redirect(route('vendor.index'))->with('message','Vendor Updated Successfully');
     }
 
     /**
@@ -90,6 +100,11 @@ class VendorController extends Controller
      */
     public function destroy(vendor $vendor)
     {
-        //
+        if ($vendor->update(['is_deleted' => 1])) {
+            $response = array('success' => true, 'error' => false, 'message' => 'Data deleted successfully.');
+        } else {
+            $response = array('success' => false, 'error' => true, 'message' => 'Something went wrong!');
+        }
+        return response()->json($response);
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerQueryController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\VendorTaskAssignController;
 
 
 /*
@@ -49,6 +50,8 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::resource('/customer-query',CustomerQueryController::class);
     Route::resource('/holiday',HolidayController::class);
     Route::resource('/vendor',VendorController::class);
+    Route::resource('/vendor-task',VendorTaskAssignController::class);
+
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
 });
 

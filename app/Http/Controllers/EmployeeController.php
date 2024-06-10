@@ -55,8 +55,6 @@ class EmployeeController extends Controller
     {
         $data=$request->all();
         $data['empmob'] = implode(",", $request->empmob);
-
-        $data['empmob'] = implode(",", $request->empmob);
            if ($request->hasFile('empdol')) {
             $file = $request->file('empdol');
             $empdol = $this->upload_images($file, $folder = 'empdol');

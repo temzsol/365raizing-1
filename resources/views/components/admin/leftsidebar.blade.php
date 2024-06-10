@@ -116,8 +116,8 @@
                         <li>
                             <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">All Vendor</a></li>
                             <li><a href="{{route('vendor.create')}}" key="t-compact-sidebar">Add Vendor</a></li>
-                            <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">Vendor Task</a></li>
-                            <li><a href="{{route('vendor.create')}}" key="t-compact-sidebar">Assign Task</a></li>
+                            <li><a href="{{route('vendor-task.index')}}" key="t-compact-sidebar">Vendor Task</a></li>
+                            <li><a href="{{route('vendor-task.create')}}" key="t-compact-sidebar">Assign Task</a></li>
                         </li>
                     </ul>
                 </li>
