@@ -77,7 +77,7 @@
                 if(response.success==true)
                 {
                     location.reload();
-                    swal("Deleted!", response.message, "error");
+                    swal("Success!", response.message, "success");
                     
 
                 }
