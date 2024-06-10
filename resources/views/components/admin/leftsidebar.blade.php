@@ -110,6 +110,18 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-layout"></i>
+                        <span key="t-layouts">Leave Infomation</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        <li>
+                            <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">Employee Leave</a></li>
+                            <li><a href="{{route('vendor.create')}}" key="t-compact-sidebar">Admin Leave</a></li>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-layout"></i>
                         <span key="t-layouts">Vendor Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
