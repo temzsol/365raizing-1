@@ -68,7 +68,7 @@
         {
         $.ajax({
             method:'POST',
-            url: '{{ url('master-admin/EmpLeaveStatusApprove') }}/'+tid,
+            url: '{{ url('master-admin/AdminLeaveStatusApprove') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'
@@ -97,7 +97,7 @@
         {
         $.ajax({
             method:'POST',
-            url: '{{ url('master-admin/EmpLeaveStatusReject') }}/'+tid,
+            url: '{{ url('master-admin/AdminLeaveStatusReject') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'
