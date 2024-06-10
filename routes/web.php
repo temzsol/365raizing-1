@@ -51,6 +51,12 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::resource('/holiday',HolidayController::class);
     Route::resource('/vendor',VendorController::class);
     Route::resource('/vendor-task',VendorTaskAssignController::class);
+    Route::resource('/leave',EmpLeaveController::class);
+    Route::get('/admin-leave','EmpLeaveController@AdminLeave')->name('AdminLeave');
+    Route::get('/emp-leave','EmpLeaveController@EmpLeave')->name('EmpLeave');
+    Route::post('/EmpLeaveStatusApprove/{id}','EmpLeaveController@EmpLeaveStatusApprove')->name('EmpLeaveStatusApprove');
+    Route::post('/EmpLeaveStatusReject/{id}','EmpLeaveController@EmpLeaveStatusReject')->name('EmpLeaveStatusReject');
+
 
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
 });

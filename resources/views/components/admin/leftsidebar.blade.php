@@ -114,8 +114,8 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">Employee Leave</a></li>
-                            <li><a href="{{route('vendor.create')}}" key="t-compact-sidebar">Admin Leave</a></li>
+                            <li><a href="{{route('EmpLeave')}}" key="t-compact-sidebar">Employee Leave</a></li>
+                            <li><a href="{{route('AdminLeave')}}" key="t-compact-sidebar">Admin Leave</a></li>
                         </li>
                     </ul>
                 </li>

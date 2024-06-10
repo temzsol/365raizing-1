@@ -52,7 +52,7 @@
                                           <div class="col-lg-4">
                                               <!--<label class="form-control-label">Official Email ID</label>-->
                                                  <label for="fname" class="form-control-label">Official Email ID <span style="color:red;">*</span></label>
-                                              <input type="email" id="empmail" placeholder="Enter Official Email ID" class="form-control" name="empmail" value="{{isset($employee)?$employee->empmail:''}}" required>
+                                              <input type="email" id="official_id" placeholder="Enter Official Email ID" class="form-control" name="official_id" value="{{isset($employee)?$employee->official_id:''}}" required>
                                           </div>
                                           
                                           <div class="col-lg-4">
