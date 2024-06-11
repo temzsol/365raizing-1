@@ -9,7 +9,7 @@ use App\Models\Employee;
 use App\Models\User;
 use App\Models\EmployeeTask;
 use App\Models\VendorTaskAssign;
-use App\Models\Vendor;
+use App\Models\vendor;
 use App\Models\Holiday;
 use App\Models\EmpLeave;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class DashboardController extends Controller
       $admintask=AdminTask::where('status',0)->count();
       $emptask=EmployeeTask::where('status',0)->count();
       $vendortask=VendorTaskAssign::where('status',0)->count();
-      $vendor=Vendor::all()->count();
+      $vendor=vendor::all()->count();
       $empleave=EmpLeave::where('l_status',0)->where('type','=','Employee')->count();
       $adminleave=EmpLeave::where('l_status',0)->where('type','=','Admin')->count();
         return view('admin.dashboards.master_admin_dashboar',compact('brand','company','admintask','admin','employee','emptask','vendortask','vendor','empleave','adminleave'));
