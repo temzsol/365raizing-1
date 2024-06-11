@@ -22,7 +22,11 @@ class VendorTaskAssignController extends Controller
      */
     public function index()
     {
-        $data = VendorTaskAssign::where('is_deleted',0)->orderBy('id', 'DESC')->paginate(10);
+        $data = VendorTaskAssign::where('vendor_task_assigns.is_deleted', 0)
+        ->join('vendors', 'vendor_task_assigns.vendor_id', '=', 'vendors.id')
+        ->select('vendor_task_assigns.*', 'vendors.fname as vendor_name')
+        ->orderBy('vendor_task_assigns.id', 'DESC')
+        ->paginate(20);
         return view('admin.vendor_task.index', compact('data'));
     }
 

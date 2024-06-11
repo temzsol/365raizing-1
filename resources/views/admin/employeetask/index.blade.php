@@ -11,18 +11,17 @@
                 </p>
 
                 <div class="table-responsive">
-                   My All Task
+                  Employee All Task
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
                     <table class="table mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
-                              
-                                <th>Vendor Name</th>
-                                <th>Task</th>
+                                <th>Employee Name</th>
+                                <th>Task Title</th>
                                 <th>Assign Date</th>
-                                <th>Deadline Date</th>
                                 <th>File</th>
+                                <th>Task Details</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -31,11 +30,12 @@
                             @foreach($data as $value)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$value->vendor_name}}</td>
-                                <td>{{$value->task_detail}}</td>
+                                <td>{{$value->emp_name}}</td>
+                                <td>{{$value->t_title}}</td>
                                 <td>{{$value->assign_date}}</td>
-                                <td>{{$value->deadline_date}}</td>
-                                <td><a href="{{url('/images/'.$value->task_file)}}" target="_blank" download>Download File</a></td>
+                                <td><a href="{{url('/images/'.$value->t_file)}}" target="_blank" download>Download File</a></td>
+                                <td>{{$value->t_detail}}</td>
+                                
                                 
                                 <td><div class="form-check form-switch form-switch-md mb-3" dir="ltr">
                                     {{-- <input class="form-check-input" type="checkbox" id="SwitchCheckSizemd{{$value->id}}" @if($value->status==1){{'checked'}} @endif> --}}
@@ -44,7 +44,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="{{route('vendor-task.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                    <a href="{{route('employeetask.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
                                 </td>
                             </tr>
                             
@@ -68,7 +68,7 @@
         {
         $.ajax({
             method:'DELETE',
-            url: '{{ url('master-admin/vendor-task') }}/'+tid,
+            url: '{{ url('master-admin/employeetask') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'
@@ -99,7 +99,7 @@
         {
         $.ajax({
             method:'POST',
-            url: '{{ url('master-admin/vendor-task/') }}/'+tid,
+            url: '{{ url('master-admin/employee_task_update/') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'
@@ -109,7 +109,7 @@
                 if(response.success)
                 {
                     location.reload();
-                    swal("Deleted!", "Status is Updated!", "success");
+                    swal("Deleted!", "Status Updated Successfully!", "success");
 
                 }
                 

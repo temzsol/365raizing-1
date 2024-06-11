@@ -11,6 +11,7 @@ use App\Http\Controllers\CustomerQueryController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\VendorTaskAssignController;
+use App\Http\Controllers\EmployeeTaskController;
 
 
 /*
@@ -52,6 +53,8 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::resource('/vendor',VendorController::class);
     Route::resource('/vendor-task',VendorTaskAssignController::class);
     Route::resource('/leave',EmpLeaveController::class);
+    Route::resource('/employeetask',EmployeeTaskController::class);
+    Route::post('/employee_task_update/{id}','EmployeeTaskController@employee_task_update')->name('employee_task_update');
     Route::get('/admin-leave','EmpLeaveController@AdminLeave')->name('AdminLeave');
     Route::get('/emp-leave','EmpLeaveController@EmpLeave')->name('EmpLeave');
     Route::post('/EmpLeaveStatusApprove/{id}','EmpLeaveController@EmpLeaveStatusApprove')->name('EmpLeaveStatusApprove');

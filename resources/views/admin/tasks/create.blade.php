@@ -14,7 +14,7 @@
 @endif
     <div class="card-body">
                 <div class="card">
-                <div class="card-header"><strong>Brand</strong><small> Form</small></div>
+                <div class="card-header"><strong>Super Admin Task</strong><small> Form</small></div>
                
                 @if(isset($mytask))
                 <form action="{{route('tasks.update',$mytask->id)}}" method="post" enctype="multipart/form-data">
