@@ -10,7 +10,7 @@
                 <hr><li class="menu-title" key="t-menu">All Details</li><hr>
 
                 <li>
-                    <a href="{{url('/admin/dashboard')}}" class="waves-effect">
+                    <a href="{{route('master-dashboard')}}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboards">Dashboards</span>
                     </a>
