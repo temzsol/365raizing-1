@@ -18,9 +18,10 @@ class AdminTaskMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $result;
+    public function __construct($result)
     {
-        //
+        $this->result=$result;
     }
 
     /**
@@ -31,7 +32,7 @@ class AdminTaskMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Admin Task Mail',
+            subject: 'Admin Task',
         );
     }
 
@@ -43,7 +44,7 @@ class AdminTaskMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.admintask',
         );
     }
 

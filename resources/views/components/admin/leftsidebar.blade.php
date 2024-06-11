@@ -92,6 +92,8 @@
                         <li>
                             <li><a href="{{route('employeetask.index')}}" key="t-compact-sidebar">All Employee Task</a></li>
                             <li><a href="{{route('employeetask.create')}}" key="t-compact-sidebar">Assign Task</a></li>
+                            <li><a href="{{route('admintask.index')}}" key="t-compact-sidebar">All Admin Task</a></li>
+                            <li><a href="{{route('admintask.create')}}" key="t-compact-sidebar">Assign Admin Task</a></li>
                         </li>
                     </ul>
                 </li>
