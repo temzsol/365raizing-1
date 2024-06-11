@@ -153,8 +153,8 @@
                         <span key="t-layouts">Web Setting</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="{{url('/admin/settings')}}" key="t-tui-calendar">Website Settings</a></li>
-                        <li><a href="{{url('/admin/settings/create')}}" key="t-full-calendar">Update Web Settings</a></li>
+                        <li><a href="{{route('settings.index')}}" key="t-tui-calendar">Website Settings</a></li>
+                        <li><a href="{{route('settings.create')}}" key="t-full-calendar">Update Web Settings</a></li>
                         
                     </ul>
                 </li>

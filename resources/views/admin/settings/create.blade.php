@@ -13,10 +13,10 @@
          </div>
          @endif
          @if(isset($data))
-         <form method="post" enctype="multipart/form-data" action="{{url('admin/settings/'.$data->id)}}" id="validation">
+         <form method="post" enctype="multipart/form-data" action="{{route('settings.update',$data->id)}}" id="validation">
             @method('PUT')
             @else
-         <form method="post" action="{{url('admin/settings')}}" enctype="multipart/form-data" id="form-validation">
+         <form method="post" action="{{route('settings.store')}}" enctype="multipart/form-data" id="form-validation">
             @endif
             @csrf
             <div class="card">
@@ -45,51 +45,7 @@
                      <div class="col-md-10" id="banner_image_upload">
                         <input class="form-control" type="file"id="web_logo" name="web_logo">
                      </div>
-{{-- 
-                     <center><h2>Email Setting<h2></center>
-                        <div class="mb-3 row">
-                           <label for="example-text-input" class="col-md-2 col-form-label">MAIL_MAILER<span class="text-danger">*</span></label>
-                           <div class="col-md-4">
-                              <input class="form-control" type="text" value="{{isset($data)?$data->mail_mailer:''}}" id="mail_mailer" name="mail_mailer" placeholder="Enter MAIL_MAILER" required>
-                           </div>
-                           <label for="example-text-input" class="col-md-2 col-form-label">MAIL_HOST<span class="text-danger">*</span></label>
-                           <div class="col-md-4">
-                              <input class="form-control" type="text" value="{{isset($data)?$data->mail_host:''}}" id="mail_host" name="mail_host" placeholder="Enter MAIL_HOST" required>
-                           </div>
-                        </div>
-                        <div class="mb-3 row">
-                           <label for="example-text-input" class="col-md-2 col-form-label">MAIL_PORT<span class="text-danger">*</span></label>
-                           <div class="col-md-4">
-                              <input class="form-control" type="number" value="{{isset($data)?$data->mail_port:''}}" id="mail_port" name="mail_port" placeholder="Enter MAIL_PORT" maxlength="5" required>
-                           </div>
-                           <label for="example-text-input" class="col-md-2 col-form-label">MAIL_USERNAME<span class="text-danger">*</span></label>
-                           <div class="col-md-4">
-                              <input class="form-control" type="text" value="{{isset($data)?$data->mail_username:''}}" id="mail_username" name="mail_username" placeholder="Enter MAIL_USERNAME" required>
-                           </div>
-                        </div>
-                        <div class="mb-3 row">
-                           <label for="example-text-input" class="col-md-2 col-form-label">MAIL_PASSWORD<span class="text-danger">*</span></label>
-                           <div class="col-md-4">
-                              <input class="form-control" type="password" value="{{isset($data)?$data->mail_password:''}}" id="mail_password" name="mail_password" placeholder="Enter MAIL_PASSWORD" required>
-                           </div>
-                           <label for="example-text-input" class="col-md-2 col-form-label">MAIL_ENCRYPTION<span class="text-danger">*</span></label>
-                           <div class="col-md-4">
-                              <select name="mail_enctype" class="form-control" required>
-                                 <option value="null" @if(isset($data)&& $data->mail_enctypr=='null') {{'selected'}} @endif>NULL</option>
-                                 <option value="tls" @if(isset($data)&& $data->mail_enctypr=='tls') {{'selected'}} @endif>TLS</option>
-                                 <option value="ssl" @if(isset($data)&& $data->mail_enctypr=='ssl') {{'selected'}} @endif>SSL</option>
-                                 <option value="starttls" @if(isset($data)&& $data->mail_enctypr=='starttls') {{'selected'}} @endif>STARTTLS </option>
-                              </select>
-                              
-                           </div>
-                        </div>
-                        <div class="mb-3 row">
-                           <label for="example-text-input" class="col-md-2 col-form-label">MAIL_FROMADDRESS<span class="text-danger">*</span></label>
-                           <div class="col-md-4">
-                              <input class="form-control" type="email" value="{{isset($data)?$data->mail_from_address:''}}" id="mail_from_address" name="mail_from_address" placeholder="Enter MAIL_FROM_ADDRESS" required>
-                           </div>
-                           
-                        </div> --}}
+
                   </div>
                </div>
                <center>
@@ -381,7 +337,7 @@
                </div>
                @endif
                <div class="card-body">
-                  <div class="mb-3 row">
+                  {{-- <div class="mb-3 row">
                      <label class="col-md-2 col-form-label" for="status">Status</label>
                      <div class="col-md-10">
                         <select class="form-select" name="status">
@@ -389,12 +345,12 @@
                         <option @if(isset($data) && $data->status=='0') selected="selected" @endif value="0">Inactive</option>
                         </select>
                      </div>
-                  </div>
+                  </div> --}}
                   <div class="mb-3 row">
                      <label class="col-md-2 col-form-label"></label>
                      <div class="col-md-10">
                         <button type="submit" class="btn btn-primary" >Submit</button>
-                        <a href="{{url('/admin/dashboard')}}" type="submit"class="btn btn-success">Home</a>
+                        <a href="{{route('master-dashboard')}}" type="submit"class="btn btn-success">Home</a>
                      </div>
                   </div>
                </div>

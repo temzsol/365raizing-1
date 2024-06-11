@@ -17,10 +17,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Page Title</th>
+                                <th>Website Name</th>
                                 <th>Logo</th>
-                                <th>Slug</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -29,15 +27,10 @@
                             <tr>
                                 @if($value->id==1)
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$value->page_title}}</td>
+                                <td>{{$value->web_name}}</td>
                                 <td><img src="{{url('/images/settings/'.$value->web_logo)}}" alt="{{$value->web_logo}}" style="height: 100px;"> <i class="bx bx-window-close text-danger"></i></td>
-                                <td>{{$value['slug']}}</td>
-                                <td><div class="form-check form-switch form-switch-md mb-3" dir="ltr">
-                                    {{-- <input class="form-check-input" type="checkbox" id="SwitchCheckSizemd{{$value->id}}" @if($value->status==1){{'checked'}} @endif> --}}
-                                    
-                                    <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1){{'Active'}}@else {{'Inactive'}} @endif</label>
-                                    </div>
-                                </td>
+                                
+                                
                                 <td>
                                     <a href="{{route('settings.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> 
                                     {{-- <a href="javascript:void(0);"  onClick="deletepages('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a> --}}
