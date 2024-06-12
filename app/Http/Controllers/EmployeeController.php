@@ -97,17 +97,21 @@ class EmployeeController extends Controller
  
                 $data['total_leave']=(int)(12-$current_month)*2.25;
         }
-        $employee->create($data);
+        $emp_result=$employee->create($data);
+        $emp_id='RZI0000'.$emp_result->id;
+        $employee=Employee::find($emp_result->id);
+        $employee->update(['emp_id'=>$emp_id,'user_type'=>'emp']);
+        
         $user = User::create([
             'name' => $request->fname,
-            'email' => $request->empmail,
+            'email' => $request->official_id,
             'status' => 1,
             'password' => Hash::make($request->empmob[0]),
             'type' => 'emp',
         ]);
-        $mailresult=['email'=>$request->empmail,'password'=>$request->empmob[0]];
+        $mailresult=['email'=>$request->official_id,'password'=>$request->empmob[0]];
         
-        Mail::to($request->empmail)
+        Mail::to($request->official_id)
         ->cc($request->personal_id) // Use cc or bcc if there are multiple recipients
         ->send(new EmployeeMail($mailresult));
         return redirect(route('employee.index'))->with('message','employee Created Successfully');

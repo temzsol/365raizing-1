@@ -35,9 +35,35 @@ class EmpLeaveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $user_name=Auth::user()->name;
+        $user_email=Auth::user()->email;
+        $leaveresult=Employee::where('official_id','=',$user_email)->where('fname','=',$user_name)->first();
+
+        // find DOJ
+        $effectiveDate = date('Y-m-d', strtotime("+3 months", strtotime($leaveresult->doj)));  
+        if($effectiveDate <= date('Y-m-d'))
+        
+        {
+            $total_leave=$leaveresult->total_leave;
+           
+        }
+        else
+        {
+            $total_leave = 'No leaves ,Your are on probation period' ;
+        }
+        $LeaveCalculate = EmpLeave::where('emp_id', $leaveresult->id)
+        ->where('l_status', 1)
+        ->sum('no_days');
+        if($LeaveCalculate > 0)
+        {
+            $takenleave=$LeaveCalculate;
+        }
+        else{
+            $takenleave=0;
+        }
+        return view('admin.leave_info.emp_leave_form',compact('total_leave','takenleave','effectiveDate'));
     }
 
     /**
@@ -46,9 +72,34 @@ class EmpLeaveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,EmpLeave $empLeave)
     {
-        //
+        $user_name=Auth::user()->name;
+        $type=Auth::user()->type;
+        $user_email=Auth::user()->email;
+        $employeeresult=Employee::where('official_id','=',$user_email)->where('fname','=',$user_name)->first();
+
+        $start = strtotime($request->l_date);
+        $end = strtotime($request->to_date);
+        $days_between = ceil(abs($end - $start) / 86400) + 1;
+        if($request->leave_remaining >= $days_between)
+        {
+        $data=$request->all();
+        if ($request->hasFile('attachment')) {
+            $file = $request->file('attachment');
+            $attachment = $this->upload_single_image($file, $folder = 'attachment');
+            $data['attachment'] = $folder."/".$attachment;
+        }
+        $data['emp_id']=$employeeresult->id;
+        $data['type']=$type;
+        $data['no_days']=$days_between;
+        $data['leave_remaining']=$request->leave_remaining;
+
+        $empLeave->create($data);
+        return back()->with('message', 'Leave Applyed Successfully');
+        }
+        return back()->with('message', 'You have less remaining leave.');
+
     }
 
     /**
@@ -191,4 +242,18 @@ public function EmpLeaveStatusApprove(Request $request,$id)
 
 
     //  Employee Leave Information End
+
+    function EmpLeaveStatus(Request $request){
+        $user_name=Auth::user()->name;
+        $type=Auth::user()->type;
+        $user_email=Auth::user()->email;
+        $employeeresult=Employee::where('official_id','=',$user_email)->where('fname','=',$user_name)->first();
+
+        $data=EmpLeave::where('emp_leaves.emp_id',$employeeresult->id) 
+        ->join('employees', 'emp_leaves.emp_id', '=', 'employees.id')
+        ->orderBy('emp_leaves.id', 'DESC')
+        ->paginate(20);
+        return view('admin.leave_info.emp_leave_info', compact('data'));
+    }
+
 }

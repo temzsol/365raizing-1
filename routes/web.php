@@ -84,6 +84,12 @@ Route::prefix('hr')->middleware('login')->group(function () {
 //  Employee Route
 Route::prefix('Employee')->middleware('login')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'Employeeindex'])->name('employee-dashboard');
+    Route::resource('/customer-query',CustomerQueryController::class);
+    Route::resource('/employeetask',EmployeeTaskController::class);
+    Route::resource('/leave',EmpLeaveController::class);
+    Route::get('/employeetaskview','EmployeeTaskController@employeetaskview')->name('employeetaskview');
+    Route::get('/emp-leave-status','EmpLeaveController@EmpLeaveStatus')->name('EmpLeaveStatus');
+
 });
 
 Route::get('/clear-cache', function() {

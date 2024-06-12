@@ -33,15 +33,15 @@
         @if( Auth::user()->type =='master_admin')
         <x-admin.leftsidebar/>
         @endif
-        @if( Auth::user()->type =='hr')
+        @if( Auth::user()->type =='HR')
         <x-admin.hr_sidebar/>
         @endif
 
-        @if( Auth::user()->type =='admin')
+        @if( Auth::user()->type =='Admin')
         <x-admin.admin_sidebar/>
         @endif
 
-        @if( Auth::user()->type =='emp')
+        @if( Auth::user()->type =='Employee')
         <x-admin.employee_sidebar/>
         @endif
 

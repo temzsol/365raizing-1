@@ -18,7 +18,7 @@
                                 <th>Leave From</th>
                                 <th>Leave To</th>
                                 <th>Leave Remaing</th>
-                                <th>Action</th>
+                                <th>Approval Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,7 @@
                                 <td>{{$value->to_date}}</td>
                                 <td>{{$value->no_days}}</td>
                                 
-                                
+                                @if(Auth::user()->type=='master_admin')
                                    @if($value->l_status	==1)
                                    <td>  <button class="btn btn-primary btn-sm disabled">Leave Approved</button></td>
                                    @endif
@@ -45,6 +45,19 @@
                                     </td>
                                    <td><button type="button" class="btn btn-danger btn-sm" onclick="reject({{$value->id}})">Leave Rejected</button></td>
                                    @endif
+                                @else
+
+                                   {{-- Employee Dashboar Section --}}
+                                   @if($value->l_status	==1)
+                                   <td>  <button class="btn btn-success btn-sm disabled">Leave Approved</button></td>
+                                   @endif
+                                   @if($value->l_status	==2)
+                                 <td>  <button class="btn btn-warning btn-sm disabled">Leave Rejected</button></td>
+                                   @endif
+                                   @if($value->l_status	==0)
+                                   <td>  <button class="btn btn-primary btn-sm disabled">Pending</button></td>
+                                     @endif
+                                @endif
                                 
                             </tr>
                             

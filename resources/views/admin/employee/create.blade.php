@@ -169,7 +169,7 @@
                                                                                                                
                                                         @else
 
-                                                            <input type="file" id="dol" class="form-control" name="empdol[]" value="Sample"> 
+                                                            <input type="file" id="dol" class="form-control" name="appointment_latter[]" value="Sample"> 
                                                         @endif
                                                        
                                                     </div>
@@ -185,7 +185,7 @@
                                               <div id="emp_appointment_latter_div">
                                                   <div class="row">
                                                       <div class="col-lg-8">
-                                                          <input type="file" id="dol" class="form-control" name="empdol[]" value="Sample">
+                                                          <input type="file" id="dol" class="form-control" name="appointment_latter[]" value="Sample">
                                                       </div>
                                                       <div class="col-lg-2">
                                                         <button type="button" class="btn btn-success" id="emp_appointment_latter">+Add</button>

@@ -62,9 +62,9 @@ $settings=App\Models\Websitesetting::find(1);
                                  <div class="input-group auth-pass-inputgroup">
                                     <select name="type" id="type" class="form-control">
                                        <option value="master_admin">Master Admin</option>
-                                       <option value="admin">Admin</option>
-                                       <option value="hr">HR</option>
-                                       <option value="emp">Employee</option>
+                                       <option value="Admin">Admin</option>
+                                       <option value="HR">HR</option>
+                                       <option value="Employee">Employee</option>
                                     </select>
                                  </div>
                               </div>

@@ -32,7 +32,10 @@
                                 <td>{{$value->query_details}}</td>
                                 
                                 <td>
-                                    <a href="{{route('customer-query.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                    <a href="{{route('customer-query.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a>
+                                    @if(Auth::user()->type=='master_admin')
+                                    <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                    @endif
                                 </td>
                             </tr>
                             

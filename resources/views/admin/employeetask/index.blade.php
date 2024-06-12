@@ -23,7 +23,9 @@
                                 <th>File</th>
                                 <th>Task Details</th>
                                 <th>Status</th>
+                                @if(Auth::user()->type=='master_admin')
                                 <th>Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -43,9 +45,14 @@
                                     <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1)<button class="btn btn-success">Completed</button>@else <button class="btn btn-warning" onClick="update_status('{{$value->id}}')">Incomplete</button> @endif</label>
                                     </div>
                                 </td>
+                                @if(Auth::user()->type=='master_admin')
                                 <td>
-                                    <a href="{{route('employeetask.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                    <a href="{{route('employeetask.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> 
+                                   
+                                     <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                  
                                 </td>
+                                @endif
                             </tr>
                             
                             @endforeach

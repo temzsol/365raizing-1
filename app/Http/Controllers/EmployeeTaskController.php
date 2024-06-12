@@ -149,4 +149,20 @@ class EmployeeTaskController extends Controller
             }
     return $response;
     }
+
+//  For Employee Dashboard Fundtion 
+    public function employeetaskview()
+    {
+        $user_name=Auth::user()->name;
+        $user_email=Auth::user()->email;
+        $employeeResult=Employee::where('official_id','=',$user_email)->where('fname','=',$user_name)->first();
+        // dd($employeeResult->id);
+        $data = EmployeeTask::where('employee_tasks.is_deleted', 0)
+        ->where('employee_tasks.emp_id', $employeeResult->id)
+        ->join('employees', 'employee_tasks.emp_id', '=', 'employees.id')
+        ->select('employee_tasks.*', 'employees.fname as emp_name')
+        ->orderBy('employee_tasks.id', 'DESC')
+        ->paginate(20);
+        return view('admin.employeetask.index', compact('data'));
+    }
 }
