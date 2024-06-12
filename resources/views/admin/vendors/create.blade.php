@@ -45,7 +45,7 @@
                               </div>
                               <div class="col-lg-4 mb-4">
                                  <label for="vcont" class="form-control-label">Country <span style="color:red;">*</span></label>
-                                 <input type="text" id="vcont" placeholder="Country name" class="form-control" name="vcont" value="{{isset($vendor)?$vendor->vcont:''}}" required>
+                                 <input type="text" id="vcont" placeholder="Country name" class="form-control" name="vcountry" value="{{isset($vendor)?$vendor->vcountry:''}}" required>
                               </div>
                               <div class="col-lg-4 mb-4">
                                  <label for="vstreet" class="form-control-label">Street <span style="color:red;">*</span></label>
@@ -172,7 +172,8 @@
                                           <input type="text" id="vservice" class="form-control" name="vservice[]" placeholder="Enter vendor's services">
                                        </div>
                                        <div class="col-lg-2">
-                                          <buttontype="button" class="btn btn-danger service_button">Remove</buttontype="button">
+                                          <button type="button" class="btn btn-success" id="emp_appointment_latter">+Add</button>
+                                         
                                        </div>
                                     </div>
                                  </div>
@@ -190,7 +191,7 @@
                                  <select name="status" class="form-control" required>
                                     <option>Please select status</option>
                                     <option value="1"{{isset($vendor) && $vendor->status==1?'selected':''}}>Active</option>
-                                    <option value="2"{{isset($vendor) && $vendor->status==2?'selected':''}}>Ex Employee</option>
+                                    <option value="2"{{isset($vendor) && $vendor->status==2?'selected':''}}>Inactive</option>
                                  </select>
                               </div>
                            </div>

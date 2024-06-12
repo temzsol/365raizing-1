@@ -25,8 +25,8 @@
                         <li>
                             <a href="javascript: void(0);" class="has-arrow" key="t-vertical">My Task</a>
                             <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="{{route('tasks.index')}}" key="t-light-sidebar">My Assigned Task</a></li>
                                 <li><a href="{{route('tasks.create')}}" key="t-compact-sidebar">Assign Task</a></li>
+                                <li><a href="{{route('tasks.index')}}" key="t-light-sidebar">My Assigned Task</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -39,10 +39,10 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('brands.index')}}" key="t-light-sidebar">All Brand </a></li>
                             <li><a href="{{route('brands.create')}}" key="t-light-sidebar">Add Brand </a></li>
-                            <li><a href="{{route('company.index')}}" key="t-compact-sidebar">All Company</a></li>
+                            <li><a href="{{route('brands.index')}}" key="t-light-sidebar">All Brand </a></li>
                             <li><a href="{{route('company.create')}}" key="t-compact-sidebar">Add Company</a></li>
+                            <li><a href="{{route('company.index')}}" key="t-compact-sidebar">All Company</a></li>
                         </li>
                     </ul>
                 </li>
@@ -76,10 +76,10 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('employee.index')}}" key="t-light-sidebar">Employee List </a></li>
                             <li><a href="{{route('employee.create')}}" key="t-light-sidebar">Add Employee </a></li>
-                            <li><a href="{{route('adminlist')}}" key="t-compact-sidebar">All Admin</a></li>
+                            <li><a href="{{route('employee.index')}}" key="t-light-sidebar">Employee List </a></li>
                             <li><a href="{{route('admins_create')}}" key="t-compact-sidebar">Add admin</a></li>
+                            <li><a href="{{route('adminlist')}}" key="t-compact-sidebar">All Admin</a></li>
                         </li>
                     </ul>
                 </li>
@@ -90,10 +90,10 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('employeetask.index')}}" key="t-compact-sidebar">All Employee Task</a></li>
                             <li><a href="{{route('employeetask.create')}}" key="t-compact-sidebar">Assign Task</a></li>
-                            <li><a href="{{route('admintask.index')}}" key="t-compact-sidebar">All Admin Task</a></li>
+                            <li><a href="{{route('employeetask.index')}}" key="t-compact-sidebar">All Employee Task</a></li>
                             <li><a href="{{route('admintask.create')}}" key="t-compact-sidebar">Assign Admin Task</a></li>
+                            <li><a href="{{route('admintask.index')}}" key="t-compact-sidebar">All Admin Task</a></li>
                         </li>
                     </ul>
                 </li>
@@ -104,8 +104,8 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('customer-query.index')}}" key="t-compact-sidebar">All Query</a></li>
                             <li><a href="{{route('customer-query.create')}}" key="t-compact-sidebar">Add Query</a></li>
+                            <li><a href="{{route('customer-query.index')}}" key="t-compact-sidebar">All Query</a></li>
                         </li>
                     </ul>
                 </li>
@@ -116,8 +116,8 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('holiday.index')}}" key="t-compact-sidebar">All Holiday</a></li>
                             <li><a href="{{route('holiday.create')}}" key="t-compact-sidebar">Add Holiday</a></li>
+                            <li><a href="{{route('holiday.index')}}" key="t-compact-sidebar">All Holiday</a></li>
                         </li>
                     </ul>
                 </li>
@@ -140,10 +140,10 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">All Vendor</a></li>
                             <li><a href="{{route('vendor.create')}}" key="t-compact-sidebar">Add Vendor</a></li>
-                            <li><a href="{{route('vendor-task.index')}}" key="t-compact-sidebar">Vendor Task</a></li>
+                            <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">All Vendor</a></li>
                             <li><a href="{{route('vendor-task.create')}}" key="t-compact-sidebar">Assign Task</a></li>
+                            <li><a href="{{route('vendor-task.index')}}" key="t-compact-sidebar">Vendor Task</a></li>
                         </li>
                     </ul>
                 </li>
@@ -153,8 +153,8 @@
                         <span key="t-layouts">Web Setting</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="{{route('settings.index')}}" key="t-tui-calendar">Website Settings</a></li>
                         <li><a href="{{route('settings.create')}}" key="t-full-calendar">Update Web Settings</a></li>
+                        <li><a href="{{route('settings.index')}}" key="t-tui-calendar">Website Settings</a></li>
                         
                     </ul>
                 </li>
