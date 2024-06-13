@@ -150,7 +150,32 @@ class AdminController extends Controller
     return $response;
     }
 
-    
+    public function passwordResetview(Request $request,Admin $admin){
+        $authresult=Auth::user()->all();
+        // dd($authresult[0]->email);
+        return view('admin.passwordreset',compact('authresult'));
+    }
+
+    public function passwordReset(Request $request,User $user){
+        $validatedData = $request->validate([
+            'n_password' => 'required|string|min:8', // ' automatically checks against 'c_password'
+            'c_password' => 'required|string|min:8'           // Validate the first element of empmob array
+        ]);
+        if($request->n_password == $request->c_password)
+        {
+
+            $user=User::find($request->id); 
+         $user->update([
+            'password' => Hash::make($request->n_password)
+        ]);
+        return back()->with('message','Password Updated Successfully');
+        }
+        else
+        {
+            return back()->with('message','Your Password is Not Match');
+        }
+
+    }
     
 
 

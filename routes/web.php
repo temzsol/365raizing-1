@@ -69,6 +69,8 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
 
 
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
+    Route::get('/password-reset-view','AdminController@passwordResetview')->name('passwordResetview');
+    Route::post('/password-reset','AdminController@passwordReset')->name('passwordReset');
 });
 
 //  Admin Route
