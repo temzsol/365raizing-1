@@ -32,7 +32,10 @@
                                 <td><a href="{{ route('company.show', ['company' => $value->id]) }}
                                     "class="btn btn-dark">View Brands {{ \App\Models\Brand::where('bcomp', '=', $value->id)->count();}}</a></td>
                                 <td>
-                                    <a href="{{route('company.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                    <div class="button_align">
+                                        <a href="{{route('company.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a>  <a href="javascript:void(0);"onClick="deleteblogs('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                    </div>
+                                   
                                 </td>
                             </tr>
                             
