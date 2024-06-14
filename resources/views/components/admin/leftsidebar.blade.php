@@ -11,14 +11,14 @@
 
                 <li>
                     <a href="{{route('master-dashboard')}}" class="waves-effect">
-                        <i class="bx bx-home-circle"></i>
+                        <i class="fa fa-home  font-size-24"></i>
                         <span key="t-dashboards">Dashboards</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-tasks font-size-18"></i>
                         <span key="t-layouts">Task Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -34,7 +34,7 @@
                 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-building font-size-18"></i>
                         <span key="t-layouts">Brand & Company</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -48,7 +48,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-users font-size-18"></i>
                         <span key="t-layouts">HR Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -71,7 +71,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-server font-size-18"></i>
                         <span key="t-layouts">Emp & Task Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -85,7 +85,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="font-size-18"></i>
                         <span key="t-layouts">Task Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -99,7 +99,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-quora font-size-18"></i>
                         <span key="t-layouts">Customer Query</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -111,7 +111,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-list font-size-18"></i>
                         <span key="t-layouts">Holiday Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -123,7 +123,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-info-circle font-size-18"></i>
                         <span key="t-layouts">Leave Infomation</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -135,7 +135,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-users font-size-18"></i>
                         <span key="t-layouts">Vendor Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -149,7 +149,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-cogs font-size-18"></i>
                         <span key="t-layouts">Web Setting</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">

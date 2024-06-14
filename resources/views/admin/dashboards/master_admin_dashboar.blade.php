@@ -23,7 +23,7 @@
                                     <div class="flex-shrink-0 align-self-center">
                                         <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
                                             <span class="avatar-title">
-                                                <i class="bx bx-copy-alt font-size-24"></i>
+                                                <i class="fa fa-user font-size-24"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -43,7 +43,7 @@
                                     <div class="flex-shrink-0 align-self-center ">
                                         <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
                                             <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="bx bx-archive-in font-size-24"></i>
+                                                <i class="fa fa-user-secret font-size-24" aria-hidden="true"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                     <div class="flex-shrink-0 align-self-center">
                                         <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
                                             <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                <i class="fa fa-users font-size-24"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@
                                     <div class="flex-shrink-0 align-self-center">
                                         <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
                                             <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                <i class="fa fa-thumb-tack font-size-24"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                                     <div class="flex-shrink-0 align-self-center">
                                         <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
                                             <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                <i class="fa fa-tasks font-size-24"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@
                                     <div class="flex-shrink-0 align-self-center">
                                         <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
                                             <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                <i class="fa fa-tasks font-size-24"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -143,7 +143,7 @@
                                     <div class="flex-shrink-0 align-self-center">
                                         <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
                                             <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                <i class="fa fa-calendar font-size-24"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@
                                     <div class="flex-shrink-0 align-self-center">
                                         <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
                                             <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                <i class="fa fa-calendar font-size-24"></i>
                                             </span>
                                         </div>
                                     </div>
