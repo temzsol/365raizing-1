@@ -140,7 +140,7 @@
                             <div class="col-md-4">
                           <div class="form-group mb-4">
                               <label for="compemail" class=" form-control-label">Email Add<span class="text-danger">*</span></label>
-                              <input type="email" name="compemail" value="{{isset($company)?$company->compemail:''}}" id="compemail" placeholder="Enter Email Add" class="form-control" required>
+                              <input type="email" name="compemail" value="{{isset($company)?$company->compemail:''}}" id="compemail" placeholder="Enter Email Address" class="form-control" required>
                           </div>
                         </div>
                           <div class="col-md-4">
