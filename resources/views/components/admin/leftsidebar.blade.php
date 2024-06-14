@@ -39,8 +39,8 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('brands.create')}}" key="t-light-sidebar">Add Brand </a></li>
-                            <li><a href="{{route('brands.index')}}" key="t-light-sidebar">All Brand </a></li>
+                            {{-- <li><a href="{{route('brands.create')}}" key="t-light-sidebar">Add Brand </a></li>
+                            <li><a href="{{route('brands.index')}}" key="t-light-sidebar">All Brand </a></li> --}}
                             <li><a href="{{route('company.create')}}" key="t-compact-sidebar">Add Company</a></li>
                             <li><a href="{{route('company.index')}}" key="t-compact-sidebar">All Company</a></li>
                         </li>

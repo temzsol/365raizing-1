@@ -107,7 +107,7 @@ class EmployeeController extends Controller
             'email' => $request->official_id,
             'status' => 1,
             'password' => Hash::make($request->empmob[0]),
-            'type' => 'emp',
+            'type' => 'Employee',
         ]);
         $mailresult=['email'=>$request->official_id,'password'=>$request->empmob[0]];
         

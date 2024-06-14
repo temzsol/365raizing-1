@@ -108,20 +108,20 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-4">
-                                    <label for="cpan" class=" form-control-label">PanCard</label>
+                                    <label for="cpan" class=" form-control-label">Tax Card</label>
                                     <input type="file" id="cpan"  class="form-control" name="cpan" value="{{isset($company)?$company->cpan:''}}">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group mb-4">
-                                    <label for="tan" class=" form-control-label">TAN Number</label>
-                                    <input type="text" id="tan" name="tan" value="{{isset($company)?$company->tan:''}}" placeholder="Enter  TAN number" class="form-control">
+                                    <label for="tan" class=" form-control-label">TAX Number</label>
+                                    <input type="text" id="tan" name="tan" value="{{isset($company)?$company->tan:''}}" placeholder="Enter  TAX number" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-4">
-                                    <label for="mca" class=" form-control-label">MCA </label>
+                                    <label for="mca" class=" form-control-label">Company ID </label>
                                     <input type="file" id="mca"  class="form-control" name="mca" >
                                 </div>
                             </div>
@@ -169,8 +169,8 @@
                         </div>
                           <div class="col-md-4">
                           <div class="form-group mb-4">
-                              <label for="compcode" class=" form-control-label">Postal Code<span class="text-danger">*</span></label>
-                              <input type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==6) return false;" name="compcode" value="{{isset($company)?$company->compcode:''}}" id="compcode" placeholder="Enter Postal Code" class="form-control"required>
+                              <label for="compcode" class=" form-control-label">Postal Code</label>
+                              <input type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==6) return false;" name="compcode" value="{{isset($company)?$company->compcode:''}}" id="compcode" placeholder="Enter Postal Code" class="form-control">
                           </div>
                         </div>
                           <div class="col-md-4">

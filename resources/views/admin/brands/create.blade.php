@@ -26,6 +26,21 @@
                         @endif
                         @csrf
                           <div class="card-body card-block">
+                            <div class="form-group mb-4">
+                                <label for="brand" class=" form-control-label">Company</label>
+                                <div id="brand_add_row" class="mb-4">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                              <div class="row">
+                                                <div class="col-lg-10">
+                                                    <input type="text" class="form-control" readonly value="{{$company->compname}}">
+                                                    <input type="hidden" name="bcomp" class="form-control" readonly value="{{$company->id}}">
+                                        </div>
+                                        </div>
+                 
+                                    </div>
+                                </div>
+                            </div>
 							<div class="form-group mb-4">
                                 <label for="brand" class=" form-control-label">Brand<span class="text-danger">*</span></label>
                                 <div id="brand_add_row">
@@ -38,27 +53,7 @@
                                 </div>
                             </div>
 
-							<div class="form-group mb-4">
-                                <label for="brand" class=" form-control-label">Company</label>
-                                <div id="brand_add_row" class="mb-4">
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                              <div class="row">
-                                                <div class="col-lg-10">
-                                          <select name="bcomp" id="bcomp" class="form-control">
-                                            <option value="">Select Company</option>
-                                            @foreach ($company as $key=>$value)
-                                            <option value="{{ $value->id }}" {{ isset($brand) && $brand->bcomp == $value->id ? 'selected' : '' }}>
-                                                {{ $value->compname }}
-                                            </option>
-                                            @endforeach
-                                          </select>
-                                        </div>
-                                        </div>
-                 
-                                    </div>
-                                </div>
-                            </div>
+							
 
                             @if(isset($brand))
                             {{-- Thid Code For Update Section --}}

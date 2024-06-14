@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -65,7 +66,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        $data=Brand::where('bcomp',$company->id)->where('is_deleted',0)->orderBy('id', 'DESC')->paginate(20);
+        return view('admin.brands.index', compact('data'));
     }
 
     /**

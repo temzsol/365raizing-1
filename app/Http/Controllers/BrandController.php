@@ -26,7 +26,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        $company=Company::where('status',1)->where('is_deleted',0)->get();
+        $company_id= $_GET['company'];
+        $company=Company::find($company_id);
         return view('admin.brands.create',compact('company'));
     }
 
@@ -54,9 +55,10 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $brand)
+    public function show(Brand $brand,Company $company)
     {
-        //
+        $data=Brand::where('bcomp',$company->id)->where('is_deleted',0)->orderBy('id', 'DESC')->paginate(20);
+        return view('admin.brands.index', compact('data'));
     }
 
     /**

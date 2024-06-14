@@ -14,6 +14,9 @@
                                 <th>Company Name</th>
                                 <th>Email</th>
                                 <th>Contact</th>
+                                <th>Website</th>
+                                <th>Add Brand</th>
+                                <th>View Brand</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -24,7 +27,10 @@
                                 <td>{{$value->compname}}</td>
                                 <td>{{$value->compemail}}</td>
                                 <td>{{$value->compmob}}</td>
-                                
+                                <td>{{$value->web_link}}</td>
+                                <td><a href="{{route('brands.create', ['company' => $value->id])}}"class="btn btn-primary">Add Brand</a></td>
+                                <td><a href="{{ route('company.show', ['company' => $value->id]) }}
+                                    "class="btn btn-dark">View Brands {{ \App\Models\Brand::where('bcomp', '=', $value->id)->count();}}</a></td>
                                 <td>
                                     <a href="{{route('company.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
                                 </td>

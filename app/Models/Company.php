@@ -10,4 +10,10 @@ class Company extends Model
     use HasFactory;
     protected $table = 'companies';
     protected $fillable=['compname', 'compbrand', 'compemail', 'compmob', 'compstreet', 'compcity', 'compcode', 'compcountry', 'cgst', 'gst_location', 'gst_file', 'cpan', 'tan', 'mca', 'billing_address', 'billing_address_location', 'head_office_address', 'web_link', 'created_at', 'updated_at','status','is_deleted'];
+
+
+    public function brands()
+    {
+        return $this->hasMany(Brand::class, 'bcomp', 'id'); // Assuming 'bcomp' is the foreign key in Brand model
+    }
 }
