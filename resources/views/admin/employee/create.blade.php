@@ -26,6 +26,16 @@
                                 @endif
                                 @csrf
                                 <div class="card-body card-block">
+                                    <div class="col-lg-4 mb-4">
+                                        <label for="ucomp" class=" form-control-label">Brand <span style="color:red;">*</span></label>
+                                      <select name="empbrand" id="empbrand" class="form-control" required>
+                                         <option value="">Please select brand</option>
+                                         @foreach($brand as $value)
+                                         <option value="{{$value->id}}" @if(isset($employee)){{$value->id==$employee->empbrand?'selected':''}}@endif>{{$value->bname}}</option>
+                                        @endforeach
+                                         
+                                       </select>
+                                  </div>
                                   <div class="form-group mb-4">
                                       <div class="row">
                                           <div class="col-lg-4">
@@ -356,7 +366,7 @@
                                                         <input type="file" id="certificate" class="form-control mb-4" name="certificate[]"> 
                                                     @endif
                                                       </div>
-                                                      @endforeach
+                                                @endforeach
                                                     </div>
                                               <div id="emp_certificate_div"></div>
                                                <div class="col-lg-2 mt-4" style="display: inline;">
@@ -368,7 +378,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-8">
                                                             {{-- <input type="file" id="certificate"  class="form-control" name="certificate[]"> --}}
-                                                            @if(!empty($value))
+                                                        @if(!empty($value->file))
                                                       <img src="{{url('/images/'.$value)}}" height="100px" width="100px">                                                 
                                                       @else
                                                           <input type="file" id="certificate" class="form-control mb-4" name="certificate[]"> 
@@ -395,7 +405,14 @@
       
                    
                                       <div class="row">
-                                     
+                                        <div class="col-lg-4 mt-4">
+                                            <label for="ucomp" class=" form-control-label">Employee Role<span style="color:red;">*</span> </label>
+                                             <select name="role" class="form-control" required>
+                                                      <option value="0"{{isset($employee) && $employee->status==0?'selected':''}}>Employee</option>
+                                                      <option value="1"{{isset($employee) && $employee->status==1?'selected':''}}>Admin</option>
+                                                      <option value="2"{{isset($employee) && $employee->status==2?'selected':''}}>HR</option>
+                                              </select>
+                                         </div>
                                           <div class="col-lg-4 mt-4">
                                              <label for="ucomp" class=" form-control-label">Status<span style="color:red;">*</span> </label>
                                               <select name="status" class="form-control" required>
@@ -404,16 +421,7 @@
                                                        <option value="2"{{isset($employee) && $employee->status==2?'selected':''}}>Ex Employee</option>
                                                </select>
                                           </div>
-                                           <div class="col-lg-4 mt-4">
-                                                <label for="ucomp" class=" form-control-label">Brand <span style="color:red;">*</span></label>
-                                              <select name="empbrand" id="empbrand" class="form-control" required>
-                                                 <option value="">Please select brand</option>
-                                                 @foreach($brand as $value)
-                                                 <option value="{{$value->id}}" @if(isset($employee)){{$value->id==$employee->empbrand?'selected':''}}@endif>{{$value->bname}}</option>
-                                                @endforeach
-                                                 
-                                               </select>
-                                          </div>
+                                        
                                       </div>
                                   
                                        <div class="form-group mb-4">

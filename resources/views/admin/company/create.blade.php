@@ -68,7 +68,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="card">
-                        <div class="card-header"><strong>Company</strong><small> Form</small></div>
+                        <div class="card-header"><strong>Company</strong><small> Form</small>
+                       
+                            </div>
                         @if(isset($company))
                         <form action="{{route('company.update',$company->id)}}" method="post" enctype="multipart/form-data">
                         @method('PUT')
@@ -188,7 +190,8 @@
                     </div>
 
                     <input type="submit" name="cok" value="{{isset($company)?'Update':'Submit'}}" class="form-control btn btn-primary" id="Add_comp_submit" Name="Submit" style="margin-top: 15px; border-radius: 6px; width: 130px;"   />
-                        </div>
+                    <a href="{{route('company.index')}}" class="btn btn-dark" style="margin-top: 15px; border-radius: 6px; width: 130px;" >Back</a>       
+                </div>
                     </form>
                     
                   </div>

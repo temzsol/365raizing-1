@@ -66,7 +66,12 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $data=Brand::where('bcomp',$company->id)->where('is_deleted',0)->orderBy('id', 'DESC')->paginate(20);
+        $data = Brand::where('brands.is_deleted', 0)
+        ->where('bcomp',$company->id)
+        ->join('companies', 'brands.bcomp', '=', 'companies.id')
+        ->select('brands.*', 'companies.compname as comp_name')
+        ->orderBy('brands.id', 'DESC')
+        ->paginate(20);
         return view('admin.brands.index', compact('data'));
     }
 

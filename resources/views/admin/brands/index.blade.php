@@ -24,7 +24,7 @@
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$value->bname}}</td>
-                                <td>{{$value->bcomp}}</td>
+                                <td>{{$value->comp_name}}</td>
                                 <td>{{$value->bdivision}}</td>
                                 <td>{{$value->div_mail}}</td>
                                 <td>{{$value->div_mob}}</td>

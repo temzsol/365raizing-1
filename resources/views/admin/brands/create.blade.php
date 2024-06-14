@@ -197,6 +197,7 @@
 
                             <div class="form-group mb-4">
                                 <input type="submit" name="brandok" value="{{isset($brand)?'Update':'Submit'}}" class="form-control btn btn-primary" id="Add_brand_submit"style="margin-top: 15px; border-radius: 6px; width: 130px;" />
+                                <a href="{{route('brands.index')}}" class="btn btn-dark" style="margin-top: 15px; border-radius: 6px; width: 130px;" >Back</a>   
                             </div>
                           </div>
                       </form>

@@ -8,6 +8,8 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\EmployeeMail;
+use App\Mail\AdminMail;
+use App\Mail\HRMail;
 use Mail;
 use Auth;
 use Session;
@@ -102,6 +104,9 @@ class EmployeeController extends Controller
         $employee=Employee::find($emp_result->id);
         $employee->update(['emp_id'=>$emp_id,'user_type'=>'emp']);
         
+        //  For Employee Registration
+        if($request->role==0)
+        {
         $user = User::create([
             'name' => $request->fname,
             'email' => $request->official_id,
@@ -114,6 +119,42 @@ class EmployeeController extends Controller
         Mail::to($request->official_id)
         ->cc($request->personal_id) // Use cc or bcc if there are multiple recipients
         ->send(new EmployeeMail($mailresult));
+        }
+
+        //  For Admin Registration
+        if($request->role==1)
+        {
+        $user = User::create([
+            'name' => $request->fname,
+            'email' => $request->official_id,
+            'status' => 1,
+            'password' => Hash::make($request->empmob[0]),
+            'type' => 'Admin',
+        ]);
+        $mailresult=['email'=>$request->official_id,'password'=>$request->empmob[0]];
+        
+        Mail::to($request->official_id)
+        ->cc($request->personal_id) // Use cc or bcc if there are multiple recipients
+        ->send(new AdminMail($mailresult));
+        }
+
+        //  for HR Registration 
+
+        if($request->role==2)
+        {
+        $user = User::create([
+            'name' => $request->fname,
+            'email' => $request->official_id,
+            'status' => 1,
+            'password' => Hash::make($request->empmob[0]),
+            'type' => 'HR',
+        ]);
+        $mailresult=['email'=>$request->official_id,'password'=>$request->empmob[0]];
+        
+        Mail::to($request->official_id)
+        ->cc($request->personal_id) // Use cc or bcc if there are multiple recipients
+        ->send(new HRMail($mailresult));
+        }
         return redirect(route('employee.index'))->with('message','employee Created Successfully');
     }
 

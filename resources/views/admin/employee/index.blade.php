@@ -16,20 +16,26 @@
                                 <th>Designation</th>
                                 <th>Location</th>
                                 <th>Contact</th>
+                                <th>Employee Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($data as $value)
                             <tr>
-                                <th scope="row">{{$loop->iteration}}</th>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{$value->fname . $value->mname.$value->lname }}</td>
                                 <td>{{$value->bname}}</td>
                                 <td>{{$value->designation}}</td>
                                 <td>{{$value->eloc}}</td>
                                 <td>{{$value->empmob}}</td>
-                                <td>{{$value->div_mob}}</td>
-                                
+                               @if($value->role==0)
+                               <td><button disabled class="btn btn-primary">Employee</button></td>
+                                @elseif($value->role==1)
+                                <td> <button disabled class="btn btn-success">Admin</button></td>
+                                @else
+                                <td>  <button disabled class="btn btn-dark">HR</button></td>
+                                @endif
                                 <td>
                                     <a href="{{route('employee.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
                                 </td>

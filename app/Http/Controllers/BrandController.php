@@ -15,6 +15,7 @@ class BrandController extends Controller
      */
     public function index()
     {
+
         $data = Brand::where('is_deleted',0)->orderBy('id', 'DESC')->paginate(20);
         return view('admin.brands.index', compact('data'));
     }
