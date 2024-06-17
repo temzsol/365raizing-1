@@ -27,6 +27,7 @@
                             <ul class="sub-menu" aria-expanded="true">
                                 <li><a href="{{route('tasks.index')}}" key="t-light-sidebar">My Assigned Task</a></li>
                                 <li><a href="{{route('tasks.create')}}" key="t-compact-sidebar">Assign Task</a></li>
+                                <li><a href="{{route('staftask.index')}}" key="t-compact-sidebar">Task For Management</a></li>
                             </ul>
                         </li>
                     </ul>

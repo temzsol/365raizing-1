@@ -24,7 +24,7 @@ class EmpLeaveController extends Controller
     {
         $data = EmpLeave::where('emp_leaves.is_deleted', 0)
         ->join('employees', 'emp_leaves.emp_id', '=', 'employees.id')
-        ->select('emp_leaves.*', 'employees.bname')
+        ->select('emp_leaves.*', 'employees.fname')
         ->orderBy('emp_leaves.id', 'DESC')
         ->paginate(20);
         return view('admin.leave_info.emp_leave_info', compact('data'));

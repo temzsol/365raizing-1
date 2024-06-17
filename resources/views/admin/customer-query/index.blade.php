@@ -12,6 +12,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Lead Type</th>
+                                <th>Added By</th>
                                 <th>Customer Name</th>
                                 <th>Email</th>
                                 <th>Contact</th>
@@ -25,6 +26,7 @@
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$value->leadtype}}</td>
+                                <td>{{$value->created_by}}</td>
                                 <td>{{$value->ct_name}}</td>
                                 <td>{{$value->ct_mail}}</td>
                                 <td>{{$value->ct_mob}}</td>

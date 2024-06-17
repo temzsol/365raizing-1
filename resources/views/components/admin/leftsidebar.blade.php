@@ -39,8 +39,6 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            {{-- <li><a href="{{route('brands.create')}}" key="t-light-sidebar">Add Brand </a></li>
-                            <li><a href="{{route('brands.index')}}" key="t-light-sidebar">All Brand </a></li> --}}
                             <li><a href="{{route('company.create')}}" key="t-compact-sidebar">Add Company</a></li>
                             <li><a href="{{route('company.index')}}" key="t-compact-sidebar">All Company</a></li>
                         </li>
@@ -78,18 +76,17 @@
                         <li>
                             <li><a href="{{route('employee.create')}}" key="t-light-sidebar">Add Employee </a></li>
                             <li><a href="{{route('employee.index')}}" key="t-light-sidebar">Employee List </a></li>
-                            {{-- <li><a href="{{route('admins_create')}}" key="t-compact-sidebar">Add admin</a></li>
-                            <li><a href="{{route('adminlist')}}" key="t-compact-sidebar">All Admin</a></li> --}}
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="font-size-18"></i>
-                        <span key="t-layouts">Task Management</span>
+                        <i class="fa fa-server font-size-18"></i>
+                        <span key="t-layouts">Task For Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
+                            <li><a href="{{route('staftask.index')}}" key="t-compact-sidebar">Task For Management</a></li>
                             <li><a href="{{route('employeetask.create')}}" key="t-compact-sidebar">Assign Task</a></li>
                             <li><a href="{{route('employeetask.index')}}" key="t-compact-sidebar">All Employee Task</a></li>
                             <li><a href="{{route('admintask.create')}}" key="t-compact-sidebar">Assign Admin Task</a></li>
