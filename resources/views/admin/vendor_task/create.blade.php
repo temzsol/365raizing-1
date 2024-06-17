@@ -81,6 +81,12 @@
                           <label for="tdetail" class="form-control-label">Task Detail</label>
                           <textarea name="task_detail" id="task_detail" rows="5" placeholder="Detail..." class="form-control">{{isset($vendorTaskAssign)?$vendorTaskAssign->task_detail:''}}</textarea>
                       </div>
+                      @if(isset($vendorTaskAssign))
+                      <div class="form-group mb-4">
+                          <label for="comments" class="form-control-label">Comments</label>
+                          <textarea name="comments" id="comments" rows="5" placeholder="Comments..." class="form-control">{{isset($vendorTaskAssign)?$vendorTaskAssign->comments:''}}</textarea>
+                      </div>
+                     
                       <div class="col-lg-4 mt-4">
                         <label for="ucomp" class=" form-control-label">Status<span style="color:red;">*</span> </label>
                         <select name="status" class="form-control" required>
@@ -89,6 +95,7 @@
                            <option value="2"{{isset($vendorTaskAssign) && $vendorTaskAssign->status==2?'selected':'selected'}}>Under Process</option>
                         </select>
                      </div>
+                     @endif
                       <div class="form-group mb-4">
                          
                           <input type="submit" name="cok" value="{{isset($vendor)?'Update':'Submit'}}" class="form-control btn btn-primary" id="Add_comp_submit" Name="Submit" style="margin-top: 15px; border-radius: 6px; width: 130px;"     />

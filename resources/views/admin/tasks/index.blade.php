@@ -30,7 +30,7 @@
                             @foreach($data as $value)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$value->brand}}</td>
+                                <td>{{$value->brand_name}}</td>
                                 <td>{{$value->t_title}}</td>
                                 <td>{{$value->assign_date}}</td>
                                 <td><a href="{{url('/images/'.$value->t_file)}}" target="_blank">{{$value->t_file}}</a></td>

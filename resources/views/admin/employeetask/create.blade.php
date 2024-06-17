@@ -59,6 +59,19 @@
                           <label for="tdetail" class="form-control-label">Task Detail</label>
                           <textarea name="t_detail" id="t_detail" rows="5" placeholder="Detail..." class="form-control">{{isset($employeeTask)?$employeeTask->t_detail:''}}</textarea>
                       </div>
+                      @if(isset($employeeTask))
+                      <div class="form-group mb-4">
+                          <label for="comments" class="form-control-label">Comments</label>
+                          <textarea name="comments" id="comments" rows="5" placeholder="Comments..." class="form-control">{{isset($employeeTask)?$employeeTask->comments:''}}</textarea>
+                      </div>
+                      <div class="form-group mb-4">
+                          <label for="tdetail" class="form-control-label">Task Status</label>
+                          <select class="form-select" name="status">
+                              <option @if(isset($employeeTask) && $employeeTask->status=='1') selected="selected" @endif value="1">Completed</option>
+                              <option @if(isset($employeeTask) && $employeeTask->status=='0') selected="selected" @endif value="0">Incompleted</option>
+                          </select>
+                      </div>
+                      @endif
                       <div class="form-group mb-4">
                         <input type="submit" name="cok" value="{{isset($employeeTask)?'Update':'Submit'}}" class="form-control btn btn-primary" id="Add_comp_submit" Name="Submit" style="margin-top: 15px; border-radius: 6px; width: 130px;"     />
                       </div>
