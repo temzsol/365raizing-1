@@ -14,12 +14,12 @@
 @endif
     <div class="card-body">
                 <div class="card">
-                <div class="card-header"><strong>Employee Task</strong><small> Form</small></div>
+                <div class="card-header"><strong>Management Task</strong><small> Form</small></div>
                
-                @if(isset($stafftask))
-                <form action="{{route('staftask.update',$stafftask->id)}}" method="post" enctype="multipart/form-data">
+                @if(isset($staffTask))
+                <form action="{{route('staftask.update',$staffTask->id)}}" method="post" enctype="multipart/form-data">
                 @method('PUT')
-                <input type="hidden" value="{{$stafftask->id}}" name="id">
+                <input type="hidden" value="{{$staffTask->id}}" name="id">
                     @else
                     <form action="{{route('staftask.store')}}" method="post" enctype="multipart/form-data">
                         @endif
@@ -30,13 +30,13 @@
                             <select name="user_type" id="user_type" class="form-control" required onchange="usertype()" onclick="usertype()">
                                 <option value="#">Please Select Role First</option>
                                
-                                <option value="master_admin" {{ isset($stafftask) && $stafftask->user_type == 'master_admin' ? 'selected' : '' }}>
+                                <option value="master_admin" {{ isset($staffTask) && $staffTask->user_type == 'master_admin' ? 'selected' : '' }}>
                                     {{'Master Admin'}}
                                 </option>
-                                <option value="Admin" {{ isset($stafftask) && $stafftask->user_type == 'Admin' ? 'selected' : '' }}>
+                                <option value="Admin" {{ isset($staffTask) && $staffTask->user_type == 'Admin' ? 'selected' : '' }}>
                                     {{'Admin'}}
                                 </option>
-                                <option value="HR" {{ isset($stafftask) && $stafftask->user_type == 'HR' ? 'selected' : '' }}>
+                                <option value="HR" {{ isset($staffTask) && $staffTask->user_type == 'HR' ? 'selected' : '' }}>
                                     {{'HR'}}
                                 </option>
                            
@@ -47,48 +47,53 @@
                         <div class="form-group mb-4">
                             <label for="task_assign_to" class=" form-control-label">Management Person Name<span class="text-danger">*</span></label>
                             <select name="task_assign_to" id="task_assign_to" class="form-control" required>
-                                <option value="#">Please select Employee first</option>
+                               
+                            @if(isset($staffTask))
                                 @foreach($emp_data as $value)
-                                <option value="{{$value->id}}" @if(isset($stafftask) && $stafftask->task_assign_to==$value->id) selected="selected" @endif>{{$value->fname}}</option>
+                                <option value="{{$value->id}}" @if(isset($staffTask) && $staffTask->task_assign_to==$value->id) selected="selected" @endif>{{$value->fname}}</option>
                                 @endforeach
+                            @else
+                            <option value="#">Please select Employee first</option>
+                            @endif
                             </select>
                         </div>
 
                       <div class="form-group mb-4">
                           <label class="form-control-label">Task Title<span class="text-danger">*</span></label>
-                          <input type="text" id="t_title" class="form-control" name="t_title" value="{{isset($stafftask)?$stafftask->t_title:''}}" required>
+                          <input type="text" id="t_title" class="form-control" name="t_title" value="{{isset($staffTask)?$staffTask->t_title:''}}" required>
                       </div>
                       <div class="form-group mb-4">
                         <label class="form-control-label">Deadline<span class="text-danger">*</span></label>
-                        <input type="date" id="deadline" class="form-control" name="deadline" value="{{isset($stafftask)?$stafftask->deadline:''}}" required>
+                        <input type="date" id="deadline" class="form-control" name="deadline" value="{{isset($staffTask)?$staffTask->deadline:''}}" required>
                     </div>
 
                       <div class="form-group mb-4">
                           <label>Upload task related documents/images (if any)</label>
-                          @if(isset($stafftask))
-                          <a href="{{url('/images/'.$stafftask->t_file)}}">Task File</a>
+                          @if(isset($staffTask))
+                          <a href="{{url('/images/'.$staffTask->t_file)}}">Task File</a>
                           @endif
                           <input type="file" name="t_file" multiple="multiple" class="form-control">
                       </div>
                       <div class="form-group mb-4">
                           <label for="tdetail" class="form-control-label">Task Detail</label>
-                          <textarea name="t_detail" id="t_detail" rows="5" placeholder="Detail..." class="form-control">{{isset($stafftask)?$stafftask->t_detail:''}}</textarea>
+                          <textarea name="t_detail" id="t_detail" rows="5" placeholder="Detail..." class="form-control">{{isset($staffTask)?$staffTask->t_detail:''}}</textarea>
                       </div>
-                      @if(isset($stafftask))
+                      @if(isset($staffTask))
                       <div class="form-group mb-4">
                           <label for="comments" class="form-control-label">Comments</label>
-                          <textarea name="comments" id="comments" rows="5" placeholder="Comments..." class="form-control">{{isset($stafftask)?$stafftask->comments:''}}</textarea>
+                          <textarea name="comments" id="comments" rows="5" placeholder="Comments..." class="form-control">{{isset($staffTask)?$staffTask->comments:''}}</textarea>
                       </div>
                       <div class="form-group mb-4">
                           <label for="tdetail" class="form-control-label">Task Status</label>
                           <select class="form-select" name="status">
-                              <option @if(isset($stafftask) && $stafftask->status=='1') selected="selected" @endif value="1">Completed</option>
-                              <option @if(isset($stafftask) && $stafftask->status=='0') selected="selected" @endif value="0">Incompleted</option>
+                              <option @if(isset($staffTask) && $staffTask->status=='1') selected="selected" @endif value="1">Completed</option>
+                              <option @if(isset($staffTask) && $staffTask->status=='0') selected="selected" @endif value="0">Incompleted</option>
                           </select>
                       </div>
                       @endif
+                      
                       <div class="form-group mb-4">
-                        <input type="submit" name="cok" value="{{isset($stafftask)?'Update':'Submit'}}" class="form-control btn btn-primary" id="Add_comp_submit" Name="Submit" style="margin-top: 15px; border-radius: 6px; width: 130px;"     />
+                        <input type="submit" value="{{isset($staffTask)?'Update':'Submit'}}" class="form-control btn btn-primary" id="Add_comp_submit" style="margin-top: 15px; border-radius: 6px; width: 130px;"     />
                       </div>
                     </div>
                 </form>

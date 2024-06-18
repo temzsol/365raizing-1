@@ -11,7 +11,7 @@
                 </p>
 
                 <div class="table-responsive">
-                  Admin All Task
+                  Admin All Task  <a class="btn btn-primary" href="{{route('admintask.create')}}">Add Task</a>
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
                     <table class="table mb-0">
                         <thead>

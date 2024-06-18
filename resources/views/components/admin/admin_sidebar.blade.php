@@ -10,24 +10,23 @@
                 <hr><li class="menu-title" key="t-menu">All Details</li><hr>
 
                 <li>
-                    <a href="{{url('/admin/dashboard')}}" class="waves-effect">
-                        <i class="bx bx-home-circle"></i>
+                    <a href="{{route('master-dashboard')}}" class="waves-effect">
+                        <i class="fa fa-home  font-size-24"></i>
                         <span key="t-dashboards">Dashboards</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-tasks font-size-18"></i>
                         <span key="t-layouts">Task Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
                             <a href="javascript: void(0);" class="has-arrow" key="t-vertical">My Task</a>
                             <ul class="sub-menu" aria-expanded="true">
-                                <li><a href="{{route('tasks.index')}}" key="t-light-sidebar">My Assigned Task</a></li>
                                 <li><a href="{{route('tasks.create')}}" key="t-compact-sidebar">Assign Task</a></li>
-                                <li><a href="{{route('staftask.index')}}" key="t-compact-sidebar">Task For Management</a></li>
+                                <li><a href="{{route('tasks.index')}}" key="t-light-sidebar">My Assigned Task</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -35,21 +34,19 @@
                 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-building font-size-18"></i>
                         <span key="t-layouts">Brand & Company</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('brands.index')}}" key="t-light-sidebar">All Brand </a></li>
-                            <li><a href="{{route('brands.create')}}" key="t-light-sidebar">Add Brand </a></li>
-                            <li><a href="{{route('company.index')}}" key="t-compact-sidebar">All Company</a></li>
                             <li><a href="{{route('company.create')}}" key="t-compact-sidebar">Add Company</a></li>
+                            <li><a href="{{route('company.index')}}" key="t-compact-sidebar">All Company</a></li>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-users font-size-18"></i>
                         <span key="t-layouts">HR Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -72,50 +69,78 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
-                        <span key="t-layouts">Employee Management</span>
+                        <i class="fa fa-server font-size-18"></i>
+                        <span key="t-layouts">Emp & Task Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('employee.index')}}" key="t-light-sidebar">Employee List </a></li>
                             <li><a href="{{route('employee.create')}}" key="t-light-sidebar">Add Employee </a></li>
-                            <li><a href="{{route('adminlist')}}" key="t-compact-sidebar">All Admin</a></li>
-                            <li><a href="{{route('admins_create')}}" key="t-compact-sidebar">Add admin</a></li>
+                            <li><a href="{{route('employee.index')}}" key="t-light-sidebar">Employee List </a></li>
+                            <li><a href="{{route('staftask.index')}}" key="t-light-sidebar">Task For Management</a></li>
+                            <li><a href="{{route('employeetask.index')}}" key="t-light-sidebar">All Employee Task</a></li>
+                            <li><a href="{{route('admintask.index')}}" key="t-light-sidebar">All Admin Task</a></li>
                         </li>
                     </ul>
                 </li>
+          
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-quora font-size-18"></i>
                         <span key="t-layouts">Customer Query</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('customer-query.index')}}" key="t-compact-sidebar">All Query</a></li>
                             <li><a href="{{route('customer-query.create')}}" key="t-compact-sidebar">Add Query</a></li>
+                            <li><a href="{{route('customer-query.index')}}" key="t-compact-sidebar">All Query</a></li>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-list font-size-18"></i>
                         <span key="t-layouts">Holiday Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
-                            <li><a href="{{route('holiday.index')}}" key="t-compact-sidebar">All Holiday</a></li>
                             <li><a href="{{route('holiday.create')}}" key="t-compact-sidebar">Add Holiday</a></li>
+                            <li><a href="{{route('holiday.index')}}" key="t-compact-sidebar">All Holiday</a></li>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-info-circle font-size-18"></i>
+                        <span key="t-layouts">Leave Infomation</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        <li>
+                            <li><a href="{{route('EmpLeave')}}" key="t-compact-sidebar">Employee Leave</a></li>
+                            <li><a href="{{route('AdminLeave')}}" key="t-compact-sidebar">Admin Leave</a></li>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fa fa-users font-size-18"></i>
+                        <span key="t-layouts">Vendor Management</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        <li>
+                            <li><a href="{{route('vendor.create')}}" key="t-compact-sidebar">Add Vendor</a></li>
+                            <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">All Vendor</a></li>
+                            <li><a href="{{route('vendor-task.create')}}" key="t-compact-sidebar">Assign Task</a></li>
+                            <li><a href="{{route('vendor-task.index')}}" key="t-compact-sidebar">Vendor Task</a></li>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fa fa-cogs font-size-18"></i>
                         <span key="t-layouts">Web Setting</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="{{url('/admin/settings')}}" key="t-tui-calendar">Website Settings</a></li>
-                        <li><a href="{{url('/admin/settings/create')}}" key="t-full-calendar">Update Web Settings</a></li>
+                        <li><a href="{{route('settings.create')}}" key="t-full-calendar">Update Web Settings</a></li>
+                        <li><a href="{{route('settings.index')}}" key="t-tui-calendar">Website Settings</a></li>
                         
                     </ul>
                 </li>

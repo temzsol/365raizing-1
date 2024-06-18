@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StaffTask;
 use App\Models\Admin;
+use App\Models\User;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Mail\AdminTaskMail;
@@ -24,30 +25,92 @@ class StaffTaskController extends Controller
         $user_type=Auth::user()->type;
         if($user_type =='master_admin')
         {
-            $data = StaffTask::where('staff_tasks.is_deleted', 0)
-            ->join('users', 'staff_tasks.task_assign_from', '=', 'users.id')
-            ->select('staff_tasks.*', 'users.name as emp_name')
+            $user_email = Auth::user()->email;
+            $suer_result=User::where('email','=',$user_email)->first();
+     
+
+            $task_for_me =StaffTask::where('staff_tasks.is_deleted', 0)
+            ->where('staff_tasks.task_assign_to', $suer_result->id)
+            ->join('employees as assigner', 'staff_tasks.task_assign_from', '=', 'assigner.id')
+            ->join('users as assignee', 'staff_tasks.task_assign_to', '=', 'assignee.id')
+            ->select('staff_tasks.*', 'assigner.fname as assigner_name', 'assignee.name as assignee_name')
             ->orderBy('staff_tasks.id', 'DESC')
             ->paginate(20);
-            return view('admin.stafftask.index', compact('data'));
+            
+           
+
+            $task_assign_by_me = StaffTask::where('staff_tasks.is_deleted', 0)
+            ->where('staff_tasks.task_assign_from', $suer_result->id)
+            ->join('users as assigner', 'staff_tasks.task_assign_from', '=', 'assigner.id')
+            ->join('employees as assignee', 'staff_tasks.task_assign_to', '=', 'assignee.id')
+            ->select('staff_tasks.*', 'assigner.name as assigner_name', 'assignee.fname as assignee_name')
+            ->orderBy('staff_tasks.id', 'DESC')
+            ->paginate(20);
+            return view('admin.stafftask.index', compact('task_for_me','task_assign_by_me'));
         }
+
         elseif($user_type =='Admin')
         {
-            $data = StaffTask::where('staff_tasks.is_deleted', 0)
-            ->join('admins', 'staff_tasks.task_assign_from', '=', 'admins.id')
-            ->select('staff_tasks.*', 'admins.fname as emp_name')
+            $user_email = Auth::user()->email;
+            $emp_result=Employee::where('official_id','=',$user_email)->first();
+
+            $task_for_me =StaffTask::where('staff_tasks.is_deleted', 0)
+            ->where('staff_tasks.task_assign_to', $emp_result->id)
+            ->join('employees as assigner', 'staff_tasks.task_assign_from', '=', 'assigner.id')
+            ->join('employees as assignee', 'staff_tasks.task_assign_to', '=', 'assignee.id')
+            ->select('staff_tasks.*', 'assigner.fname as assigner_name', 'assignee.fname as assignee_name')
             ->orderBy('staff_tasks.id', 'DESC')
             ->paginate(20);
-            return view('admin.stafftask.index', compact('data'));
+            
+           
+
+            $task_assign_by_me = StaffTask::where('staff_tasks.is_deleted', 0)
+            ->where('staff_tasks.task_assign_from', $emp_result->id)
+            ->join('employees as assigner', 'staff_tasks.task_assign_from', '=', 'assigner.id')
+            ->join('employees as assignee', 'staff_tasks.task_assign_to', '=', 'assignee.id')
+            ->select('staff_tasks.*', 'assigner.fname as assigner_name', 'assignee.fname as assignee_name')
+            ->orderBy('staff_tasks.id', 'DESC')
+            ->paginate(20);
+
+            return view('admin.stafftask.index', compact('task_for_me','task_assign_by_me'));
         }
        
-        else{
-            $data = StaffTask::where('staff_tasks.is_deleted', 0)
-            ->join('employees', 'staff_tasks.task_assign_from', '=', 'employees.id')
-            ->select('staff_tasks.*', 'employees.fname as emp_name')
+        elseif($user_type =='HR'){
+           
+            $user_email = Auth::user()->email;
+            $emp_result=Employee::where('official_id','=',$user_email)->first();
+
+            $task_for_me =taffTask::where('staff_tasks.is_deleted', 0)
+            ->where('staff_tasks.task_assign_to', $emp_result->id)
+            ->join('employees as assigner', 'staff_tasks.task_assign_from', '=', 'assigner.id')
+            ->join('employees as assignee', 'staff_tasks.task_assign_to', '=', 'assignee.id')
+            ->select('staff_tasks.*', 'assigner.fname as assigner_name', 'assignee.fname as assignee_name')
             ->orderBy('staff_tasks.id', 'DESC')
             ->paginate(20);
-            return view('admin.stafftask.index', compact('data'));
+
+            $task_assign_by_me = StaffTask::where('staff_tasks.is_deleted', 0)
+            ->where('staff_tasks.task_assign_from', $emp_result->id)
+            ->join('employees as assigner', 'staff_tasks.task_assign_from', '=', 'assigner.id')
+            ->join('employees as assignee', 'staff_tasks.task_assign_to', '=', 'assignee.id')
+            ->select('staff_tasks.*', 'assigner.fname as assigner_name', 'assignee.fname as assignee_name')
+            ->orderBy('staff_tasks.id', 'DESC')
+            ->paginate(20);
+            return view('admin.stafftask.index', compact('task_assign_by_me','task_for_me'));
+        }
+        else{
+           
+            $user_email = Auth::user()->email;
+            $emp_result=Employee::where('official_id','=',$user_email)->first();
+
+            $task_assign_by_me = StaffTask::where('staff_tasks.is_deleted', 0)
+            ->where('staff_tasks.task_assign_from', $emp_result->id)
+            ->join('employees as assigner', 'staff_tasks.task_assign_from', '=', 'assigner.id')
+            ->join('employees as assignee', 'staff_tasks.task_assign_to', '=', 'assignee.id')
+            ->select('staff_tasks.*', 'assigner.fname as assigner_name', 'assignee.fname as assignee_name')
+            ->orderBy('staff_tasks.id', 'DESC')
+            ->paginate(20);
+        
+            return view('admin.stafftask.index', compact('task_assign_by_me'));
         }
         
     }
@@ -59,8 +122,9 @@ class StaffTaskController extends Controller
      */
     public function create()
     {
-        $employee=Employee::where('status',1)->where('is_deleted',0)->get();
-        return view('admin.stafftask.create',compact('employee'));
+        $user_type=Auth::user()->type;
+
+        return view('admin.stafftask.create');
     }
 
     /**
@@ -79,12 +143,10 @@ class StaffTaskController extends Controller
         }
         $data['assign_date']=date('Y-m-d');
         $data['status']=0;
-
-        
         // Task assign from
         if(Auth::user()->type=='Admin')
         {
-            $admindata=Admin::where('official_id',Auth::user()->email)->first();
+            $admindata=Employee::where('official_id',Auth::user()->email)->first();
             $data['task_assign_from']=$admindata->id;
             $data['task_from']='Admin';
         }
@@ -97,29 +159,43 @@ class StaffTaskController extends Controller
         }
         if(Auth::user()->type=='HR')
         {
-            
+            $hrdata=Employee::where('official_id',Auth::user()->email)->first();
+            $data['task_assign_from']=$hrdata->id;
+            $data['task_from']='HR';
         }
-
+        if(Auth::user()->type=='master_admin')
+        {
+            $hrdata=User::where('email',Auth::user()->email)->first();
+            $data['task_assign_from']=$hrdata->id;
+            $data['task_from']='master_admin';
+        }
         $result=$staffTask->create($data);
-
         $task_assign_to = $result->task_assign_to;
 
-//  Task Assign to 
+        //  Task Assign to 
         if($request->user_type=='Admin')
         {
-            $admin_result=Admin::find($task_assign_to);
+            $admin_result=Employee::find($task_assign_to);
             $result['deadline_date']=$request->deadline_date;
-            $email_id = $admin_result->empmail;
+            $email_id = $admin_result->official_id;
             Mail::to($email_id)->send(new AdminTaskMail($result));
             return redirect(route('staftask.index'))->with('message','Task Created Successfully');
         }
         if($request->user_type=='HR')
         {
-            
+            $hr_result=Employee::find($task_assign_to);
+            $result['deadline_date']=$request->deadline_date;
+            $email_id = $hr_result->official_id;
+            Mail::to($email_id)->send(new AdminTaskMail($result));
+            return redirect(route('staftask.index'))->with('message','Task Created Successfully');
         }
         if($request->user_type=='master_admin')
         {
-            
+            $master_result=User::find($task_assign_to);
+            $result['deadline_date']=$request->deadline_date;
+            $email_id = $master_result->email;
+            Mail::to($email_id)->send(new AdminTaskMail($result));
+            return redirect(route('staftask.index'))->with('message','Task Created Successfully');
         }
 
     }
@@ -143,22 +219,28 @@ class StaffTaskController extends Controller
      */
     public function edit(StaffTask $staffTask,$id)
     {
-        $stafftask =staffTask::find($id);
+        $staffTask =StaffTask::find($id);
        
-        if($stafftask->user_type == 'master_admin')
+        $user_type=$staffTask->user_type;
+
+        if($user_type == 'master_admin')
         {
-            $emp_data=User::where('type','=','master_admin')->get();
+            $emp_data=User::where('type','=','master_admin')->select('users.name as fname')->get();
         }
-        if($stafftask->user_type == 'Admin')
+        if($user_type == 'Admin')
         {
-            $emp_data=Admin::where('is_deleted',0)->get();
+            $emp_data=Employee::where('is_deleted',0)->where('role','=',1)->get();
             
         }
-        if($stafftask->user_type == 'HR')
+        if($user_type == 'HR')
         {
-            
+            $emp_data=Employee::where('is_deleted',0)->where('role','=',2)->get();
         }
-        return view('admin.stafftask.create',compact('stafftask','emp_data'));
+        if($user_type == 'Employee')
+        {
+            $emp_data=Employee::where('is_deleted',0)->where('role','!=',0)->get();
+        }
+        return view('admin.stafftask.create',compact('staffTask','emp_data'));
     }
 
     /**
@@ -168,8 +250,9 @@ class StaffTaskController extends Controller
      * @param  \App\Models\StaffTask  $staffTask
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StaffTask $staffTask)
+    public function update(Request $request, StaffTask $staffTask,$id)
     {
+        $staffTask =StaffTask::find($id);
         $data=$request->all();
         if ($request->hasFile('t_file')) {
             $file = $request->file('t_file');
@@ -177,9 +260,6 @@ class StaffTaskController extends Controller
             $data['t_file'] = $folder."/".$t_file;
         }
         $data['assign_date']=date('Y-m-d');
-
-
-        
         // Task assign from
         if(Auth::user()->type=='Admin')
         {
@@ -196,30 +276,41 @@ class StaffTaskController extends Controller
         }
         if(Auth::user()->type=='HR')
         {
-            
+            $hrdata=Employee::where('official_id',Auth::user()->email)->first();
+            $data['task_assign_from']=$hrdata->id;
+            $data['task_from']='HR';   
         }
 
-        $staffTask->update($data);
-      
+        $data['comments']=$request->comments;
+        $data['status']=$request->status;
 
+        $staffTask->update($data);
         $task_assign_to = $request->task_assign_to;
 
 //  Task Assign to 
         if($request->user_type=='Admin')
         {
-            $admin_result=Admin::find($task_assign_to);
+            $admin_result=Employee::find($task_assign_to);
             $result['deadline_date']=$request->deadline_date;
-            $email_id = $admin_result->empmail;
+            $email_id = $admin_result->official_id;
             Mail::to($email_id)->send(new AdminTaskMail($staffTask));
             return redirect(route('staftask.index'))->with('message','Task Updated Successfully');
         }
         if($request->user_type=='HR')
         {
-            
+            $hr_result=Employee::find($task_assign_to);
+            $result['deadline_date']=$request->deadline_date;
+            $email_id = $hr_result->official_id;
+            Mail::to($email_id)->send(new AdminTaskMail($staffTask));
+            return redirect(route('staftask.index'))->with('message','Task Updated Successfully');
         }
         if($request->user_type=='master_admin')
         {
-            
+            $master_result=User::find($task_assign_to);
+            $result['deadline_date']=$request->deadline_date;
+            $email_id = $master_result->email;
+            Mail::to($email_id)->send(new AdminTaskMail($result));
+            return redirect(route('staftask.index'))->with('message','Task Updated Successfully');
         }
     }
 
@@ -277,17 +368,24 @@ class StaffTaskController extends Controller
         $html = ''; // Initialize a variable to store the HTML options
         
         if ($user_type == 'master_admin') {
-            // Handle master_admin logic if any
+            $emp_data = User::where('type', 'master_admin')->select('users.name as fname')
+            ->get();
+            foreach ($emp_data as $value) {
+                $html .= "<option value='{$value->id}'>{$value->fname}</option>";
+            }
         } elseif ($user_type == 'Admin') {
-            $data = Admin::where('is_deleted', 0)->get();
+            $data = Employee::where('is_deleted', 0)->where('role',1)->get();
             foreach ($data as $value) {
                 $html .= "<option value='{$value->id}'>{$value->fname}</option>";
             }
         } elseif ($user_type == 'HR') {
-            // Handle HR logic if any
+            $data = Employee::where('is_deleted', 0)->where('role',2)->get();
+            foreach ($data as $value) {
+                $html .= "<option value='{$value->id}'>{$value->fname}</option>";
+            }
         } 
         elseif ($user_type == 'Employee') {
-            $data = Employee::where('is_deleted', 0)->get();
+            $data = Employee::where('is_deleted', 0)->where('role',0)->get();
             foreach ($data as $value) {
                 $html .= "<option value='{$value->id}'>{$value->fname}</option>";
             }
