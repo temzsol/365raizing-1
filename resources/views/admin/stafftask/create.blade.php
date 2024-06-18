@@ -12,6 +12,8 @@
         </ul>
     </div>
 @endif
+
+
     <div class="card-body">
                 <div class="card">
                 <div class="card-header"><strong>Management Task</strong><small> Form</small></div>
@@ -27,7 +29,7 @@
                     <div class="card-body card-block">
                         <div class="form-group mb-4">
                             <label for="user_type" class=" form-control-label">Management Role<span class="text-danger">*</span></label>
-                            <select name="user_type" id="user_type" class="form-control" required onchange="usertype()" onclick="usertype()">
+                            <select name="user_type" id="user_type" class="form-control" required onchange="usertype()" onclick="usertype()" {{isset($login_id,$staffTask) && $login_id != $staffTask->task_assign_from?'readonly':''}} >
                                 <option value="#">Please Select Role First</option>
                                
                                 <option value="master_admin" {{ isset($staffTask) && $staffTask->user_type == 'master_admin' ? 'selected' : '' }}>
@@ -46,11 +48,11 @@
                         </div>
                         <div class="form-group mb-4">
                             <label for="task_assign_to" class=" form-control-label">Management Person Name<span class="text-danger">*</span></label>
-                            <select name="task_assign_to" id="task_assign_to" class="form-control" required>
+                            <select name="task_assign_to" id="task_assign_to" class="form-control" required {{isset($login_id,$staffTask) && $login_id != $staffTask->task_assign_from?'readonly':''}} >
                                
                             @if(isset($staffTask))
                                 @foreach($emp_data as $value)
-                                <option value="{{$value->id}}" @if(isset($staffTask) && $staffTask->task_assign_to==$value->id) selected="selected" @endif>{{$value->fname}}</option>
+                                <option value="{{$value->id}}" >{{$value->fname}}</option>
                                 @endforeach
                             @else
                             <option value="#">Please select Employee first</option>
@@ -60,11 +62,11 @@
 
                       <div class="form-group mb-4">
                           <label class="form-control-label">Task Title<span class="text-danger">*</span></label>
-                          <input type="text" id="t_title" class="form-control" name="t_title" value="{{isset($staffTask)?$staffTask->t_title:''}}" required>
+                          <input type="text" id="t_title" class="form-control" name="t_title" value="{{isset($staffTask)?$staffTask->t_title:''}}" required {{isset($login_id,$staffTask) && $login_id != $staffTask->task_assign_from?'readonly':''}}>
                       </div>
                       <div class="form-group mb-4">
                         <label class="form-control-label">Deadline<span class="text-danger">*</span></label>
-                        <input type="date" id="deadline" class="form-control" name="deadline" value="{{isset($staffTask)?$staffTask->deadline:''}}" required>
+                        <input type="date" id="deadline" class="form-control" name="deadline" value="{{isset($staffTask)?$staffTask->deadline:''}}" required {{isset($login_id,$staffTask) && $login_id != $staffTask->task_assign_from?'readonly':''}} >
                     </div>
 
                       <div class="form-group mb-4">
@@ -72,11 +74,11 @@
                           @if(isset($staffTask))
                           <a href="{{url('/images/'.$staffTask->t_file)}}">Task File</a>
                           @endif
-                          <input type="file" name="t_file" multiple="multiple" class="form-control">
+                          <input type="file" name="t_file" multiple="multiple" class="form-control"{{isset($login_id,$staffTask) && $login_id != $staffTask->task_assign_from?'readonly':''}}>
                       </div>
                       <div class="form-group mb-4">
                           <label for="tdetail" class="form-control-label">Task Detail</label>
-                          <textarea name="t_detail" id="t_detail" rows="5" placeholder="Detail..." class="form-control">{{isset($staffTask)?$staffTask->t_detail:''}}</textarea>
+                          <textarea name="t_detail" id="t_detail" rows="5" placeholder="Detail..." class="form-control" {{isset($login_id,$staffTask) && $login_id != $staffTask->task_assign_from?'readonly':''}} >{{isset($staffTask)?$staffTask->t_detail:''}}</textarea>
                       </div>
                       @if(isset($staffTask))
                       <div class="form-group mb-4">

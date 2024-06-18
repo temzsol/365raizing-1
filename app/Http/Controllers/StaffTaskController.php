@@ -240,7 +240,34 @@ class StaffTaskController extends Controller
         {
             $emp_data=Employee::where('is_deleted',0)->where('role','!=',0)->get();
         }
-        return view('admin.stafftask.create',compact('staffTask','emp_data'));
+
+        //  For Find Login type 
+        $useremail=Auth::user()->email;
+        $type = Auth::user()->type;
+        $login_id='';
+        if($type=='Admin')
+        {
+            $login_id = Employee::where('official_id',$useremail)->first();
+            $login_id = $login_id->id;
+
+        }
+        elseif($type=='master_admin')
+        {
+            $login_id = User::where('email',$useremail)->first();
+            $login_id = $login_id->id;
+        }
+        elseif($type=='HR')
+        {
+            $login_id = Employee::where('official_id',$useremail)->first();
+            $login_id = $login_id->id;
+        }
+        else
+        {
+            $login_id = Employee::where('official_id',$useremail)->first();
+            $login_id = $login_id->id;
+        }
+        // logi type end
+        return view('admin.stafftask.create',compact('staffTask','emp_data','login_id'));
     }
 
     /**
@@ -263,7 +290,7 @@ class StaffTaskController extends Controller
         // Task assign from
         if(Auth::user()->type=='Admin')
         {
-            $admindata=Admin::where('official_id',Auth::user()->email)->first();
+            $admindata=Employee::where('official_id',Auth::user()->email)->first();
             $data['task_assign_from']=$admindata->id;
             $data['task_from']='Admin';
         }
@@ -280,6 +307,12 @@ class StaffTaskController extends Controller
             $data['task_assign_from']=$hrdata->id;
             $data['task_from']='HR';   
         }
+        if(Auth::user()->type=='master_admin')
+        {
+            $masterdata=User::where('email',Auth::user()->email)->first();
+            $data['task_assign_from']=$masterdata->id;
+            $data['task_from']='master_admin';   
+        }
 
         $data['comments']=$request->comments;
         $data['status']=$request->status;
@@ -290,25 +323,25 @@ class StaffTaskController extends Controller
 //  Task Assign to 
         if($request->user_type=='Admin')
         {
-            $admin_result=Employee::find($task_assign_to);
+            $result=Employee::find($task_assign_to);
             $result['deadline_date']=$request->deadline_date;
-            $email_id = $admin_result->official_id;
-            Mail::to($email_id)->send(new AdminTaskMail($staffTask));
+            $email_id = $result->official_id;
+            Mail::to($email_id)->send(new AdminTaskMail($result));
             return redirect(route('staftask.index'))->with('message','Task Updated Successfully');
         }
         if($request->user_type=='HR')
         {
-            $hr_result=Employee::find($task_assign_to);
+            $result=Employee::find($task_assign_to);
             $result['deadline_date']=$request->deadline_date;
-            $email_id = $hr_result->official_id;
-            Mail::to($email_id)->send(new AdminTaskMail($staffTask));
+            $email_id = $result->official_id;
+            Mail::to($email_id)->send(new AdminTaskMail($result));
             return redirect(route('staftask.index'))->with('message','Task Updated Successfully');
         }
         if($request->user_type=='master_admin')
         {
-            $master_result=User::find($task_assign_to);
+            $result=User::find($task_assign_to);
             $result['deadline_date']=$request->deadline_date;
-            $email_id = $master_result->email;
+            $email_id = $result->email;
             Mail::to($email_id)->send(new AdminTaskMail($result));
             return redirect(route('staftask.index'))->with('message','Task Updated Successfully');
         }
