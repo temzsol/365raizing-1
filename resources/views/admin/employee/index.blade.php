@@ -40,7 +40,11 @@
                                 <td><a class="btn btn-primary" href="{{route('employeetask.create')}}">Add Task</a></td>
                                 <td>
                                     <div class="button_align">
-                                        <a href="{{route('employee.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a>  <a href="javascript:void(0);" onClick="deleteblogs('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                        <a href="{{route('employee.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a>
+                                       
+                                        @if($usertype=Auth::user()->type =='master_admin')
+                                        <a href="javascript:void(0);" onClick="deleteblogs('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

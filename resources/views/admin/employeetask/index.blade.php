@@ -45,14 +45,16 @@
                                     <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1)<button class="btn btn-success">Completed</button>@else <button class="btn btn-warning" onClick="update_status('{{$value->id}}')">Incomplete</button> @endif</label>
                                     </div>
                                 </td>
-                                @if(Auth::user()->type=='master_admin')
+                               
                                 <td>
-                                    <a href="{{route('employeetask.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> 
-                                   
-                                     <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
-                                  
+                                    <div class="button_align">
+                                        <a href="{{route('employeetask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
+                                       
+                                        @if($usertype=Auth::user()->type =='master_admin')
+                                        <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                        @endif
+                                    </div>
                                 </td>
-                                @endif
                             </tr>
                             
                             @endforeach

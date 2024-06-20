@@ -8,7 +8,7 @@
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <hr>
-                <li class="menu-title" key="t-menu">Employee Details</li>
+                <li class="menu-title" key="t-menu">Employee Panel</li>
                 <hr>
                 <li>
                     <a href="{{route('employee-dashboard')}}" class="waves-effect">
@@ -19,7 +19,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-tasks font-size-18"></i>
                         <span key="t-layouts">Task Details</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -36,7 +36,7 @@
                 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-quora font-size-18"></i>
                         <span key="t-layouts">Customer Query</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
@@ -48,7 +48,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
+                        <i class="fa fa-info-circle font-size-18"></i>
                         <span key="t-layouts">Leave Information</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">

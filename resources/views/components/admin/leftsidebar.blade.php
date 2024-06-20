@@ -7,7 +7,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <hr><li class="menu-title" key="t-menu">All Details</li><hr>
+                <hr><li class="menu-title" key="t-menu">Master Admin</li><hr>
 
                 <li>
                     <a href="{{route('master-dashboard')}}" class="waves-effect">

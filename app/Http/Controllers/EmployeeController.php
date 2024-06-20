@@ -43,8 +43,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $brand=Brand::where('status',1)->where('is_deleted',0)->get();
-        return view('admin.employee.create',compact('brand'));
+        $company=Company::where('status',1)->where('is_deleted',0)->get();
+        return view('admin.employee.create',compact('company'));
     }
 
     /**
@@ -177,8 +177,8 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        $brand=Brand::where('status',1)->where('is_deleted',0)->get();
-        return view('admin.employee.create',compact('brand','employee'));
+        $company=Company::where('status',1)->where('is_deleted',0)->get();
+        return view('admin.employee.create',compact('company','employee'));
     }
 
     /**
@@ -253,5 +253,18 @@ class EmployeeController extends Controller
         return response()->json($response);
     }
 
-    
+    public function findbrandname(Request $request) {
+       $data = $request->all();
+        $html = ''; // Initialize a variable to store the HTML options
+            $brand_data = Brand::where('bcomp', $request->comp_id)->select('brands.bname','brands.id')
+            ->get(); 
+         
+            foreach ($brand_data as $value) {
+                $html .= "<option value='{$value->id}'>{$value->bname}</option>";
+            }        
+            return response()->json([
+                'success' => true,
+                'html' => $html
+            ]); 
+}
 }

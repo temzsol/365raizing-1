@@ -70,7 +70,8 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        $company=Company::where('status',1)->where('is_deleted',0)->get();
+       
+        $company=Company::where('status',1)->where('is_deleted',0)->where('id',$brand->bcomp)->first();
         return view('admin.brands.create',compact('brand','company'));
     }
 

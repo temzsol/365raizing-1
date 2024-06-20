@@ -34,8 +34,15 @@
                                 <td>{{$value->total_leave}}</td>
                                 
                                 <td>
-                                    <a href="{{route('admins_edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> | <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                    <div class="button_align">
+                                        <a href="{{route('admins_edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
+                                       
+                                        @if($usertype=Auth::user()->type =='master_admin')
+                                        <a href="javascript:void(0);"  onClick="deleteblogs('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                        @endif
+                                    </div>
                                 </td>
+                                
                             </tr>
                             
                             @endforeach

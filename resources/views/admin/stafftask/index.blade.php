@@ -66,13 +66,16 @@
                                     <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1)<button class="btn btn-success">Completed</button>@else <button class="btn btn-warning">Incomplete</button> @endif</label>
                                     </div>
                                 </td>
-
                                 <td>
-                                    <a href="{{route('staftask.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> 
-                                    @if(Auth::user()->type === $value->task_from)
-                                     <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
-                                     @endif
+                                    <div class="button_align">
+                                        <a href="{{route('staftask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
+                                       
+                                        @if($usertype=Auth::user()->type =='master_admin')
+                                        <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                        @endif
+                                    </div>
                                 </td>
+                                
                                
                             </tr>
                             
@@ -122,14 +125,16 @@
                                     </div>
                                 </td>
 
-                                
-                               
                                 <td>
-                                    <a href="{{route('staftask.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> 
-                                    @if(Auth::user()->type=='master_admin')
-                                     <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="text-danger"><i class="bx bx-trash-alt"></i> Delete</a>
-                                    @endif
+                                    <div class="button_align">
+                                        <a href="{{route('staftask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
+                                       
+                                        @if($usertype=Auth::user()->type =='master_admin')
+                                        <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                        @endif
+                                    </div>
                                 </td>
+                               
                               
                             </tr>
                             

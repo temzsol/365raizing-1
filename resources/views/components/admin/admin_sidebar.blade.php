@@ -1,3 +1,4 @@
+
 <!-- ========== Left Sidebar Start ========== -->
 <div class="vertical-menu">
 
@@ -7,7 +8,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <hr><li class="menu-title" key="t-menu">All Details</li><hr>
+                <hr><li class="menu-title" key="t-menu">Admin Panel</li><hr>
 
                 <li>
                     <a href="{{route('master-dashboard')}}" class="waves-effect">
@@ -76,9 +77,9 @@
                         <li>
                             <li><a href="{{route('employee.create')}}" key="t-light-sidebar">Add Employee </a></li>
                             <li><a href="{{route('employee.index')}}" key="t-light-sidebar">Employee List </a></li>
-                            <li><a href="{{route('staftask.index')}}" key="t-light-sidebar">Task For Management</a></li>
                             <li><a href="{{route('employeetask.index')}}" key="t-light-sidebar">All Employee Task</a></li>
                             <li><a href="{{route('admintask.index')}}" key="t-light-sidebar">All Admin Task</a></li>
+                            <li><a href="{{route('staftask.index')}}" key="t-light-sidebar">Task For Management</a></li>
                         </li>
                     </ul>
                 </li>

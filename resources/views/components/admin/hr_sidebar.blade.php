@@ -7,7 +7,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <hr><li class="menu-title" key="t-menu">All Details</li><hr>
+                <hr><li class="menu-title" key="t-menu">HR Panel</li><hr>
 
                 <li>
                     <a href="{{route('master-dashboard')}}" class="waves-effect">
@@ -32,18 +32,7 @@
                     </ul>
                 </li>
                 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fa fa-building font-size-18"></i>
-                        <span key="t-layouts">Brand & Company</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li>
-                            <li><a href="{{route('company.create')}}" key="t-compact-sidebar">Add Company</a></li>
-                            <li><a href="{{route('company.index')}}" key="t-compact-sidebar">All Company</a></li>
-                        </li>
-                    </ul>
-                </li>
+                
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fa fa-users font-size-18"></i>
@@ -119,31 +108,8 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fa fa-users font-size-18"></i>
-                        <span key="t-layouts">Vendor Management</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li>
-                            <li><a href="{{route('vendor.create')}}" key="t-compact-sidebar">Add Vendor</a></li>
-                            <li><a href="{{route('vendor.index')}}" key="t-compact-sidebar">All Vendor</a></li>
-                            <li><a href="{{route('vendor-task.create')}}" key="t-compact-sidebar">Assign Task</a></li>
-                            <li><a href="{{route('vendor-task.index')}}" key="t-compact-sidebar">Vendor Task</a></li>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fa fa-cogs font-size-18"></i>
-                        <span key="t-layouts">Web Setting</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="{{route('settings.create')}}" key="t-full-calendar">Update Web Settings</a></li>
-                        <li><a href="{{route('settings.index')}}" key="t-tui-calendar">Website Settings</a></li>
-                        
-                    </ul>
-                </li>
+                
+                
             </ul>
         </div>
         <!-- Sidebar -->
