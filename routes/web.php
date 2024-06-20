@@ -67,6 +67,7 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::get('/admin-leave','EmpLeaveController@AdminLeave')->name('AdminLeave');
     Route::get('/emp-leave','EmpLeaveController@EmpLeave')->name('EmpLeave');
     Route::post('/EmpLeaveStatusApprove/{id}','EmpLeaveController@EmpLeaveStatusApprove')->name('EmpLeaveStatusApprove');
+    Route::post('/primary_leave_status','EmpLeaveController@primary_leave_status')->name('primary_leave_status');
     Route::post('/EmpLeaveStatusReject/{id}','EmpLeaveController@EmpLeaveStatusReject')->name('EmpLeaveStatusReject');
     Route::post('/AdminLeaveStatusApprove/{id}','EmpLeaveController@AdminLeaveStatusApprove')->name('AdminLeaveStatusApprove');
     Route::post('/AdminLeaveStatusReject/{id}','EmpLeaveController@AdminLeaveStatusReject')->name('AdminLeaveStatusReject');

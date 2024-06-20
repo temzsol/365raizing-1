@@ -210,10 +210,12 @@ public function EmpLeave(Request $request){
 public function EmpLeaveStatusApprove(Request $request,$id)
     {
         $leaveStatus=EmpLeave::find($request->id); 
-        if($leaveStatus->update(['l_status'=>1]))
+        $leave_remaining = ($leaveStatus->leave_remaining) - ($leaveStatus->no_days);
+        if($leaveStatus->update(['l_status'=>1,'leave_remaining'=>$leave_remaining]))
         {
             $emp_data=Employee::find($leaveStatus->emp_id);
             $emp_data['approve_status']=1;
+
             Mail::to($emp_data->official_id)->send(new EmployeeLeaveMail($emp_data));
             $response = array('success' => true, 'error' => false, 'message' => 'Employee Leave is Approved successfully..');
         }
@@ -254,6 +256,16 @@ public function EmpLeaveStatusApprove(Request $request,$id)
         ->orderBy('emp_leaves.id', 'DESC')
         ->paginate(20);
         return view('admin.leave_info.emp_leave_info', compact('data'));
+    }
+
+    function primary_leave_status(Request $request,EmpLeave $empLeave){
+        $empLeave=EmpLeave::find($request->id); 
+       $data=$request->all();
+       $data['approved_by']=Auth::user()->type;
+        if($empLeave->update($data))
+        {
+            return back()->with('message', 'Leave Status Updated Successfully');
+        }
     }
 
 }
