@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\LoginDetails;
+
 use Redirect;
 use Auth;
 use Session;
@@ -38,6 +40,15 @@ class AdminController extends Controller
         
         if(Auth::attempt($credentials))
         {
+            $data['uemail'] = $request->email;  // Ensure the email is sanitized/validated as needed.
+            $data['ip'] = $request->ip();       // Correct method to get the client's IP address.
+            $data['login_time'] = date('H:i:s'); // Correct format for time.
+            $data['login_date'] = date('m-d-Y'); // This format is fine.
+            $data['current_status'] = 1;
+           
+            $loged_id=LoginDetails::create($data);
+            $request->session()->put('login_session_id',$loged_id->id);
+        
             $request->session()->put('type',Auth::user()->type);
             if(Auth::user()->type=='master_admin')
             {
@@ -69,7 +80,11 @@ class AdminController extends Controller
     
     
 
-    public function logout(Request $request) {
+    public function logout(Request $request,LoginDetails $loginDetails) {
+        $id= Session::get('login_session_id');
+        $data = LoginDetails::find($id);
+        $logout_time = date('H:i:s');
+        LoginDetails::where('id', $id)->update(['logout_time' => $logout_time, 'current_status' => 0]);
         Auth::logout();
         $request->session()->pull('result');
         return redirect('/');

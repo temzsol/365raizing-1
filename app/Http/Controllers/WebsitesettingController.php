@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Websitesetting;
+use App\Models\LoginDetails;
 use Illuminate\Http\Request;
 
 class WebsitesettingController extends Controller
@@ -147,4 +148,8 @@ class WebsitesettingController extends Controller
          }
     return $response;
     }
+
+
+   
+       
 }

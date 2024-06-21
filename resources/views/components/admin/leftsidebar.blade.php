@@ -141,6 +141,7 @@
                     <ul class="sub-menu" aria-expanded="true">
                         <li><a href="{{route('settings.create')}}" key="t-full-calendar">Update Web Settings</a></li>
                         <li><a href="{{route('settings.index')}}" key="t-tui-calendar">Website Settings</a></li>
+                        <li><a href="{{route('login_details.index')}}" key="t-tui-calendar">Login Details</a></li>
                         
                     </ul>
                 </li>

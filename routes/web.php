@@ -15,6 +15,7 @@ use App\Http\Controllers\EmployeeTaskController;
 use App\Http\Controllers\AdminTaskController;
 use App\Http\Controllers\WebsitesettingController;
 use App\Http\Controllers\StaffTaskController;
+use App\Http\Controllers\LoginDetailsController;
 
 
 /*
@@ -71,7 +72,9 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::post('/EmpLeaveStatusReject/{id}','EmpLeaveController@EmpLeaveStatusReject')->name('EmpLeaveStatusReject');
     Route::post('/AdminLeaveStatusApprove/{id}','EmpLeaveController@AdminLeaveStatusApprove')->name('AdminLeaveStatusApprove');
     Route::post('/AdminLeaveStatusReject/{id}','EmpLeaveController@AdminLeaveStatusReject')->name('AdminLeaveStatusReject');
+    
     Route::resource('/settings',WebsitesettingController::class);
+    Route::resource('/login_details',LoginDetailsController::class);
 
 
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
