@@ -17,7 +17,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Admin Name</th>
+                                <th>Repoter</th>
+                                <th>Task Assigne</th>
                                 <th>Task Title</th>
                                 <th>Assign Date</th>
                                 <th>File</th>
@@ -30,7 +31,8 @@
                             @foreach($data as $value)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$value->admin_name}}</td>
+                                <td>{{$value->repoter}}</td>
+                                <td>{{$value->taskAssigneTo}}</td>
                                 <td>{{$value->t_title}}</td>
                                 <td>{{$value->assign_date}}</td>
                                 <td><a href="{{url('/images/'.$value->t_file)}}" target="_blank" download>Download File</a></td>

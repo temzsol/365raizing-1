@@ -77,7 +77,7 @@
                             {{-- <li><a href="{{route('employee.create')}}" key="t-light-sidebar">Add Employee </a></li> --}}
                             <li><a href="{{route('employee.index')}}" key="t-light-sidebar">Employee List & Task </a></li>
                             <li><a href="{{route('employeetask.index')}}" key="t-light-sidebar">All Employee Task List</a></li>
-                            <li><a href="{{route('admintask.index')}}" key="t-light-sidebar">All Admin Task</a></li>
+                            <li><a href="{{route('admintask.index')}}" key="t-light-sidebar">All Management Task</a></li>
                             <li><a href="{{route('staftask.index')}}" key="t-light-sidebar">Super Admin Task</a></li>
                         </li>
                     </ul>
