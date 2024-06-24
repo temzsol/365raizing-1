@@ -33,7 +33,10 @@
                                 <td>{{$value->uemail}}</td>
                                 <td>{{$value->login_time}}</td>
                                 <td>{{$value->logout_time}}</td>
-                                <td>{{$value->current_status}}</td>
+                                <td>
+                                    <a href="javascript:void(0);"  class="btn btn-outline-{{$value->current_status==1?'primary':'danger'}} disabled">{{$value->current_status==1?'Login':'Logout'}}</a>
+                                    
+                                </td>
                                 <td><a href="https://maps.google.com/?q={{ $value->latitude }},{{ $value->longitude }}" target="_blank" class="theme-info">Login Loaction</a></td>
                                 <td><a href="https://maps.google.com/?q={{ $value->logout_lat }},{{ $value->logout_long }}" target="_blank" class="theme-info">Logout Loaction</a></td>
                                 
