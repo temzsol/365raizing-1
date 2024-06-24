@@ -12,9 +12,9 @@
 
                 <div class="table-responsive">
                   Employee All Task  
-                  @if(Auth::user()->type!='Employee')
+                  {{-- @if(Auth::user()->type!='Employee')
                   <a class="btn btn-primary" href="{{route('employeetask.create')}}">Add Task</a>
-                  @endif
+                  @endif --}}
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
                     <table class="table mb-0">
                         <thead>
