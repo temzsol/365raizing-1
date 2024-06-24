@@ -41,7 +41,7 @@
                                 @else
                                 <td>  <button disabled class="btn btn-dark">HR</button></td>
                                 @endif
-                                <td><a class="btn btn-primary" href="{{route('employeetask.create')}}">Add Task</a></td>
+                                <td><a class="btn btn-primary" href="{{route('employeetask.create',['id'=>$value->id])}}">Add Task</a></td>
                                 <td>
                                     <div class="button_align">
                                         <a href="{{route('employee.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a>

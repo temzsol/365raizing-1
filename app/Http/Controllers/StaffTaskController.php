@@ -195,7 +195,7 @@ class StaffTaskController extends Controller
             $result['deadline_date']=$request->deadline_date;
             $email_id = $admin_result->official_id;
             Mail::to($email_id)->send(new AdminTaskMail($result));
-            return redirect(route('staftask.index'))->with('message','Task Created Successfully');
+            return redirect(route('managementtask.index'))->with('message','Task Created Successfully');
         }
         if($request->user_type=='HR')
         {
@@ -203,7 +203,7 @@ class StaffTaskController extends Controller
             $result['deadline_date']=$request->deadline_date;
             $email_id = $hr_result->official_id;
             Mail::to($email_id)->send(new AdminTaskMail($result));
-            return redirect(route('staftask.index'))->with('message','Task Created Successfully');
+            return redirect(route('managementtask.index'))->with('message','Task Created Successfully');
         }
         if($request->user_type=='master_admin')
         {
@@ -211,7 +211,7 @@ class StaffTaskController extends Controller
             $result['deadline_date']=$request->deadline_date;
             $email_id = $master_result->email;
             Mail::to($email_id)->send(new AdminTaskMail($result));
-            return redirect(route('staftask.index'))->with('message','Task Created Successfully');
+            return redirect(route('managementtask.index'))->with('message','Task Created Successfully');
         }
 
     }
@@ -317,7 +317,7 @@ class StaffTaskController extends Controller
             $result['deadline_date']=$request->deadline_date;
             $email_id = $result->official_id;
             Mail::to($email_id)->send(new AdminTaskMail($result));
-            return redirect(route('staftask.index'))->with('message','Task Updated Successfully');
+            return redirect(route('managementtask.index'))->with('message','Task Updated Successfully');
         }
         if($request->user_type=='HR')
         {
@@ -325,7 +325,7 @@ class StaffTaskController extends Controller
             $result['deadline_date']=$request->deadline_date;
             $email_id = $result->official_id;
             Mail::to($email_id)->send(new AdminTaskMail($result));
-            return redirect(route('staftask.index'))->with('message','Task Updated Successfully');
+            return redirect(route('managementtask.index'))->with('message','Task Updated Successfully');
         }
         if($request->user_type=='master_admin')
         {
@@ -334,7 +334,7 @@ class StaffTaskController extends Controller
             $result['deadline_date']=$request->deadline_date;
             $email_id = $result->email;
             Mail::to($email_id)->send(new AdminTaskMail($result));
-            return redirect(route('staftask.index'))->with('message','Task Updated Successfully');
+            return redirect(route('managementtask.index'))->with('message','Task Updated Successfully');
         }
     }
 
@@ -344,9 +344,10 @@ class StaffTaskController extends Controller
      * @param  \App\Models\StaffTask  $staffTask
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StaffTask $staffTask)
+    public function destroy(StaffTask $staffTask,$id)
     {
-        // $EmployeeTask=EmployeeTask::find($request->id); 
+        $staffTask=StaffTask::find($id); 
+
         if($staffTask->update(['is_deleted'=>1]))
         {
             $response = array('success' => true, 'error' => false, 'message' => 'Data Delete successfully..');
@@ -355,35 +356,6 @@ class StaffTaskController extends Controller
         $response = array('success' => false, 'error' => true, 'message' => 'Something Went Wrong !');
             }
     return $response;
-    }
-
-    //  Updating Task Status
-    public function employee_task_update(Request $request,EmployeeTask $employeeTask){
-        $EmployeeTask=EmployeeTask::find($request->id); 
-        if($EmployeeTask->update(['status'=>1]))
-        {
-            $response = array('success' => true, 'error' => false, 'message' => 'Status Updated Successfully..');
-        }
-    else{
-        $response = array('success' => false, 'error' => true, 'message' => 'Something Went Wrong !');
-            }
-    return $response;
-    }
-    
-    //  For Employee Dashboard Fundtion 
-    public function employeetaskview()
-    {
-        $user_name=Auth::user()->name;
-        $user_email=Auth::user()->email;
-        $employeeResult=Employee::where('official_id','=',$user_email)->where('fname','=',$user_name)->first();
-        // dd($employeeResult->id);
-        $data = EmployeeTask::where('employee_tasks.is_deleted', 0)
-        ->where('employee_tasks.emp_id', $employeeResult->id)
-        ->join('employees', 'employee_tasks.emp_id', '=', 'employees.id')
-        ->select('employee_tasks.*', 'employees.fname as emp_name')
-        ->orderBy('employee_tasks.id', 'DESC')
-        ->paginate(20);
-        return view('admin.stafftask.index', compact('data'));
     }
 
 

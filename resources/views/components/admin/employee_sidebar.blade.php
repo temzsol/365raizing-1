@@ -27,7 +27,7 @@
                             <a href="javascript: void(0);" class="has-arrow" key="t-vertical">Employee Task</a>
                             <ul class="sub-menu" aria-expanded="true">
                                 <li><a href="{{route('employeetaskview')}}" key="t-light-sidebar">My Assigned Task</a></li>
-                                <li><a href="{{route('staftask.index')}}" key="t-compact-sidebar">Task For Management</a></li>
+                                <li><a href="{{route('managementtask.index')}}" key="t-compact-sidebar">Task For Management</a></li>
                             </ul>
                         </li>
                     </ul>

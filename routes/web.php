@@ -68,7 +68,7 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::resource('/leave',EmpLeaveController::class);
     Route::resource('/employeetask',EmployeeTaskController::class);
     Route::resource('/admintask',AdminTaskController::class);
-    Route::resource('/staftask',StaffTaskController::class);
+    Route::resource('/managementtask',StaffTaskController::class);
     Route::post('/employee_task_update/{id}','EmployeeTaskController@employee_task_update')->name('employee_task_update');
     Route::post('/admin_task_update/{id}','AdminTaskController@admin_task_update')->name('admin_task_update');
     Route::get('/admin-leave','EmpLeaveController@AdminLeave')->name('AdminLeave');
@@ -88,7 +88,7 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
 //  Admin Route
 Route::prefix('admin')->middleware('login')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'Adminindex'])->name('admin-dashboard');
-    Route::resource('/staftask',StaffTaskController::class);
+    Route::resource('/managementtask',StaffTaskController::class);
     Route::resource('/holiday',HolidayController::class);
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
 
@@ -97,7 +97,7 @@ Route::prefix('admin')->middleware('login')->group(function () {
 //  HR Route
 Route::prefix('hr')->middleware('login')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'HRindex'])->name('hr-dashboard');
-    Route::resource('/staftask',StaffTaskController::class);
+    Route::resource('/managementtask',StaffTaskController::class);
     Route::resource('/holiday',HolidayController::class);
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
 
@@ -111,7 +111,7 @@ Route::prefix('Employee')->middleware('login')->group(function () {
     Route::resource('/leave',EmpLeaveController::class);
     Route::get('/employeetaskview','EmployeeTaskController@employeetaskview')->name('employeetaskview');
     Route::get('/emp-leave-status','EmpLeaveController@EmpLeaveStatus')->name('EmpLeaveStatus');
-    Route::resource('/staftask',StaffTaskController::class);
+    Route::resource('/managementtask',StaffTaskController::class);
     Route::resource('/holiday',HolidayController::class);
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
 

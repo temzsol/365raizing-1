@@ -68,7 +68,7 @@
                                 </td>
                                 <td>
                                     <div class="button_align">
-                                        <a href="{{route('staftask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
+                                        <a href="{{route('managementtask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
                                        
                                         @if($usertype=Auth::user()->type =='master_admin')
                                         <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
@@ -87,7 +87,7 @@
             </div>
         @endif
             <div id="task_assign_by_me">
-                <a href="{{route('staftask.create')}}" class="btn btn-primary">Add Task</a>
+                <a href="{{route('managementtask.create')}}" class="btn btn-primary">Add Task</a>
                 <div class="table-responsive">
                   Management All Task
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
@@ -127,7 +127,7 @@
 
                                 <td>
                                     <div class="button_align">
-                                        <a href="{{route('staftask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
+                                        <a href="{{route('managementtask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
                                        
                                         @if($usertype=Auth::user()->type =='master_admin')
                                         <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
@@ -159,7 +159,7 @@
         {
         $.ajax({
             method:'DELETE',
-            url: '{{ url('master-admin/staftask') }}/'+tid,
+            url: '{{ url('master-admin/managementtask') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'

@@ -18,7 +18,7 @@
                 <div class="card">
                 <div class="card-header"><strong>Management Task</strong><small> Form</small></div>
                
-                <form action="{{route('staftask.update',$staffTask->id)}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('managementtask.update',$staffTask->id)}}" method="post" enctype="multipart/form-data">
                 @method('PUT')
                 <input type="hidden" value="{{$staffTask->id}}" name="id">
                         @csrf
@@ -130,5 +130,20 @@ function usertype() {
 }
 
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Get the input field
+      const dateInput = document.getElementById('deadline');
+      
+      // Create a new Date object for today
+      const today = new Date();
+      
+      // Format the date as YYYY-MM-DD
+      const formattedDate = today.toISOString().split('T')[0];
+      
+      // Set the min attribute to today's date
+      dateInput.setAttribute('min', formattedDate);
+    });
+  </script>
 @endpush
 

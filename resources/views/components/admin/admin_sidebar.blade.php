@@ -79,7 +79,7 @@
                             <li><a href="{{route('employee.index')}}" key="t-light-sidebar">Employee List </a></li>
                             <li><a href="{{route('employeetask.index')}}" key="t-light-sidebar">All Employee Task</a></li>
                             <li><a href="{{route('admintask.index')}}" key="t-light-sidebar">All Admin Task</a></li>
-                            <li><a href="{{route('staftask.index')}}" key="t-light-sidebar">Task For Management</a></li>
+                            <li><a href="{{route('managementtask.index')}}" key="t-light-sidebar">Task For Management</a></li>
                         </li>
                     </ul>
                 </li>

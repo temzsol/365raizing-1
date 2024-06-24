@@ -17,7 +17,7 @@
     <div class="card-body">
                 <div class="card">
                 <div class="card-header"><strong>Management Task</strong><small> Form</small></div>
-                    <form action="{{route('staftask.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('managementtask.store')}}" method="post" enctype="multipart/form-data">
                        
                         @csrf
                     <div class="card-body card-block">
@@ -102,5 +102,20 @@ function usertype() {
 }
 
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Get the input field
+      const dateInput = document.getElementById('deadline');
+      
+      // Create a new Date object for today
+      const today = new Date();
+      
+      // Format the date as YYYY-MM-DD
+      const formattedDate = today.toISOString().split('T')[0];
+      
+      // Set the min attribute to today's date
+      dateInput.setAttribute('min', formattedDate);
+    });
+  </script>
 @endpush
 

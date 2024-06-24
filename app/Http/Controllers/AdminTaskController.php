@@ -25,6 +25,9 @@ class AdminTaskController extends Controller
         // ->select('admin_tasks.*', 'admins.fname as admin_name')
         // ->orderBy('admin_tasks.id', 'DESC')
         // ->paginate(20);
+        $type=Auth::user()->type;
+        if($type=='master_admin')
+        {
         $data =StaffTask::where('staff_tasks.is_deleted', 0)
         ->where('staff_tasks.user_type', '!=','master_admin')
         ->join('employees as repoter', 'staff_tasks.task_assign_from', '=', 'repoter.id')
@@ -33,6 +36,30 @@ class AdminTaskController extends Controller
         ->select('staff_tasks.*','repoter.fname as repoter','employees.fname as taskAssigneTo')
         ->orderBy('staff_tasks.id', 'DESC')
         ->paginate(20);
+        }
+        if($type=='Admin')
+        {
+        $data =StaffTask::where('staff_tasks.is_deleted', 0)
+        ->where('staff_tasks.user_type', '!=','Admin')
+        ->join('employees as repoter', 'staff_tasks.task_assign_from', '=', 'repoter.id')
+        ->join('employees', 'staff_tasks.task_assign_to', '=', 'employees.id')
+        // ->join('users as assignee', 'staff_tasks.task_assign_to', '=', 'assignee.id')
+        ->select('staff_tasks.*','repoter.fname as repoter','employees.fname as taskAssigneTo')
+        ->orderBy('staff_tasks.id', 'DESC')
+        ->paginate(20);
+        }
+        if($type=='HR')
+        {
+        $data =StaffTask::where('staff_tasks.is_deleted', 0)
+        ->where('staff_tasks.user_type', '!=','HR')
+        ->join('employees as repoter', 'staff_tasks.task_assign_from', '=', 'repoter.id')
+        ->join('employees', 'staff_tasks.task_assign_to', '=', 'employees.id')
+        // ->join('users as assignee', 'staff_tasks.task_assign_to', '=', 'assignee.id')
+        ->select('staff_tasks.*','repoter.fname as repoter','employees.fname as taskAssigneTo')
+        ->orderBy('staff_tasks.id', 'DESC')
+        ->paginate(20);
+        }
+
         return view('admin.admintask.index', compact('data'));
     }
 

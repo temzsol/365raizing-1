@@ -27,16 +27,9 @@
                     <div class="card-body card-block">
                         <div class="form-group mb-4">
                             <label for="emp_id" class=" form-control-label">Employee Name<span class="text-danger">*</span></label>
-                            <select name="emp_id" id="emp_id" class="form-control" required>
-                                <option value="#">Please select Employee first</option>
-                                @foreach($employee as $key => $value)
-                                <option value="{{ $value->id }}" {{ isset($employeeTask) && $value->id == $employeeTask->emp_id ? 'selected' : '' }}>
-                                    {{ $value->fname }}
-                                </option>
-                            @endforeach
-  
-                                
-                            </select>
+                            <input type="text" readonly class="type form-control" value="{{isset($employee)?$employee->fname:''}}">
+                            <input type="hidden" name="emp_id" class="type form-control" value="{{isset($employee)?$employee->id:''}}">
+                           
                         </div>
 
                       <div class="form-group mb-4">
@@ -91,6 +84,20 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Get the input field
+      const dateInput = document.getElementById('deadline');
+      
+      // Create a new Date object for today
+      const today = new Date();
+      
+      // Format the date as YYYY-MM-DD
+      const formattedDate = today.toISOString().split('T')[0];
+      
+      // Set the min attribute to today's date
+      dateInput.setAttribute('min', formattedDate);
+    });
+  </script>
 @endpush
 

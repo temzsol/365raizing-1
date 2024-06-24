@@ -11,13 +11,13 @@
                 </p>
 
                 <div class="table-responsive">
-                  Admin All Task  <a class="btn btn-primary" href="{{route('admintask.create')}}">Add Task</a>
+                  {{-- Admin All Task  <a class="btn btn-primary" href="{{route('admintask.create')}}">Add Task</a> --}}
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
                     <table class="table mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Repoter</th>
+                                <th>Reporter</th>
                                 <th>Task Assignee</th>
                                 <th>Task Title</th>
                                 <th>Assign Date</th>
@@ -35,7 +35,13 @@
                                 <td>{{$value->taskAssigneTo}}</td>
                                 <td>{{$value->t_title}}</td>
                                 <td>{{$value->assign_date}}</td>
-                                <td><a href="{{url('/images/'.$value->t_file)}}" target="_blank" download>Download File</a></td>
+                                <td>
+                                    @if(!empty($value->t_file))
+                                   
+
+                                        <a href="{{url('/images/'.$value->t_file)}}" target="_blank" download>Download File</a></td>
+                                    
+                                    @endif
                                 <td>{{$value->t_detail}}</td>
                                 
                                 
@@ -47,8 +53,8 @@
                                 </td>
                                 <td>
                                     <div class="button_align">
-                                        <a href="{{route('admintask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
                                        
+                                        <a href="{{route('managementtask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
                                         @if($usertype=Auth::user()->type =='master_admin')
                                         <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
                                         @endif
@@ -77,7 +83,7 @@
         {
         $.ajax({
             method:'DELETE',
-            url: '{{ url('master-admin/admintask') }}/'+tid,
+            url: '{{ url('master-admin/managementtask') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'
@@ -103,29 +109,29 @@
         });
     }
 }
-    function update_status(tid){
-        if(confirm('Do you want to change status'))
-        {
-        $.ajax({
-            method:'POST',
-            url: '{{ url('master-admin/admin_task_update/') }}/'+tid,
-            data:{
-                id: tid,
-                _token: '{{ csrf_token() }}'
-            },
-            success:function(response){
+//     function update_status(tid){
+//         if(confirm('Do you want to change status'))
+//         {
+//         $.ajax({
+//             method:'POST',
+//             url: '{{ url('master-admin/managementtask/') }}/'+tid,
+//             data:{
+//                 id: tid,
+//                 _token: '{{ csrf_token() }}'
+//             },
+//             success:function(response){
                 
-                if(response.success)
-                {
-                    location.reload();
-                    swal("Deleted!", "Status Updated Successfully!", "success");
+//                 if(response.success)
+//                 {
+//                     location.reload();
+//                     swal("Deleted!", "Status Updated Successfully!", "success");
 
-                }
+//                 }
                 
-            }
-        });
-    }
-}
+//             }
+//         });
+//     }
+// }
     </script>
 
 

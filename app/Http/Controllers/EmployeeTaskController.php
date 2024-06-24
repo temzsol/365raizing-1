@@ -34,7 +34,9 @@ class EmployeeTaskController extends Controller
      */
     public function create()
     {
-        $employee=Employee::where('status',1)->where('is_deleted',0)->get();
+
+        $id=$_GET['id'];
+        $employee=Employee::find($id);
         return view('admin.employeetask.create',compact('employee'));
     }
 
@@ -54,12 +56,18 @@ class EmployeeTaskController extends Controller
         }
         $data['assign_date']=date('Y-m-d');
         $data['status']=0;
+        $data['reporter_id']=Auth::user()->id;
         $result=$employeeTask->create($data);
         $emp_id = $result->emp_id;
         $empl_result=Employee::find($emp_id);
         $result['deadline_date']=$request->deadline_date;
         $email_id = $empl_result->official_id;
-        Mail::to($email_id)->send(new EmployeeTaskMail($result));
+        $mailto=array();
+        $result['reporter_name']=Auth::user()->name;
+        $result['assignee_name']=$empl_result->fname;
+        $repoter_mail=Auth::user()->email;
+        $mailto=[$email_id,$repoter_mail];
+        Mail::to($mailto)->send(new EmployeeTaskMail($result));
         return redirect(route('employeetask.index'))->with('message','Task Created Successfully');
     }
 
@@ -82,8 +90,8 @@ class EmployeeTaskController extends Controller
      */
     public function edit(EmployeeTask $employeeTask,$id)
     {
-        $employeeTask =EmployeeTask::find($id);
-        $employee=Employee::where('status',1)->where('is_deleted',0)->get();
+        $employeeTask=EmployeeTask::find($id);
+        $employee=Employee::find($employeeTask->emp_id);
         return view('admin.employeetask.create',compact('employeeTask','employee'));
     }
 
@@ -104,12 +112,18 @@ class EmployeeTaskController extends Controller
             $data['t_file'] = $folder."/".$t_file;
         }
         $data['assign_date']=date('Y-m-d');
+        $data['reporter_id']=Auth::user()->id;
         $result=$EmployeeTask->update($data);
         $result=$EmployeeTask;
+        $result['reporter_name']=Auth::user()->name;
+        
         $emp_id = $data['emp_id'];
         $empl_result=Employee::find($emp_id);
         $email_id = $empl_result->official_id;
-
+        $result['assignee_name']=$empl_result->fname;
+        $mailto=array();
+        $repoter_mail=Auth::user()->email;
+        $mailto=[$email_id,$repoter_mail];
         Mail::to($email_id)->send(new EmployeeTaskMail($result));
         return redirect(route('employeetask.index'))->with('message','Task updated Successfully');
     }
