@@ -42,6 +42,8 @@ $settings=App\Models\Websitesetting::find(1);
                            </center>
                         </div>
                      </div>
+                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>
+                     @endif
                      <div class="card-body pt-0">
                         <div class="p-2">
                            <form class="form-horizontal" id="loginform" method="post" action="{{route('login')}}">

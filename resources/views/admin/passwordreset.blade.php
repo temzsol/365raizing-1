@@ -1,181 +1,135 @@
-@extends('layouts.masteradmin')
-@section('body')
-<div class="page-content">
-   <div class="row">
-      <div class="col-12">
-         @if ($errors->any())
-         <div class="alert alert-text-text-danger">
-            <ul>
-               @foreach ($errors->all() as $error)
-               <li>{{ $error }}</li>
-               @endforeach
-            </ul>
-         </div>
-         @endif
-         <div class="card">
-            <div class="card-body">
-               <div class="card">
-                  <div class="card-header"><strong>Password Reset</strong><small> Form</small>
-                    @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
-                </div>
-                  <form action="{{route('passwordReset')}}" method="post" enctype="multipart/form-data">
-                     @csrf
-                     <div class="card-body card-block">
-                        <div class="form-group mb-4">
-                           <div class="row">
-                            <div class="col-lg-6">
-                                <label for="email" class="form-control-label">User Email<span style="color:red;">*</span></label>
-                                <input type="text" id="email"readonly class="form-control" name="email" value="{{$authresult[0]->email}}">
-                                <input type="hidden" readonly class="form-control" name="id" value="{{$authresult[0]->id}}">
-                             </div>               
-                              <div class="col-lg-6">
-                                 <label for="vgstin" class="form-control-label">New Password<span style="color:red;">*</span> </label>
-                                 <input type="text" id="vgstin" placeholder="New password" class="form-control" name="n_password"  required>
+@php
+$settings=App\Models\Websitesetting::find(1);
+@endphp
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>Raizing Group || Login</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta content="Raizing Group" name="description" />
+      <meta content="Raizing Group" name="Deepak" />
+      <!-- App favicon -->
+      <link rel="shortcut icon" href="{{url('/images/settings/logo.png')}}">
+      <!-- Bootstrap Css -->
+      <link href="{{url('/')}}/admin/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+      <!-- Icons Css -->
+      <link href="{{url('/')}}/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+      <!-- App Css-->
+      <link href="{{url('/')}}/admin/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+      <style>
+         body{
+         background-color: grey;
+         }
+         .error_msg
+         {
+            color: red;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="account-pages my-5 pt-sm-5">
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-md-8 col-lg-6 col-xl-5">
+                  <div class="card overflow-hidden">
+                     <div class="bg-primary bg-soft">
+                        <div class="row">
+                           <center>
+                              <div class="col-12 align-self-end">
+                                 <img src="{{url('/images/settings/'.$settings->web_logo)}}" alt="RR Web LOGO" class="img-fluid" height="50%" width="50%">
                               </div>
-                              <div class="col-lg-6 mt-4">
-                                 <label for="vcont" class="form-control-label">Confirm Password <span style="color:red;">*</span></label>
-                                 <input type="text" id="vcont" placeholder="Confirm" class="form-control" name="c_password" required>
-                              </div>
-                              </div>
-                            <button class="btn btn-primary mt-4">Update</button>
-                  </form>
+                           </center>
+                        </div>
+                     </div>
+                     <div class="card-body pt-0">
+                        <div class="p-2">
+                           @if(isset($token))
+                           <div class="card-header"><strong>Password Reset</strong><small> Form</small>
+                           </div>
+                           <form action="{{route('finalreset')}}" method="post" enctype="multipart/form-data">
+                              @csrf
+                              <div class="card-body card-block">
+                                 <div class="form-group mb-4">
+                                    <div class="row">
+                                     <div class="col-lg-12">
+                                         <label for="email" class="form-control-label">User Email<span style="color:red;">*</span></label>
+                                         <input type="text" id="email"readonly class="form-control" name="email" value="{{Auth::user()->email}}">
+                                      </div>   
+                                      <div class="col-lg-12 mt-4">
+                                       <label for="password" class="form-control-label">New Password<span style="color:red;">*</span></label>
+                                       <input type="text" id="password" class="form-control" name="password" value="" required>
+                                       <input type="hidden" id="password"readonly class="form-control" name="remember_token" value="{{$token}}">
+                                    </div>             
+                                  
+                                       </div>
+                                     <button type="submit"class="btn btn-primary mt-4">Submit</button>
+                                 </form>
+                              @else
+                              <h2>No Request Found</h2>
+                              @endif
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mt-5 text-center">
+                     <div>
+                        <p class="copywright">
+                           © <script>document.write(new Date().getFullYear())</script> Raizing Group Develop <i class="mdi mdi-heart text-danger"></i> by TEMZ Pvt. Ltd.
+                        </p>
+                     </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <!-- end col -->
-   </div>
-</div>
-@endsection
-@push('footer-section-code')
-<!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<script>
-   //on Subimt button , disable button and text change as updating
-   
-       function disableButton()
-       {
-           var btn = document.getElementById('Add_emp_submit');
-           btn.disabled = true;
-           btn.value = 'Please Wait...'
-            //document.getElementById("form1").submit();
-          // return true;
-       }
-       
-             function emp_validation()
-           {
-                 var location =  $("#eloc").val();
-                  var fname =  $("#fname").val();
-                  //  var mobile =  $("#vemail").val();
-                if(location == '')
-                {
-                   alert('Please enter location');
-                   return false;
-                }
-                 if(fname == '')
-                {
-                   alert('Please enter Name');
-                   return false;
-                }
-   
-           var eduInput = document.getElementsByName('vemail[]');
-           for (i=0; i<eduInput.length; i++)
-           {
-               //alert(eduInput[i].value);
-                if (eduInput[i].value == "")
-                   {
-                    alert('Please Enter Mobile');
-                    return false;
-                   }
-           }
-   
-   
-   
-   
-             return true;
-           }
-   
-   
-        $(document).ready(function(){
-   
-           //   var i=1;
-           //   $('#emp_mail').click(function(){
-           //        i++;
-           //        $('#emp_email_div').append('<div class="row" id="emp_email_div'+i+'" style="margin-top:5px; margin-bottom: 10px;"><div class="col-lg-10"><input type="mail" id="uemail" placeholder="Enter employee\'s email" class="form-control" name="empemail[]"></div><div class="col-lg-2"><img src="images/cross.png" alt="" id="'+i+'" class="btn_remove" width="25"></div></div>');
-           //    });
-   
-           //    $(document).on('click', '.btn_remove', function(){
-           //    var button_id = $(this).attr("id");
-           //    $('#emp_email_div'+button_id+'').remove();
-           //     });
-   
-   
-        //    New Code 
-              var x=1;
-             $('#emp_cont').click(function(){
-                  x++;
-                  $('#ven_email_div').append('<div class="row" id="ven_email_div'+x+'" style="margin-top:5px; margin-bottom: 10px;"><div class="col-lg-8 mt-4"><input type="text" id="mob" placeholder="Enter vendor\'s email" class="form-control" name="vemail[]"></div><div class="col-lg-2 mt-4"><buttontype="button" class="btn btn-danger btn_remove1" id="'+x+'">Remove</button></div></div>');
-              });
-   
-              $(document).on('click', '.btn_remove1', function(){
-              var button_id = $(this).attr("id");
-              $('#ven_email_div'+button_id+'').remove();
-               });
-   
-               var x=1;
-             $('#vendor_contact').click(function(){
-                  x++;
-                  $('#ven_con_div').append('<div class="row" id="ven_con_div'+x+'" style="margin-top:5px; margin-bottom: 10px;"><div class="col-lg-8 mt-4"><input type="text" id="vcont"  class="form-control" name="vcont[]" placeholder="Enter vendor\'s contact"></div><div class="col-lg-2 mt-4"><buttontype="button" class="btn btn-danger btn_ven_contact" id="'+x+'">Remove</button></div></div>');
-              });
-              $(document).on('click', '.btn_ven_contact', function(){
-              var button_id = $(this).attr("id");
-              $('#ven_con_div'+button_id+'').remove();
-               });
-
-               var x=1;
-             $('#emp_appointment_latter').click(function(){
-                  x++;
-                  $('#ven_service_div').append('<div class="row" id="ven_service_div'+x+'" style="margin-top:5px; margin-bottom: 10px;"><div class="col-lg-8 mt-4"><input type="text" id="vservice"  class="form-control" name="appointment_latter[]"placeholder="Enter vendor\'s services"></div><div class="col-lg-2 mt-4"><buttontype="button" class="btn btn-danger service_button" id="'+x+'">Remove</button></div></div>');
-              });
-              $(document).on('click', '.service_button', function(){
-              var button_id = $(this).attr("id");
-              $('#ven_service_div'+button_id+'').remove();
-               });
-   //    New Code End 
-
-   
-   //  For Loop Section Remove
-           $(document).on('click', '.emp_dol_section', function(){
-              var button_id = $(this).attr("id");
-              $('#ven_con_div'+button_id+'').remove();
-               });
-   
-               $(document).on('click', '.emp_appointment_latter_section', function(){
-              var button_id = $(this).attr("id");
-              alert(button_id);
-              $('#ven_service_div'+button_id+'').remove();
-               });
-   
-               $(document).on('click', '.emp_pan_section', function(){
-              var button_id = $(this).attr("id");
-              alert(button_id);
-              $('#emp_pan_div'+button_id+'').remove();
-               });
-   
-               $(document).on('click', '.emp_adhar_section', function(){
-              var button_id = $(this).attr("id");
-              $('#emp_adhar_div'+button_id+'').remove();
-               });
-   
-               $(document).on('click', '.emp_certificate_section', function(){
-              var button_id = $(this).attr("id");
-              alert(button_id);
-              $('#emp_certificate_div'+button_id+'').remove();
-               });
-   
+      <!-- end account-pages -->
+      <!-- JAVASCRIPT -->
+      <script src="{{url('/')}}/admin/assets/libs/jquery/jquery.min.js"></script>
+      <script src="{{url('/')}}/admin/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="{{url('/')}}/admin/assets/libs/metismenu/metisMenu.min.js"></script>
+      <script src="{{url('/')}}/admin/assets/libs/simplebar/simplebar.min.js"></script>
+      <script src="{{url('/')}}/admin/assets/libs/node-waves/waves.min.js"></script>
+      <!-- App js -->
+      <script src="{{url('/')}}/admin/assets/js/app.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script>
+         function login(){
+             
+         }
+         
+      </script>
+      <script>
+        $(document).ready(function() {
+            $("#loginform").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        maxlength: 35,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8
+                    }
+                },
+                messages: {
+                    email: {
+                        required: "Email Address is required.",
+                        maxlength: "Your email must not be more than 35 characters long.",
+                        email: "Please enter a valid email address."
+                    },
+                    password: {
+                        required: "Please enter a password.",
+                        minlength: "Password should be at least 8 characters long."
+                    }
+                },
+               
+            });
         });
-        
-</script>
-@endpush
+    </script>
+    
+    
+    
+   </body>
+</html>

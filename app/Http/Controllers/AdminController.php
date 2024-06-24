@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\LoginDetails;
-
+use App\Mail\PasswordResetMail;
+use Stevebauman\Location\Facades\Location;
 use Redirect;
 use Auth;
 use Session;
@@ -41,7 +42,18 @@ class AdminController extends Controller
         if(Auth::attempt($credentials))
         {
             $data['uemail'] = $request->email;  // Ensure the email is sanitized/validated as needed.
-            $data['ip'] = $request->ip();       // Correct method to get the client's IP address.
+            $ip = $request->ip();       // Correct method to get the client's IP address.
+            $data['ip'] = $ip;       // Correct method to get the client's IP address.
+            $location = Location::get($ip);
+            if ($location) {
+                $latitude = $location->latitude;
+                $longitude = $location->longitude;
+
+                $data['latitude'] = $latitude;       // Correct method to get the client's IP address.
+                $data['longitude'] = $longitude;       // Correct method to get the client's IP address.
+            }
+
+        
             $data['login_time'] = date('H:i:s'); // Correct format for time.
             $data['login_date'] = date('m-d-Y'); // This format is fine.
             $data['current_status'] = 1;
@@ -84,7 +96,16 @@ class AdminController extends Controller
         $id= Session::get('login_session_id');
         $data = LoginDetails::find($id);
         $logout_time = date('H:i:s');
-        LoginDetails::where('id', $id)->update(['logout_time' => $logout_time, 'current_status' => 0]);
+        $ip = $request->ip();       // Correct method to get the client's IP address.
+            $data['ip'] = $ip;       // Correct method to get the client's IP address.
+            $location = Location::get($ip);
+            $logout_lat="";
+            $logout_long="";
+            if ($location) {
+                $logout_lat = $location->latitude;
+                $logout_long = $location->longitude;
+            }
+        LoginDetails::where('id', $id)->update(['logout_time' => $logout_time, 'current_status' => 0,'logout_lat'=>$logout_lat,'logout_long'=>$logout_long]);
         Auth::logout();
         $request->session()->pull('result');
         return redirect('/');
@@ -166,30 +187,46 @@ class AdminController extends Controller
     }
 
     public function passwordResetview(Request $request,Admin $admin){
-        $authresult=Auth::user()->all();
-        // dd($authresult[0]->email);
-        return view('admin.passwordreset',compact('authresult'));
+        return view('admin.reset_view');
     }
 
     public function passwordReset(Request $request,User $user){
-        $validatedData = $request->validate([
-            'n_password' => 'required|string|min:8', // ' automatically checks against 'c_password'
-            'c_password' => 'required|string|min:8'           // Validate the first element of empmob array
-        ]);
-        if($request->n_password == $request->c_password)
+      
+        $user=User::where('email',$request->email)->first(); 
+        $token = $user->createToken("password reset token");
+        $new_token=$token->accessToken['token'];
+        $user['remember_token']= $new_token;
+        
+        $user->update(['remember_token' =>$new_token]);
+        mail::to($request->email)->send(new PasswordResetMail($user));
+        return back()->with('message','Please Check Your Email We Are Send a mail on '.$request->email.' for password reset');
+    }
+
+    public function passwordResetForm(Request $request,User $user,$token){
+        $result=User::where('remember_token',$token)->first();
+        if($result)
         {
 
-            $user=User::find($request->id); 
-         $user->update([
-            'password' => Hash::make($request->n_password)
-        ]);
-        return back()->with('message','Password Updated Successfully');
+            return view('admin.passwordreset',compact('token'));
         }
         else
         {
-            return back()->with('message','Your Password is Not Match');
+            return "This session is expire.";
         }
 
+    }
+
+    
+    public function passwordfinalReset(Request $request,User $user){
+      
+        $user=User::where('email',$request->email)->where('remember_token',$request->remember_token)->first();       
+        $user->update([
+            'password' => Hash::make($request->password),
+            'remember_token' => null,
+        ]);
+        Auth::logout();
+        $request->session()->pull('result');
+        return redirect('/')->with('message','Your Password is Updated Successfully Please Login');       
     }
     
 

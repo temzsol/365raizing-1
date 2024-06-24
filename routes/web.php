@@ -41,6 +41,12 @@ Route::post('/login',[AdminController::class,'AuthLogin'])->name('login');
 Route::post('/user_type','StaffTaskController@UserType')->name('user_type');
 Route::post('/findbrandname','EmployeeController@findbrandname')->name('findbrandname');
 
+//  For Password Rest Route
+Route::get('/password-reset-view','AdminController@passwordResetview')->name('passwordResetview');
+Route::post('/password-reset','AdminController@passwordReset')->name('passwordReset');
+Route::get('/password-reserform/{token}','AdminController@passwordResetForm')->name('reserform');
+Route::post('/password-finalreset','AdminController@passwordfinalReset')->name('finalreset');
+ //  For Password Rest Route End
 
 Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'index'])->name('master-dashboard');
@@ -78,8 +84,8 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
 
 
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
-    Route::get('/password-reset-view','AdminController@passwordResetview')->name('passwordResetview');
-    Route::post('/password-reset','AdminController@passwordReset')->name('passwordReset');
+ 
+    
 });
 
 //  Admin Route

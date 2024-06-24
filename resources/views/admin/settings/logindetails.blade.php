@@ -21,6 +21,8 @@
                                 <th>Login Time</th>
                                 <th>Logout Time</th>
                                 <th>Login Status</th>
+                                <th>Login Location</th>
+                                <th>Logout Location</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,14 +34,9 @@
                                 <td>{{$value->login_time}}</td>
                                 <td>{{$value->logout_time}}</td>
                                 <td>{{$value->current_status}}</td>
-                                <td>{{$value->ip}}</td>
-                                <td><img src="{{url('/images/settings/'.$value->web_logo)}}" alt="{{$value->web_logo}}" style="height: 100px;"> <i class="bx bx-window-close text-danger"></i></td>
+                                <td><a href="https://maps.google.com/?q={{ $value->latitude }},{{ $value->longitude }}" target="_blank" class="theme-info">Login Loaction</a></td>
+                                <td><a href="https://maps.google.com/?q={{ $value->logout_lat }},{{ $value->logout_long }}" target="_blank" class="theme-info">Logout Loaction</a></td>
                                 
-                                
-                                <td>
-                                    <a href="{{route('settings.edit',$value->id)}}"><i class="bx bx-pencil"></i> Edit </a> 
-                                
-                                </td>
                             </tr>
                             
                             @endforeach
