@@ -6,6 +6,10 @@
             <div class="card-body">
                 <div class="table-responsive" style="margin-top:80px;">
                    All Employee
+                   @if(Auth::user()->type!='Employee')
+                   <a class="btn btn-primary" href="{{route('employee.create')}}">Add Employee</a>
+                   @endif
+                   
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
                     <table class="table mb-0">
                         <thead>
