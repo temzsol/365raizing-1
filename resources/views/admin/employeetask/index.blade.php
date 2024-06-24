@@ -35,7 +35,11 @@
                                 <td>{{$value->emp_name}}</td>
                                 <td>{{$value->t_title}}</td>
                                 <td>{{$value->assign_date}}</td>
-                                <td><a href="{{url('/images/'.$value->t_file)}}" target="_blank" download>Download File</a></td>
+                                <td>
+                                    @if(!empty($value->t_file))
+                                    <a href="{{url('/images/'.$value->t_file)}}" target="_blank" download>Download File</a>
+                                    @endif
+                                </td>
                                 <td>{{$value->t_detail}}</td>
                                 
                                 
@@ -48,7 +52,7 @@
                                
                                 <td>
                                     <div class="button_align">
-                                        <a href="{{route('employeetask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a> 
+                                        <a href="{{route('employeetask.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> View Task </a> 
                                        
                                         @if($usertype=Auth::user()->type =='master_admin')
                                         <a href="javascript:void(0);"  onClick="deletetasks('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
