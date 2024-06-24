@@ -13,7 +13,7 @@
 {{--  For Tab Section  --}}
 <ul class="nav nav-tabs mb-4">
     <li class="nav-item">
-      <a class="nav-link active" id="me_task_button" onclick="tabFunction('task_assign_by_me')" href="#task_assign_by_me">Task Assign by Me</a>
+      <a class="nav-link active" id="me_task_button" onclick="tabFunction('task_assign_by_me')" href="#task_assign_by_me">Task Assigned by Me</a>
     </li>
     @if(Auth::user()->type!='Employee')
     <li class="nav-item">
