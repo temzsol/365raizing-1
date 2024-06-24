@@ -104,7 +104,6 @@ class EmployeeTaskController extends Controller
             $data['t_file'] = $folder."/".$t_file;
         }
         $data['assign_date']=date('Y-m-d');
-        $data['status']=0;
         $result=$EmployeeTask->update($data);
         $result=$EmployeeTask;
         $emp_id = $data['emp_id'];
