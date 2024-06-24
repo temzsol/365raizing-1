@@ -19,7 +19,7 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fa fa-tasks font-size-18"></i>
-                        <span key="t-layouts">Task Management</span>
+                        <span key="t-layouts">To Do Task</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
                         <li>
