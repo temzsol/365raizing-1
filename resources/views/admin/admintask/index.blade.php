@@ -18,7 +18,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Repoter</th>
-                                <th>Task Assigne</th>
+                                <th>Task Assignee</th>
                                 <th>Task Title</th>
                                 <th>Assign Date</th>
                                 <th>File</th>
