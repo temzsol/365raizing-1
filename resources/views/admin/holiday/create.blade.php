@@ -27,39 +27,50 @@
                                 @csrf
                                 <div class="card-body card-block">
                                     <div class="form-group mt-4">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label for="v_brand" class="form-control-label">Company Name<span class="danger">*</span></label>
-                                                <select name="company_id" id="company_id" class="form-control" required>
-                                                    <option value="">Please select Company</option>
-                                                    @foreach($company as $value)
-                                                    <option value="{{$value->id}}">{{$value->compname}}</option>
-                                                    @endforeach
-
-                                                    
-                                                </select>
-                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                   <div class="col-lg-4 mb-4">
+                                                      <label for="ucomp" class=" form-control-label">Company Name <span style="color:red;">*</span></label>
+                                                      <select name="company_id" id="compname" class="form-control" required onchange="Findbrand()">
+                                                         <option value="">Please select brand</option>
+                                                         @foreach($company as $value)
+                                                         <option value="{{$value->id}}" @if(isset($employee)){{$value->id==$employee->compname?'selected':''}}@endif>{{$value->compname}}</option>
+                                                         @endforeach
+                                                      </select>
+                                                   </div>
+                                                   <div class="col-lg-4 mb-4">
+                                                      <label for="ucomp" class=" form-control-label">Brand <span style="color:red;">*</span></label>
+                                                      <select name="brand_id" id="empbrand" class="form-control" required>
+                                                         <option value="">Please select brand</option>
+                                                      </select>
+                                                   </div>
+                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group mt-4">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="date" class="form-control-label">Holiday Date<span class="danger">*</span></label>
                                                 <input type="date" id="date" name="date[]" placeholder="Date" class="form-control" required>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <label for="holidays" class="form-control-label">Holiday Name<span class="danger">*</span></label>
                                                 <input type="text" id="holidays" name="holidays[]" placeholder="Holidays Name" class="form-control" required>
                                             </div>
-                                            <div class="col-md-4 mt-4">
-                                                <button type="button" id="vendor_service" class="btn btn-success">+Add</button>
-
-                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="ucomp" class=" form-control-label">Holiday Type <span style="color:red;">*</span></label>
+                                                <select name="type[]" id="empbrand" class="form-control" required>
+                                                   <option value="Paid">Paid</option>
+                                                   <option value="Unpaid">Unpaid</option>
+                                                </select>
+                                             </div>
+                                           
                                         </div>
                                     <div id="contentappend"></div>
                                     </div>
                                     <div class="form-group mt-4">
                                         <input type="submit" name="holiday_ok" value="Submit" class="form-control btn btn-primary" style="margin-top: 15px; border-radius: 6px; width: 130px;" />
+                                        <button type="button" id="vendor_service" class="btn btn-success mt-3">+Add</button>
                                     </div>
                                 </div>
                             </form>
@@ -83,15 +94,22 @@
         $('#vendor_service').click(function () {
             $('#contentappend').append(
                 '<div class="row">' +
-                    '<div class="col-md-4 mt-4">' +
+                    '<div class="col-md-3 mt-4">' +
                         '<label for="date" class="form-control-label">Holiday Date<span class="danger">*</span></label>' +
                         '<input type="date" name="date[]" placeholder="Date" class="form-control" required>' +
                     '</div>' +
-                    '<div class="col-md-4 mt-4">' +
+                    '<div class="col-md-3 mt-4">' +
                         '<label for="holidays" class="form-control-label">Holiday Name<span class="danger">*</span></label>' +
                         '<input type="text" name="holidays[]" placeholder="Holidays Name" class="form-control" required>' +
                     '</div>' +
-                    '<div class="col-md-4 mt-4">' +
+                    '<div class="col-md-3 mt-4">'+
+                        '<label for="ucomp" class=" form-control-label">Holiday Type <span style="color:red;">*</span></label>'+
+                        '<select name="type[]" id="empbrand" class="form-control" required>'+
+                            '<option value="Paid">Paid</option>'+
+                            '<option value="Unpaid">Unpaid</option>'+
+                        '</select>'+
+                    '</div>'+
+                    '<div class="col-md-3 mt-4">' +
                         '<button type="button" class="btn btn-danger mt-4 btn_remove2"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
                     '</div>' +
                 '</div>'
@@ -102,5 +120,31 @@
             $(this).closest('.row').remove();
         });
     });
+
+
+    //  For Location find
+    function Findbrand() {
+    var comp_id = $('#compname').val();
+    
+    $.ajax({
+        method: 'POST',
+        url: '{{ url('findbrandname') }}',
+        data: {
+            comp_id: comp_id,
+            _token: '{{ csrf_token() }}'
+        },
+        success: function(response) {
+            if (response.success === true) {
+                $('#empbrand').html(response.html); // Update the HTML of the dropdown with the response
+            } else {
+                $('#empbrand').html("No Data Found");
+               
+            }
+        },
+        error: function(xhr, status, error) {
+            swal("Request Failed!", "An error occurred while processing your request.", "error");
+        }
+    });
+}
     </script>
 @endpush

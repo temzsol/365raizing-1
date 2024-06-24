@@ -78,11 +78,8 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
     Route::post('/EmpLeaveStatusReject/{id}','EmpLeaveController@EmpLeaveStatusReject')->name('EmpLeaveStatusReject');
     Route::post('/AdminLeaveStatusApprove/{id}','EmpLeaveController@AdminLeaveStatusApprove')->name('AdminLeaveStatusApprove');
     Route::post('/AdminLeaveStatusReject/{id}','EmpLeaveController@AdminLeaveStatusReject')->name('AdminLeaveStatusReject');
-    
     Route::resource('/settings',WebsitesettingController::class);
     Route::resource('/login_details',LoginDetailsController::class);
-
-
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
  
     
@@ -92,12 +89,18 @@ Route::prefix('master-admin')->middleware('login')->group(function () {
 Route::prefix('admin')->middleware('login')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'Adminindex'])->name('admin-dashboard');
     Route::resource('/staftask',StaffTaskController::class);
+    Route::resource('/holiday',HolidayController::class);
+    Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
+
 });
 
 //  HR Route
 Route::prefix('hr')->middleware('login')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'HRindex'])->name('hr-dashboard');
     Route::resource('/staftask',StaffTaskController::class);
+    Route::resource('/holiday',HolidayController::class);
+    Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
+
 });
 
 //  Employee Route
@@ -109,13 +112,24 @@ Route::prefix('Employee')->middleware('login')->group(function () {
     Route::get('/employeetaskview','EmployeeTaskController@employeetaskview')->name('employeetaskview');
     Route::get('/emp-leave-status','EmpLeaveController@EmpLeaveStatus')->name('EmpLeaveStatus');
     Route::resource('/staftask',StaffTaskController::class);
+    Route::resource('/holiday',HolidayController::class);
+    Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
 
 });
 
-Route::get('/clear-cache', function() {
+Route::get('/cache', function() {
     Artisan::call('cache:clear ');
+    echo Artisan::output();
+});
+Route::get('/route', function() {
     Artisan::call('route:clear');
+    echo Artisan::output();
+});
+Route::get('/config', function() {
     Artisan::call('config:clear');
+    echo Artisan::output();
+});
+Route::get('/view', function() {
     Artisan::call('view:clear');
     echo Artisan::output();
 });

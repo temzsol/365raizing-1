@@ -12,6 +12,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Company Name</th>
+                                <th>Brand Name</th>
                                 <th>View</th>
                             </tr>
                         </thead>
@@ -20,7 +21,8 @@
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$value->company_name}}</td>
-                                <td><a href="{{url('/master-admin/viewholidays/'.$value->id)}}"class="btn btn-primary">View Holidays</a></td>
+                                <td>{{$value->brand}}</td>
+                                <td><a href="{{route('viewholidays',['id'=>$value->id])}}"class="btn btn-primary">View Holidays</a></td>
                            
                             </tr>
                             

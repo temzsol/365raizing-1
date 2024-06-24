@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Holiday;
 use App\Models\Company;
+use App\Models\Employee;
+use App\Models\Brand;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 use Mail;
@@ -20,11 +23,28 @@ class HolidayController extends Controller
      */
     public function index()
     {
+        $email=Auth::user()->email;
+        $type=Auth::user()->type;
+        $employee_result=Employee::where('official_id',$email)->first();
+        if($type=='Employee')
+        {
         $data = Holiday::where('holidays.is_deleted', 0)
+        ->where('holidays.brand_id',$employee_result->empbrand)
         ->join('companies', 'holidays.company_id', '=', 'companies.id')
-        ->select('holidays.*', 'companies.compname as company_name')
+        ->join('brands', 'holidays.brand_id', '=', 'brands.id')
+        ->select('holidays.*', 'companies.compname as company_name','brands.bname as brand')
         ->orderBy('holidays.id', 'DESC')
         ->paginate(10);
+        }
+        else
+        {
+            $data = Holiday::where('holidays.is_deleted', 0)
+            ->join('companies', 'holidays.company_id', '=', 'companies.id')
+            ->join('brands', 'holidays.brand_id', '=', 'brands.id')
+            ->select('holidays.*', 'companies.compname as company_name','brands.bname as brand')
+            ->orderBy('holidays.id', 'DESC')
+            ->paginate(10);
+        }
         return view('admin.holiday.index', compact('data'));
     }
 
@@ -52,6 +72,7 @@ class HolidayController extends Controller
        // Concatenate the date and holidays fields with a pipe separator
        $data['date'] = implode("|", $request->date);
        $data['holidays'] = implode("|", $request->holidays);
+       $data['type'] = implode("|", $request->type);
    
        // Initialize an array to store the names of the days
        $days = array();
@@ -60,7 +81,6 @@ class HolidayController extends Controller
        foreach ($request->date as $value) {
            // Get the day name from the date
            $day_name = date('l', strtotime($value));
-   
            // Add the day name to the days array
            array_push($days, $day_name);
        }

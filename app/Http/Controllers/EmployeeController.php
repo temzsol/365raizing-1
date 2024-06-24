@@ -178,7 +178,8 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $company=Company::where('status',1)->where('is_deleted',0)->get();
-        return view('admin.employee.create',compact('company','employee'));
+        $brand=Brand::where('status',1)->where('is_deleted',0)->get();
+        return view('admin.employee.create',compact('company','employee','brand'));
     }
 
     /**

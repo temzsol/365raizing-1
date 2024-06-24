@@ -28,17 +28,24 @@
                            <div class="row">
                               <div class="col-lg-4 mb-4">
                                  <label for="ucomp" class=" form-control-label">Company Name <span style="color:red;">*</span></label>
-                                 <select name="compname" id="compname" class="form-control" required onchange="Findbrand()">
+                                 <select name="empcomp" id="compname" class="form-control" required onchange="Findbrand()">
                                     <option value="">Please select brand</option>
                                     @foreach($company as $value)
-                                    <option value="{{$value->id}}" @if(isset($employee)){{$value->id==$employee->compname?'selected':''}}@endif>{{$value->compname}}</option>
+                                    <option value="{{$value->id}}" @if(isset($employee)){{$value->id==$employee->empcomp?'selected':''}}@endif>{{$value->compname}}</option>
                                     @endforeach
+                                    
                                  </select>
                               </div>
                               <div class="col-lg-4 mb-4">
                                  <label for="ucomp" class=" form-control-label">Brand <span style="color:red;">*</span></label>
                                  <select name="empbrand" id="empbrand" class="form-control" required>
-                                    <option value="">Please select brand</option>
+                                    @isset($employee)
+                                       @foreach($brand as $value)
+                                          <option value="{{$value->id}}" @if($value->id==$employee->empbrand) selected @endif>{{$value->bname}}</option>
+                                       @endforeach
+                                       @else
+                                          <option value="">Please select brand</option>
+                                       @endif
                                  </select>
                               </div>
                            </div>
@@ -374,9 +381,9 @@
                               <div class="col-lg-4 mt-4">
                                  <label for="ucomp" class=" form-control-label">Employee Role<span style="color:red;">*</span> </label>
                                  <select name="role" class="form-control" required>
-                                 <option value="0"{{isset($employee) && $employee->status==0?'selected':''}}>Employee</option>
-                                 <option value="1"{{isset($employee) && $employee->status==1?'selected':''}}>Admin</option>
-                                 <option value="2"{{isset($employee) && $employee->status==2?'selected':''}}>HR</option>
+                                 <option value="0"{{isset($employee) && $employee->role==0?'selected':''}}>Employee</option>
+                                 <option value="1"{{isset($employee) && $employee->role==1?'selected':''}}>Admin</option>
+                                 <option value="2"{{isset($employee) && $employee->role==2?'selected':''}}>HR</option>
                                  </select>
                               </div>
                               <div class="col-lg-4 mt-4">
@@ -385,6 +392,7 @@
                                     <option>Please select status</option>
                                     <option value="1"{{isset($employee) && $employee->status==1?'selected':''}}>Active</option>
                                     <option value="2"{{isset($employee) && $employee->status==2?'selected':''}}>Ex Employee</option>
+                                    <option value="0"{{isset($employee) && $employee->status==0?'selected':''}}>In Active</option>
                                  </select>
                               </div>
                            </div>
