@@ -47,9 +47,8 @@
                                     {{-- <input class="form-check-input" type="checkbox" id="SwitchCheckSizemd{{$value->id}}" @if($value->status==1){{'checked'}} @endif> --}}
                                     
                                     <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">
-                                         <button class="btn btn-danger">@if( $value->status=='0') {{"To Do"}} @endif</button>
-                                         <button class="btn btn-warning">@if( $value->status=='2') {{"In Progress"}} @endif</button>
-                                         <button class="btn btn-success">@if( $value->status=='1'){{"Completed"}} @endif</button>
+                                         <button class="btn btn->@if( $value->status=='0') {{"danger"}} @endif @if( $value->status=='2') {{"warning"}} @endif  @if( $value->status=='0') {{"success"}} @endif">@if( $value->status=='0') {{"To Do"}} @endif @if( $value->status=='2') {{"In Progress"}} @endif  @if( $value->status=='0') {{"Completed"}} @endif</button>
+                                        
                                          </label>
                                     </div>
                                 </td>
