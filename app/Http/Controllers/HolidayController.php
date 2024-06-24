@@ -25,10 +25,12 @@ class HolidayController extends Controller
     {
         $email=Auth::user()->email;
         $type=Auth::user()->type;
+        $holiday_year=date('Y');
         $employee_result=Employee::where('official_id',$email)->first();
         if($type=='Employee')
         {
         $data = Holiday::where('holidays.is_deleted', 0)
+        ->where('holidays.holiday_year', $holiday_year)
         ->where('holidays.brand_id',$employee_result->empbrand)
         ->join('companies', 'holidays.company_id', '=', 'companies.id')
         ->join('brands', 'holidays.brand_id', '=', 'brands.id')
@@ -39,6 +41,7 @@ class HolidayController extends Controller
         else
         {
             $data = Holiday::where('holidays.is_deleted', 0)
+            ->where('holidays.holiday_year', $holiday_year)
             ->join('companies', 'holidays.company_id', '=', 'companies.id')
             ->join('brands', 'holidays.brand_id', '=', 'brands.id')
             ->select('holidays.*', 'companies.compname as company_name','brands.bname as brand')
@@ -73,7 +76,7 @@ class HolidayController extends Controller
        $data['date'] = implode("|", $request->date);
        $data['holidays'] = implode("|", $request->holidays);
        $data['type'] = implode("|", $request->type);
-   
+       $data['holiday_year']=date('Y');
        // Initialize an array to store the names of the days
        $days = array();
    
@@ -115,7 +118,12 @@ class HolidayController extends Controller
     public function edit(Holiday $holiday)
     {
         $company=Company::where('status',1)->where('is_deleted',0)->get();
-        return view('admin.tasks.create',compact('holiday','company'));
+        $brand=Brand::where('status',1)->where('is_deleted',0)->get();
+        $date = explode('|',$holiday->date);
+        $day = explode('|',$holiday->day);
+        $store_holidays = explode('|',$holiday->holidays);
+        $type = explode('|',$holiday->type);
+        return view('admin.holiday.create',compact('holiday','company','date','day','store_holidays','type','brand'));
     }
 
     /**
@@ -133,7 +141,8 @@ class HolidayController extends Controller
         // Concatenate the date and holidays fields with a pipe separator
         $data['date'] = implode("|", $request->date);
         $data['holidays'] = implode("|", $request->holidays);
-    
+        $data['type'] = implode("|", $request->type);
+        $data['holiday_year']=date('Y');
         // Initialize an array to store the names of the days
         $days = array();
     

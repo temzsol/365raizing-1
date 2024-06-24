@@ -9,5 +9,5 @@ class Holiday extends Model
 {
     use HasFactory;
     protected $table = 'holidays';
-    protected $fillable= ['date', 'day', 'holidays', 'company_id', 'status', 'is_deleted', 'created_at', 'updated_at', 'brand_id','type'];
+    protected $fillable= ['date', 'day', 'holidays', 'company_id', 'status', 'is_deleted', 'created_at', 'updated_at', 'brand_id','type','holiday_year'];
 }

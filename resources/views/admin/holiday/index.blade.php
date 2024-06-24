@@ -14,6 +14,9 @@
                                 <th>Company Name</th>
                                 <th>Brand Name</th>
                                 <th>View</th>
+                                @if($usertype=Auth::user()->type =='master_admin' || $usertype=Auth::user()->type =='HR' || $usertype=Auth::user()->type =='Admin')
+                                <th>Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -23,7 +26,16 @@
                                 <td>{{$value->company_name}}</td>
                                 <td>{{$value->brand}}</td>
                                 <td><a href="{{route('viewholidays',['id'=>$value->id])}}"class="btn btn-primary">View Holidays</a></td>
-                           
+                                <td>
+                                    <div class="button_align">
+                                        @if($usertype=Auth::user()->type =='master_admin' || $usertype=Auth::user()->type =='HR' || $usertype=Auth::user()->type =='Admin')
+                                        <a href="{{route('holiday.edit',$value->id)}}" class="btn btn-outline-primary"><i class="bx bx-pencil"></i> Edit </a>
+                                        @endif
+                                        @if($usertype=Auth::user()->type =='master_admin')
+                                        <a href="javascript:void(0);" onClick="deleteblogs('{{$value->id}}')" class="btn btn-outline-danger"><i class="bx bx-trash-alt"></i> Delete</a>
+                                        @endif
+                                    </div>
+                                </td>
                             </tr>
                             
                             @endforeach
@@ -46,7 +58,7 @@
         {
         $.ajax({
             method:'DELETE',
-            url: '{{ url('master-admin/brands') }}/'+tid,
+            url: '{{ url('master-admin/holiday') }}/'+tid,
             data:{
                 id: tid,
                 _token: '{{ csrf_token() }}'
