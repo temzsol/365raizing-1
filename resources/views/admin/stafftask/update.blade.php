@@ -81,8 +81,9 @@
                       <div class="form-group mb-4">
                           <label for="tdetail" class="form-control-label">Task Status</label>
                           <select class="form-select" name="status">
+                              <option @if(isset($staffTask) && $staffTask->status=='0') selected="selected" @endif value="0">TO Do</option>
+                              <option @if(isset($staffTask) && $staffTask->status=='2') selected="selected" @endif value="0">In Progress</option>
                               <option @if(isset($staffTask) && $staffTask->status=='1') selected="selected" @endif value="1">Completed</option>
-                              <option @if(isset($staffTask) && $staffTask->status=='0') selected="selected" @endif value="0">Incompleted</option>
                           </select>
                       </div>
                       @endif

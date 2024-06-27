@@ -62,8 +62,9 @@
                                 
                                 <td><div class="form-check form-switch form-switch-md mb-3" dir="ltr">
                                     {{-- <input class="form-check-input" type="checkbox" id="SwitchCheckSizemd{{$value->id}}" @if($value->status==1){{'checked'}} @endif> --}}
-                                    
-                                    <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1)<button class="btn btn-success">Completed</button>@else <button class="btn btn-warning">Incomplete</button> @endif</label>
+                                    <button class="btn btn-@if($value->status=='0'){{"danger"}}@elseif( $value->status=='2'){{"warning"}}@else{{"success"}} @endif">
+                                        @if( $value->status=='0') {{"To Do"}} @elseif( $value->status=='2') {{"In Progress"}} @else {{"Completed"}} @endif</button>
+                                    {{-- <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1)<button class="btn btn-success">Completed</button>@else <button class="btn btn-warning">Incomplete</button> @endif</label> --}}
                                     </div>
                                 </td>
                                 <td>
@@ -120,8 +121,10 @@
                                 
                                 
                                 <td><div class="form-check form-switch form-switch-md mb-3" dir="ltr">
-                                                                        
-                                    <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1)<button class="btn btn-success disabled">Completed</button>@else <button class="btn btn-warning disabled">Incomplete</button> @endif</label>
+                                    <button class="btn btn-@if($value->status=='0'){{"danger"}}@elseif( $value->status=='2'){{"warning"}}@else{{"success"}} @endif">
+                                        @if( $value->status=='0') {{"To Do"}} @elseif( $value->status=='2') {{"In Progress"}} @else {{"Completed"}} @endif</button>
+                                                                           
+                                    {{-- <label class="form-check-label" for="SwitchCheckSizemd{{$value->id}}">@if($value->status==1)<button class="btn btn-success disabled">Completed</button>@else <button class="btn btn-warning disabled">Incomplete</button> @endif</label> --}}
                                     </div>
                                 </td>
 
