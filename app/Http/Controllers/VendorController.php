@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\vendor;
+use App\Models\User;
 use App\Models\Brand;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use App\Mail\VendorLoginMail;
+
+use Mail;
+use Auth;
+use Session;
+use Validator;
+use Illuminate\Support\Facades\Hash;
 
 class VendorController extends Controller
 {
@@ -49,6 +57,18 @@ class VendorController extends Controller
         $data['vemail'] = implode(",", $request->vemail);
         $data['vservice'] = implode(",", $request->vservice);
         $vendor->create($data);
+
+        $user = User::create([
+            'name' => $request->fname,
+            'email' => $request->vemail[0],
+            'status' => 1,
+            'password' => Hash::make($request->vcont[0]),
+            'type' => 'Vendor',
+        ]);
+        $mailresult=['email'=>$request->vemail[0],'password'=>$request->vcont[0]];
+        
+        Mail::to($request->vemail[0]) // Use cc or bcc if there are multiple recipients
+        ->send(new VendorLoginMail($mailresult));
         return redirect(route('vendor.index'))->with('message','Vendor Created Successfully');
     }
 

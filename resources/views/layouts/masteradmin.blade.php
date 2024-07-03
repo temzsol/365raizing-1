@@ -45,6 +45,9 @@
         @if( Auth::user()->type =='Employee')
         <x-admin.employee_sidebar/>
         @endif
+        @if( Auth::user()->type =='Vendor')
+        <x-admin.vendor_sidebar/>
+        @endif
 
         <!-- Right Sidebar -->
         <x-admin.rightsidebar/>

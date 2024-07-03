@@ -67,6 +67,7 @@ $settings=App\Models\Websitesetting::find(1);
                                        <option value="Admin">Admin</option>
                                        <option value="HR">HR</option>
                                        <option value="Employee">Employee</option>
+                                       <option value="Vendor">Vendor</option>
                                     </select>
                                  </div>
                               </div>

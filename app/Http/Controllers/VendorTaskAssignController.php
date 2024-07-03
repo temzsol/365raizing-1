@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\VendorTaskAssign;
 use App\Models\Vendor;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Mytask;
 use App\Models\Brand;
@@ -22,11 +23,26 @@ class VendorTaskAssignController extends Controller
      */
     public function index()
     {
-        $data = VendorTaskAssign::where('vendor_task_assigns.is_deleted', 0)
-        ->join('vendors', 'vendor_task_assigns.vendor_id', '=', 'vendors.id')
-        ->select('vendor_task_assigns.*', 'vendors.fname as vendor_name')
-        ->orderBy('vendor_task_assigns.id', 'DESC')
-        ->paginate(20);
+
+        $type = Auth::user()->type; 
+        $email = Auth::user()->email; 
+        if($type == 'Vendor')
+        {
+           $vendor_result =Vendor::where('vemail',$email)->first();
+           $data = VendorTaskAssign::where('vendor_task_assigns.is_deleted', 0)->where('vendor_id',$vendor_result->id)
+           ->join('vendors', 'vendor_task_assigns.vendor_id', '=', 'vendors.id')
+           ->select('vendor_task_assigns.*', 'vendors.fname as vendor_name')
+           ->paginate(20);
+
+        }
+        else{
+            $data = VendorTaskAssign::where('vendor_task_assigns.is_deleted', 0)
+            ->join('vendors', 'vendor_task_assigns.vendor_id', '=', 'vendors.id')
+            ->select('vendor_task_assigns.*', 'vendors.fname as vendor_name')
+            ->orderBy('vendor_task_assigns.id', 'DESC')
+            ->paginate(20);
+        }
+        
         return view('admin.vendor_task.index', compact('data'));
     }
 
@@ -39,7 +55,8 @@ class VendorTaskAssignController extends Controller
     {
         $brand=Brand::where('status',1)->where('is_deleted',0)->get();
         $vendor=Vendor::where('status',1)->where('is_deleted',0)->get();
-        return view('admin.vendor_task.create',compact('brand','vendor'));
+        $type=Auth::user()->type;
+        return view('admin.vendor_task.create',compact('brand','vendor','type'));
     }
 
     /**
@@ -89,7 +106,8 @@ class VendorTaskAssignController extends Controller
         $vendorTaskAssign =VendorTaskAssign::find($id);
         $brand=Brand::where('status',1)->where('is_deleted',0)->get();
         $vendor=Vendor::where('status',1)->where('is_deleted',0)->get();
-        return view('admin.vendor_task.create',compact('vendorTaskAssign','brand','vendor'));
+        $type=Auth::user()->type;
+        return view('admin.vendor_task.create',compact('vendorTaskAssign','brand','vendor','type'));
     }
 
     /**

@@ -28,16 +28,16 @@
                     <div class="card-body card-block">
                         <div class="form-group mb-4">
                             <label for="vendor_id" class=" form-control-label">Vendor Name<span class="text-danger">*</span></label>
-                            <select name="vendor_id" id="vendor_id" class="form-control" required>
+                            
+                            <select name="vendor_id" id="vendor_id" class="form-control" required {{$type !='Vendor'?'':'readonly'}}>
                                 <option value="#">Please select Vendor Name</option>
                                 @foreach($vendor as $key => $value)
                                 <option value="{{ $value->id }}" {{ isset($vendorTaskAssign) && $value->id == $vendorTaskAssign->vendor_id ? 'selected' : '' }}>
                                     {{ $value->fname }}
                                 </option>
                             @endforeach
-  
-                                
-                            </select>
+                        </select>
+                        
                         </div>
                       {{-- <div class="form-group mb-4">
                           <label for="brand" class=" form-control-label">Brand<span class="text-danger">*</span></label>
@@ -67,19 +67,26 @@
                     </div> --}}
                       <div class="form-group mb-4">
                         <label class="form-control-label">Deadline<span class="text-danger">*</span></label>
-                        <input type="date" id="deadline_date" class="form-control" name="deadline_date" value="{{isset($vendorTaskAssign)?$vendorTaskAssign->deadline_date:''}}" required>
+                        <input type="date" id="deadline_date" class="form-control" name="deadline_date" value="{{isset($vendorTaskAssign)?$vendorTaskAssign->deadline_date:''}}" required {{$type !='Vendor'?'':'readonly'}}>
                     </div>
+                    <div class="form-group mb-4">
+                          @if($type !='Vendor')
+                          <label>Upload task related documents/images (if any)</label>
+                                @if(isset($vendorTaskAssign) && $vendorTaskAssign->task_file !='')
+                                <a href="{{url('/images/'.$vendorTaskAssign->task_file)}}">Task File</a>
+                                @endif
+                          <input type="file" name="task_file"  class="form-control">
+                          @else
+                                @if(isset($vendorTaskAssign) && $vendorTaskAssign->task_file !='')
+                                <a href="{{url('/images/'.$vendorTaskAssign->task_file)}}" class="btn btn-primary" target="_blank" download>Download File</a>
+                                @endif
+                          @endif
+                      </div>
+
 
                       <div class="form-group mb-4">
-                          <label>Upload task related documents/images (if any)</label>
-                          @if(isset($vendorTaskAssign))
-                          <a href="{{url('/images/'.$vendorTaskAssign->task_file)}}">Task File</a>
-                          @endif
-                          <input type="file" name="task_file"  class="form-control">
-                      </div>
-                      <div class="form-group mb-4">
                           <label for="tdetail" class="form-control-label">Task Detail</label>
-                          <textarea name="task_detail" id="task_detail" rows="5" placeholder="Detail..." class="form-control">{{isset($vendorTaskAssign)?$vendorTaskAssign->task_detail:''}}</textarea>
+                          <textarea name="task_detail" id="task_detail" rows="5" placeholder="Detail..." class="form-control" {{$type !='Vendor'?'':'readonly'}}>{{isset($vendorTaskAssign)?$vendorTaskAssign->task_detail:''}}</textarea>
                       </div>
                       @if(isset($vendorTaskAssign))
                       <div class="form-group mb-4">

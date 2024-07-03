@@ -104,7 +104,7 @@ Route::prefix('hr')->middleware('login')->group(function () {
 });
 
 //  Employee Route
-Route::prefix('Employee')->middleware('login')->group(function () {
+Route::prefix('employee')->middleware('login')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'Employeeindex'])->name('employee-dashboard');
     Route::resource('/customer-query',CustomerQueryController::class);
     Route::resource('/employeetask',EmployeeTaskController::class);
@@ -114,6 +114,14 @@ Route::prefix('Employee')->middleware('login')->group(function () {
     Route::resource('/managementtask',StaffTaskController::class);
     Route::resource('/holiday',HolidayController::class);
     Route::get('/viewholidays/{id}','HolidayController@holidayview')->name('viewholidays');
+
+});
+
+// Vendor Dashboard
+//  Vendor Route
+Route::prefix('vendor')->middleware('login')->group(function () {
+    Route::get('/dashboard', [DashboardController::class,'Vendorindex'])->name('vendor-dashboard');
+    Route::resource('/vendor-task',VendorTaskAssignController::class);
 
 });
 

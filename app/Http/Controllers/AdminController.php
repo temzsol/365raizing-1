@@ -79,6 +79,10 @@ class AdminController extends Controller
             {
                 return redirect(route('employee-dashboard'));
             }
+            if(Auth::user()->type=='Vendor')
+            {
+                return redirect(route('vendor-dashboard'));
+            }
             
         }
         else {

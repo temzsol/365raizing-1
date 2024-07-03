@@ -59,7 +59,7 @@ class DashboardController extends Controller
          return view('admin.dashboards.hr_dashboard',compact('admin','employee','brand','company','empleave','adminleave','vendor'));
       }
 
-      //   For HR Dashboard
+      //   For HR Employee
       public function Employeeindex(){
         $useremail= Auth::user()->email;
         $emp_data=Employee::where('official_id',$useremail)->first();
@@ -71,5 +71,19 @@ class DashboardController extends Controller
 
          return view('admin.dashboards.employee_dashboard',compact('activetask','completedtask','taskassignbyyou','completed'));
       }
+
+      
+      //   For HR Vendor
+      public function Vendorindex(){
+         $useremail= Auth::user()->email;
+         $emp_data=Employee::where('official_id',$useremail)->first();
+ 
+          $activetask=EmployeeTask::where('status',0)->where('is_deleted',0)->where('emp_id',$emp_data->id)->count();
+          $completedtask=EmployeeTask::where('status',1)->where('is_deleted',0)->where('emp_id',$emp_data->id)->count();
+          $taskassignbyyou=StaffTask::where('status',0)->where('is_deleted',0)->where('task_assign_from',$emp_data->id)->count();
+          $completed=StaffTask::where('status',1)->where('is_deleted',0)->where('task_assign_from',$emp_data->id)->count();
+ 
+          return view('admin.dashboards.vendor_dashboard',compact('activetask','completedtask','taskassignbyyou','completed'));
+       }
 
 }

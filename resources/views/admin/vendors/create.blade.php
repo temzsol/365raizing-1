@@ -44,8 +44,8 @@
                                  <input type="text" id="vgstin" placeholder="Enter vendor's tax number" class="form-control" name="vgstin" value="{{isset($vendor)?$vendor->vgstin:''}}" required>
                               </div>
                               <div class="col-lg-4 mb-4">
-                                 <label for="vcont" class="form-control-label">Country <span style="color:red;">*</span></label>
-                                 <input type="text" id="vcont" placeholder="Country name" class="form-control" name="vcountry" value="{{isset($vendor)?$vendor->vcountry:''}}" required>
+                                 <label for="vcountry" class="form-control-label">Country <span style="color:red;">*</span></label>
+                                 <input type="text" id="vcountry" placeholder="Country name" class="form-control" name="vcountry" value="{{isset($vendor)?$vendor->vcountry:''}}" required>
                               </div>
                               <div class="col-lg-4 mb-4">
                                  <label for="vstreet" class="form-control-label">Street <span style="color:red;">*</span></label>
@@ -99,7 +99,7 @@
                                  @endif
                               </div>
                               <div class="col-lg-4">
-                                 <label class="form-control-label">Vendor Contact</label>
+                                 <label class="form-control-label">Vendor Contact<span class="text-danger">*</span></label>
                                  @if(isset($vendor))
                                  @php
                                  $vconts = explode(',', $vendor->vcont); 
@@ -110,7 +110,7 @@
                                     <div class="row">
                                     <div class="col-lg-8 mt-4" >
                                        @if(!empty($value))
-                                       <input type="text" id="vcont" class="form-control" value="{{$value}}" name="vcont[]"placeholder="Enter vendor's contact">
+                                       <input type="text" id="vcont" class="form-control" value="{{$value}}" name="vcont[]"placeholder="Enter vendor's contact" required>
                                        @endif
                                     </div>
                                     <div class="col-lg-2 mt-4">
