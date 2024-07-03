@@ -26,7 +26,14 @@
                         @method('PUT')
                             @else
                             <form method="POST" action="{{route('leave.store')}}" id="emp_task_form" enctype="multipart/form-data">
-                                <p class="text-warning">Total Leave: {{$total_leave}}, Taken Leave:{{$takenleave}}, Remaining Leave {{($total_leave-$takenleave)}}</p>
+                            @endif
+                                
+                                @if($leave_remaining > 0)
+                                <input type="hidden" id="leave_remaining" name="leave_remaining" value="{{($total_leave-$takenleave)}}"> 
+                                <p class="text-primary">Total Leave: <b class="text-dark"> {{$total_leave}},</b> Taken Leave:<b class="text-dark"> {{$takenleave}},</b> Remaining Leave:<b class="text-dark"> {{$leave_remaining}} </b></p>
+                                @else
+                                <input type="hidden" id="leave_remaining" name="leave_remaining" value="0"> 
+                                <p class="text-primary">Total Leave: <b class="text-dark"> {{$total_leave}},</b> Taken Leave:<b class="text-dark"> {{$takenleave}},</b> Remaining Leave:<b class="text-dark"> {{$leave_remaining}} </b></p>
                                @endif
                                @csrf
                                 <div class="card-body card-block">
@@ -49,7 +56,7 @@
                                       </div>
               
                                   </div>
-                             <input type="hidden" id="leave_remaining" name="leave_remaining" value="{{($total_leave-$takenleave)}}"> 
+                            
                                    <div class="form-group">
                                       <div class="row">
                                           <div class="col-sm-12">
@@ -78,8 +85,14 @@
                                       </div>
               
                                   </div>
+                                  
                                   <div class="form-group">
-                                      <input type="submit" class="form-control btn btn-primary submit" id="submit" name="submit" style="margin-top: 15px; border-radius: 6px; width: 130px;"  @if($effectiveDate > date('Y-m-d')) disabled @endif>
+                                    @if($effectiveDate > date('Y-m-d'))
+                                    <button  class="form-control btn btn-primary submit" id="submit" style="margin-top: 15px; border-radius: 6px; width: 130px;" disabled>Submit </button>
+                                   @else
+                                   <input type="submit" class="form-control btn btn-primary submit" id="submit" name="submit" style="margin-top: 15px; border-radius: 6px; width: 130px;">
+                                   
+                                   @endif
                                   </div>
                                   <span class="error" style="display:none"> Please Enter All Details</span>
                                 </div>

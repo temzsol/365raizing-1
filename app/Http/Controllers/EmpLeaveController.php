@@ -47,23 +47,20 @@ class EmpLeaveController extends Controller
         
         {
             $total_leave=$leaveresult->total_leave;
-           
+            $takenleave = EmpLeave::where('emp_id', $leaveresult->id)
+            ->where('l_status', 1)
+            ->sum('no_days');
+           $leave_remaining=$total_leave-$takenleave;
         }
         else
         {
-            $total_leave = 'No leaves ,Your are on probation period' ;
-        }
-        $LeaveCalculate = EmpLeave::where('emp_id', $leaveresult->id)
-        ->where('l_status', 1)
-        ->sum('no_days');
-        if($LeaveCalculate > 0)
-        {
-            $takenleave=$LeaveCalculate;
-        }
-        else{
             $takenleave=0;
+            $total_leave = 'No leaves ,Your are on probation period' ;
+            $leave_remaining=0;
         }
-        return view('admin.leave_info.emp_leave_form',compact('total_leave','takenleave','effectiveDate'));
+      
+        
+        return view('admin.leave_info.emp_leave_form',compact('total_leave','takenleave','leave_remaining','effectiveDate'));
     }
 
     /**

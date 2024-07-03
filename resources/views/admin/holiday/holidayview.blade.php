@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive" style="margin-top:80px;">
-                    Employee's Holidays List Company Wise
+                    Employee's Holidays 
                     @if(session('message')) <p style="color:rgb(6, 82, 6); font-weight: 600;">{{session('message')}}</p>@endif
                     <table class="table mb-0">
                         <thead>

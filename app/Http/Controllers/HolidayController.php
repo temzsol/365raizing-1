@@ -186,10 +186,24 @@ class HolidayController extends Controller
 
 
     function holidayview(Request $request,$id){
-      $holiday= Holiday::find($id);
-      $day=explode("|",$holiday->day);
-      $date=explode("|",$holiday->date);
-      $holidays=explode("|",$holiday->holidays);
+        $type=Auth::user()->type;
+        $email=Auth::user()->email;
+        if($type=='Employee')
+        {
+            $data = Employee::where('official_id',$email)->where('is_deleted',0)->first();
+            $holiday= Holiday::where('brand_id',$data->empbrand)->where('holiday_year',date('Y'))->first();
+            
+            $day=explode("|",$holiday->day);
+            $date=explode("|",$holiday->date);
+            $holidays=explode("|",$holiday->holidays);
+        }
+        else{
+            $holiday= Holiday::find($id);
+            $day=explode("|",$holiday->day);
+            $date=explode("|",$holiday->date);
+            $holidays=explode("|",$holiday->holidays);
+        }
+      
       return view('admin.holiday.holidayview',compact('day','date','holidays'));
 
     }
