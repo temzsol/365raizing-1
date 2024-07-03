@@ -50,7 +50,7 @@
                                           <input type="text" name="emp_id" id="emp_id" hidden>
                                           <div class="col-sm-12">
                                               <label for="deadline" class="form-control-label">From Date<span class="text-danger">*</span></label>
-                                              <input type="date" id="l_date" class="form-control" name="l_date" required>
+                                              <input type="date" id="from_date" class="form-control" name="l_date" required>
                                           </div>
               
                                       </div>
@@ -137,4 +137,35 @@
         });
     });
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Get the input field
+      const dateInput = document.getElementById('from_date');
+      
+      // Create a new Date object for today
+      const today = new Date();
+      
+      // Format the date as YYYY-MM-DD
+      const formattedDate = today.toISOString().split('T')[0];
+      
+      // Set the min attribute to today's date
+      dateInput.setAttribute('min', formattedDate);
+    });
+
+    // For To Date 
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Get the input field
+      const dateInput = document.getElementById('to_date');
+      
+      // Create a new Date object for today
+      const today = new Date();
+      
+      // Format the date as YYYY-MM-DD
+      const formattedDate = today.toISOString().split('T')[0];
+      
+      // Set the min attribute to today's date
+      dateInput.setAttribute('min', formattedDate);
+    });
+  </script>
 @endpush
