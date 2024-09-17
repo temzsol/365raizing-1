@@ -11,7 +11,29 @@ use App\Models\Websitesetting;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
+/**
+ * @OA\Info(
+ *     title="Forever Medspa",
+ *     version="1.0.0",
+ *     description="All API Related to Giftcards",
+ *     termsOfService="test",
+ *     contact={
+ *         "name": "Forever Medspa",
+ *         "url": "https://forevermedspanj.com",
+ *         "email": "info@forevermedspanj.com"
+ *     },
+ *     license={
+ *         "name": "License",
+ *         "url": "https://forevermedspanj.com/license"
+ *     }
+ * )
+ *  * @OA\SecurityScheme(
+ *     type="http",
+ *     securityScheme="bearerAuth",
+ *     scheme="bearer",
+ *     bearerFormat="JWT"
+ * )
+ */
     public function upload_single_image($file,$folder)
     {
     	$data = $file->getClientOriginalName();
